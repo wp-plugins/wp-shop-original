@@ -190,14 +190,14 @@ class WpShop
 			}
 		}
 		
-		wp_enqueue_style('wp-shop_style',"/wp-content/plugins/wp-shop/styles/{$this->_css}");
-		wp_enqueue_style('wp-shop_style_main',"/wp-content/plugins/wp-shop/wp-shop.css");
+		wp_enqueue_style('wp-shop_style',"/wp-content/plugins/wp-shop-original/styles/{$this->_css}");
+		wp_enqueue_style('wp-shop_style_main',"/wp-content/plugins/wp-shop-original/wp-shop.css");
 
 
  		global $wp_styles;
 		
 		
-   		$wp_styles->add('wp-shop_style_main2', "/wp-content/plugins/wp-shop/wp-shop.css");
+   		$wp_styles->add('wp-shop_style_main2', "/wp-content/plugins/wp-shop-original/wp-shop.css");
 		wp_enqueue_script('jquery');
 		wp_enqueue_script('wp-shop_general.js',WPSHOP_URL . "/general.js");
 		
