@@ -48,7 +48,7 @@ Visit the site wp-shop.ru for help.
 
 == Screenshots ==
 
-1. Витрина магазина на WP Shop - https://yadi.sk/i/TgSmw78HZtQRX
+1. Витрина магазина на WP Shop
 2. Корзина с вариантами оплаты - https://yadi.sk/i/tCH58fuBZtQi9
 3. Вид товарной страницы - https://yadi.sk/i/vX6CEPJAZtQpF
 4. Прайслист с картинками - https://yadi.sk/i/cfM1ZVwqZtR5T
