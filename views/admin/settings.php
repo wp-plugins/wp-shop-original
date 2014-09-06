@@ -99,7 +99,7 @@
 						</td>
 					</tr>
           
-          <tr>
+					<tr>
 						<td><label for="wpshop_hide_auth"><?php  echo __('Disable kind of authorization', 'wp-shop') /*Currency*/ ?></label></td>
 						<td>
 							<?php 
@@ -113,6 +113,29 @@
 								<option value='register' <?php echo $m2?>><?php  _e('dissable register form', 'wp-shop');  ?></option>
 								<option value='guest' <?php echo $m3?>><?php  _e('disable guest shoping', 'wp-shop');  ?></option>
 							</select>
+						</td>
+					</tr>
+					<tr>
+						<script type="text/javascript">
+						jQuery(document).ready(function()
+						{
+								jQuery('.wp-shop_delete_all').bind('click',function()
+								{
+									jQuery.post('<?php bloginfo('wpurl') ?>/wp-admin/admin-ajax.php', {action:'delete_all'},function(data, textStatus)
+									{
+										if (textStatus == "success")
+										{
+											alert('<?php  _e('Данные магазина очищены', 'wp-shop'); /*Готово*/ ?>');
+										}
+									});
+									return false;
+								});
+								
+						});
+						</script>
+					
+						<td>
+							<a href="" class="wp-shop_delete_all">Стереть данные плагина</a>
 						</td>
 					</tr>
 					<!--tr>

@@ -448,3 +448,30 @@ th#sklad {
 	float: right;
 }
 
+.wp-shop_delete_all {
+	display: block;
+	width: 200px;
+	background: red;
+	color: white;
+	text-align: center;
+	line-height: 40px;
+	font-size: 14px;
+	text-decoration: none;
+}
+
+.wp-shop_delete_all {
+	display: block;
+	width: 200px;
+	background: red;
+	color: white;
+	text-align: center;
+	line-height: 40px;
+	font-size: 14px;
+	text-decoration: none;
+	margin-top: 10px;
+}
+
+.wp-shop_delete_all:hover {
+	background: blue;
+}
+

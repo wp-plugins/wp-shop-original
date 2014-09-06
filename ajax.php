@@ -10,12 +10,26 @@ add_action("wp_ajax_set_currency", "set_currency");
 add_action("wp_ajax_nopriv_set_currency", "set_currency");
 add_action("wp_ajax_ajax_post", "ajax_post");
 add_action("wp_ajax_nopriv_ajax_post", "ajax_post");
+add_action("wp_ajax_delete_all", "delete_all");
+add_action("wp_ajax_nopriv_delete_all", "delete_all");
 
 function ajax_post(){
 	if ($_POST['act'] == 'price_options')
   {
     update_option('wpshop_price_under_title', $_POST['under_title']);
   }
+	die();
+}
+
+function delete_all(){
+	global $wpdb;
+	$res = $wpdb->query("SET AUTOCOMMIT=0;");
+	$res = $wpdb->query("SET FOREIGN_KEY_CHECKS=0;");
+	$res = $wpdb->query("DROP TABLE {$wpdb->prefix}wpshop_orders;");
+	$res = $wpdb->query("DROP TABLE {$wpdb->prefix}wpshop_ordered;");
+	$res = $wpdb->query("DROP TABLE {$wpdb->prefix}wpshop_selected_items;");
+	$res = $wpdb->query("DELETE FROM {$wpdb->prefix}posts WHERE post_type='wpshopcarts';");
+	
 	die();
 } 
 

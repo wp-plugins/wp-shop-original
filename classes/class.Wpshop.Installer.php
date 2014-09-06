@@ -77,7 +77,7 @@ array('Field'=>'ordered_digit_live'),
 	private function dropTable($tableName)
 	{
 		$this->wpdb->query("DROP TABLE `{$this->wpdb->prefix}{$tableName}`;");
-		echo mysqli_error();
+		//echo mysql_error();
 	}
 
 	/**
