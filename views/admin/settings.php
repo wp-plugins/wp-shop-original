@@ -135,7 +135,7 @@
 						</script>
 					
 						<td>
-							<a href="" class="wp-shop_delete_all">Стереть данные плагина</a>
+							<a href="" class="wp-shop_delete_all">Стереть данные магазина</a>
 						</td>
 					</tr>
 					<!--tr>
