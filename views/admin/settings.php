@@ -135,7 +135,7 @@
 						</script>
 					
 						<td>
-							<a href="" class="wp-shop_delete_all">Стереть данные магазина</a>
+							<a href="" class="wp-shop_delete_all">Переустановка магазина</a>
 						</td>
 					</tr>
 					<!--tr>
