@@ -41,16 +41,16 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 5. See [full userguide](http://www.youtube.com/embed/Ew51hmmwVIg?list=PLSDnqQFsL1p38epx0edCjawemN-g5_8Ql) how to set up your shop
 
 See also:
-Quick and easy WordPress Shop installer - http://wp-shop.ru/wpshop-install/
-Full video-guide about WP-Shop-site creation - http://wp-shop.ru/full_video_guide/
-Full video-guide about WP-Shop-site usage - http://www.youtube.com/watch?v=XeinZsh_hzo
-Video user-guide about update old versions - http://wp-shop.ru/poleznyie-sovetyi/obnovlenie-plagina-magazina-so-staryx-versij/
+1. Quick and easy WordPress Shop installer - http://wp-shop.ru/wpshop-install/
+2. Full video-guide about WP-Shop-site creation - http://wp-shop.ru/full_video_guide/
+3. Full video-guide about WP-Shop-site usage - http://www.youtube.com/watch?v=XeinZsh_hzo
+4. Video user-guide about update old versions - http://wp-shop.ru/poleznyie-sovetyi/obnovlenie-plagina-magazina-so-staryx-versij/
 
 Смотрите так же:
-Простая и быстрая установка интернет-магазина "в 3 клика" - http://wp-shop.ru/wpshop-install/
-Полный видеогид по установке интерет-магазина на работающий сайт WordPress - http://wp-shop.ru/full_video_guide/
-Полный видеогид по работе с интернет-магазином на WP Shop - http://www.youtube.com/watch?v=XeinZsh_hzo
-Видеогид по обновлению старых версий плагина магазина на новую - http://wp-shop.ru/poleznyie-sovetyi/obnovlenie-plagina-magazina-so-staryx-versij/
+1. Простая и быстрая установка интернет-магазина "в 3 клика" - http://wp-shop.ru/wpshop-install/
+2. Полный видеогид по установке интерет-магазина на работающий сайт WordPress - http://wp-shop.ru/full_video_guide/
+3. Полный видеогид по работе с интернет-магазином на WP Shop - http://www.youtube.com/watch?v=XeinZsh_hzo
+4. Видеогид по обновлению старых версий плагина магазина на новую - http://wp-shop.ru/poleznyie-sovetyi/obnovlenie-plagina-magazina-so-staryx-versij/
 
 
 == Frequently asked questions ==
