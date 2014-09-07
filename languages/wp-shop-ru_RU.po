@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-shop\n"
 "POT-Creation-Date: 2014-08-14 21:50+0400\n"
-"PO-Revision-Date: 2014-09-06 21:31+0400\n"
+"PO-Revision-Date: 2014-09-07 16:24+0400\n"
 "Last-Translator: WP Shop.ru <masta@wp-shop.ru>\n"
 "Language-Team: Sergey Makarin <serg.makarin@gmail.com>\n"
 "Language: ru_RU\n"
@@ -427,7 +427,7 @@ msgstr "Наличными курьеру"
 #: C:\wp-shop/classes/class.Wpshop.Payment.php:62
 msgid ""
 "Making order with payment at post-offce before receiving (Cash on delivery)"
-msgstr "Оформление заказа с оплатой на почте при получении"
+msgstr "Оформление заказа с оплатой на почте при получении товара"
 
 #: C:\wp-shop/classes/class.Wpshop.Payment.php:63
 msgid "Cash on delivery"
