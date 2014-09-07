@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WP-shop\n"
 "POT-Creation-Date: 2014-08-14 21:50+0400\n"
-"PO-Revision-Date: 2014-09-07 16:24+0400\n"
+"PO-Revision-Date: 2014-09-07 21:41+0400\n"
 "Last-Translator: WP Shop.ru <masta@wp-shop.ru>\n"
 "Language-Team: Sergey Makarin <serg.makarin@gmail.com>\n"
 "Language: ru_RU\n"
@@ -326,7 +326,7 @@ msgstr "Самовывоз"
 
 #: C:\wp-shop/classes/class.Wpshop.Payment.php:33
 msgid "Making order using 'Self-delivery' goods from our store / office"
-msgstr "Оформление заказа с через ‘самовывоз’ товара из нашего магазина/офиса"
+msgstr "Оформление заказа через ‘самовывоз’ товара из нашего магазина/офиса"
 
 #: C:\wp-shop/classes/class.Wpshop.Payment.php:35
 #: C:\wp-shop/classes/class.Wpshop.Payment.php:50
