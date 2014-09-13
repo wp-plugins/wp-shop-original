@@ -18,6 +18,11 @@ class Wpshop_Order
 		return $this->order->order_discount;
 	}
 	
+	public function getOrderEmail()
+	{
+		return $this->order->client_email;
+	}
+	
 	public function getDelivery()
 	{
 		if ($this->order->order_delivery)
