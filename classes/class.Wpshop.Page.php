@@ -231,6 +231,35 @@ class Wpshop_Page
 			$id = wp_insert_post($post);
 			wp_set_object_terms( $id, $payment->paymentID, "genre", false);
 		}
+		if ($payment->paymentID == "yandex_kassa")
+		{
+			$post = array
+			(
+				'post_title' => "Ваш платеж через ‘Yandex касса’ принят",
+				'post_content' => "",
+				'post_status' => 'publish',
+				'post_type' => 'wpshopcarts',
+				'post_excerpt' => "yandex_kassa_success",
+				'post_name' => "yandex_kassa_success",
+				'comment_status'=> 'closed',
+				'ping_status' => 'closed'
+			);
+			$id = wp_insert_post($post);
+			wp_set_object_terms( $id, $payment->paymentID, "genre", false);
+			$post = array
+			(
+				'post_title' => "Ваш платеж через ‘Yandex касса’ не принят",
+				'post_content' => "",
+				'post_status' => 'publish',
+				'post_type' => 'wpshopcarts',
+				'post_excerpt' => "yandex_kassa_failed",
+				'post_name' => "yandex_kassa_failed",
+				'comment_status'=>'closed',
+				'ping_status' => 'closed'
+			);
+			$id = wp_insert_post($post);
+			wp_set_object_terms( $id, $payment->paymentID, "genre", false);
+		}
 		if ($payment->paymentID == "robokassa")
 		{
 			$post = array

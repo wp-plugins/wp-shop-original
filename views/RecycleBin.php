@@ -338,12 +338,55 @@ if ($total > 0) {
 									{ 
 										$ek = $payment;
 									}
+									if ($payment->paymentID == "yandex_kassa"&& $wpshop_merchant_system =="yandex_kassa")
+									{ 
+										$yandex_kassa = $payment;
+									}
 								}
 							}
 							
 							?>
 						</ul>
 					</div>
+					<?php  if ($yandex_kassa){?>
+					<div id='payments-table'>
+					<h3 id='mode-paymets-title'>
+						<?php 
+							echo __('Payment is made through a payment service RoboKassa.ru <br/> Small extra comission.', 'wp-shop'); //Оплата производится через платежный сервис RoboKassa.ru<br/> Взимается небольшая дополнительная комисcия.
+						?>
+					</h3>
+					<ul>
+						<li>
+							<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=PC";?>'><img src='<?php  echo WPSHOP_URL;?>/images/payments/yandexmoney.png' title=''/></a><br/>
+							<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=PC";?>'><?php  echo __('Yandex - Money', 'wp-shop');?></a>
+						</li>
+						<li>
+							<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=AC";?>'><img src='<?php  echo WPSHOP_URL;?>/images/payments/mastercard.png' title=''/></a><br/>
+							<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=AC";?>'><?php  echo __('Credit card', 'wp-shop');?></a>
+						</li>
+						<li>
+							<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=GP";?>'><img src='<?php  echo WPSHOP_URL;?>/images/payments/cashterminal.png' title=''/></a><br/>
+							<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=GP";?>'><?php  echo __('Terminals', 'wp-shop');?></a>
+						</li>
+						<li>
+							<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=MC";?>'><img src='<?php  echo WPSHOP_URL;?>/images/payments/mts.png' title=''/></a><br/>
+							<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=MC";?>'><?php  echo __('Mobile', 'wp-shop');?></a>
+						</li>
+            <?php if( $yandex_kassa->data['webmoney']){?>
+						<li>
+							<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=WM";?>'><img src='<?php  echo WPSHOP_URL;?>/images/payments/wbmoney.png' title=''/></a><br/>
+							<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=WM";?>'><?php  echo __('Webmoney', 'wp-shop');?></a>
+						</li>
+            <?php } ?>
+            <?php if( $yandex_kassa->data['sber']){?>
+						<li>
+							<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=SB";?>'><img src='<?php  echo WPSHOP_URL;?>/images/payments/sberonline.png' title=''/></a><br/>
+							<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=SB";?>'><?php  echo __('Sberbank online', 'wp-shop');?></a>
+						</li>
+            <?php } ?>
+					</ul>
+					</div>
+					<?php }?>
 					<?php  if ($robokassa){?>
 					<div id='payments-table'>
 					<h3 id='mode-paymets-title'>

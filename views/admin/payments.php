@@ -212,7 +212,7 @@
 			</div>
 		</div>
 	</div>
-
+	
 	<div id="poststuff">
 		<div class="postbox">
 			<h3><?php  _e('Payment through the merchant', 'wp-shop');/* Оплата через шлюз */?></h3>
@@ -229,22 +229,39 @@
 					jQuery(function(){
 						if (jQuery('.merchant_system').val() == 'ek') { 
 							jQuery('.robokassa_n').hide();
+							jQuery('.yandex_kassa_n').hide();
 							jQuery('.ek_n').show();
 						}
 						
 						if (jQuery('.merchant_system').val() == 'robokassa') { 
 							jQuery('.ek_n').hide();
+							jQuery('.yandex_kassa_n').hide();
 							jQuery('.robokassa_n').show();
 						}
+						
+						if (jQuery('.merchant_system').val() == 'yandex_kassa') { 
+							jQuery('.ek_n').hide();
+							jQuery('.robokassa_n').hide();
+							jQuery('.yandex_kassa_n').show();
+						}
+						
 						jQuery('.merchant_system').change(function(){
 							if (jQuery(this).val() == 'ek') { 
 								jQuery('.robokassa_n').hide();
+								jQuery('.yandex_kassa_n').hide();
 								jQuery('.ek_n').show();
 							}
 							
 							if (jQuery(this).val() == 'robokassa') { 
 								jQuery('.ek_n').hide();
+								jQuery('.yandex_kassa_n').hide();
 								jQuery('.robokassa_n').show();
+							}
+							
+							if (jQuery(this).val() == 'yandex_kassa') { 
+								jQuery('.ek_n').hide();
+								jQuery('.robokassa_n').hide();
+								jQuery('.yandex_kassa_n').show();
 							}
 						});
 					});
@@ -256,7 +273,7 @@
 						<select name="wpshop_merchant_system" class="merchant_system">
 							<option value='ek' <?php  if($this->merchant_system == 'ek'){ echo' selected="selected"';}?>><?php  _e('WalletOne', 'wp-shop');/* Единая касса */?></option>
 							<option value='robokassa' <?php  if($this->merchant_system == 'robokassa'){ echo' selected="selected"';}?>><?php  _e('Robokassa', 'wp-shop');/* Робокасса */?></option>
-							
+							<option value='yandex_kassa' <?php  if($this->merchant_system == 'yandex_kassa'){ echo' selected="selected"';}?>><?php  _e('Yandex kassa', 'wp-shop');/* Робокасса */?></option>
 						</select>
 					</td>
 				</tr>
@@ -376,10 +393,71 @@
 							<p>Для правильной синхронизации данных с системой Единая Касса Вам нужно внести этот код в форму ругистрации аккаунта </p>
 							<a href="#TB_inline?width=600&height=550&inlineId=my-content-id" class="thickbox">Подробнее...</a>
 						</td>
-
-
-
 					</tr>
+				</table>
+				
+				<!-- Настройки yandex_kassa-->
+				<table class="yandex_kassa_n" style="display:none">
+					
+					<tr>
+						<td style='width:400px;'><?php  _e('Test paiments', 'wp-shop'); ?></td>
+						<?php $yandex_test = $this->yandex_kassa['test'] ? " checked" : "";?>
+						<td><input type="checkbox" name="wpshop_payments_yandex_kassa[test]"<?php  echo $yandex_test;?>/></td>
+					</tr>
+          
+					<tr>
+						<td><?php  _e('Delivery', 'wp-shop'); /*Доставка*/ ?></td>
+						<td>
+						<?php 
+							$i = 0;
+							foreach($this->deliveries as $delivery)
+							{
+								$checked = "";
+								if($this->yandex_kassa['delivery']){
+								if (in_array($delivery->ID,$this->wm['delivery']))
+								{
+									$checked = " checked";
+								}
+								}elseif($i==3){ $checked = " checked"; update_option("wpshop.payments.yandex_kassa",array('delivery' => array(2=>'vizit')));}
+								echo "<input type='checkbox' name='wpshop_payments_yandex_kassa[delivery][]' value='{$delivery->ID}'{$checked}/> <label>{$delivery->name}</label><br/>";
+								if(++$i == 5) break;
+							}
+
+						?>
+						</td>
+					</tr>
+
+					<tr>
+						<td><?php  _e('Your Yandex kassa shop_id', 'wp-shop'); /*Ваш Yandex shop_id*/ ?></td>
+						<td><input type="text" name="wpshop_payments_yandex_kassa[shopId]" value="<?php  echo $this->yandex_kassa['shopId'];?>"/></td>
+					</tr>
+					<tr>
+						<td><?php  _e('Your Yandex kassa scid', 'wp-shop'); /*Ваш Yandex scid*/ ?></td>
+						<td><input type="text" name="wpshop_payments_yandex_kassa[scid]" value="<?php  echo $this->yandex_kassa['scid'];?>"/></td>
+					</tr>
+					<tr>
+						<td><?php  _e('Your Yandex kassa shopPassword', 'wp-shop'); /*Ваш Yandex shopPassword*/ ?></td>
+						<td><input type="text" name="wpshop_payments_yandex_kassa[shopPassword]" value="<?php echo $this->yandex_kassa['shopPassword'];?>"/></td>
+					</tr>
+					
+					<tr>
+						<td><?php  _e('Success URL', 'wp-shop'); ?></td>
+						<td><input type="text" name="wpshop_payments_yandex_kassa[successUrl]" value="<?php  echo $this->yandex_kassa['successUrl'];?>"/></td>
+					</tr>
+					<tr>
+						<td><?php  _e('Failed URL', 'wp-shop'); ?></td>
+						<td><input type="text" name="wpshop_payments_yandex_kassa[failedUrl]" value="<?php  echo $this->yandex_kassa['failedUrl'];?>"/></td>
+					</tr>
+					<tr>
+						<td style='width:400px;'><?php  _e('Enable Sberbank online', 'wp-shop'); ?></td>
+						<?php $yandex_sber = $this->yandex_kassa['sber'] ? " checked" : "";?>
+						<td><input type="checkbox" name="wpshop_payments_yandex_kassa[sber]"<?php  echo $yandex_sber;?>/></td>
+					</tr>
+					<tr>
+						<td style='width:400px;'><?php  _e('Enable Webmoney', 'wp-shop'); ?></td>
+						<?php $yandex_webmoney = $this->yandex_kassa['webmoney'] ? " checked" : "";?>
+						<td><input type="checkbox" name="wpshop_payments_yandex_kassa[webmoney]"<?php  echo $yandex_webmoney;?>/></td>
+					</tr>         
 				</table>
 			</table>
 			
@@ -394,13 +472,13 @@
 			<div class="inside">
 			<table cellpadding="2" cellspacing="2">
 				<tr>
-					<td style='width:400px;'>Включить поддержку PayPal</td>
+					<td style='width:400px;'><?php  _e('Enable PayPal', 'wp-shop'); ?></td>
 					<?php $paypal_activate = $this->paypal['activate'] ? " checked" : "";?>
 					<td><input type="checkbox" name="wpshop_payments_paypal[activate]"<?php  echo $paypal_activate;?>/></td>
 				</tr>
 				
 				<tr>
-					<td style='width:400px;'>Тестовый режим</td>
+					<td style='width:400px;'><?php  _e('Test paiments', 'wp-shop'); ?></td>
 					<?php $paypal_test = $this->paypal['test'] ? " checked" : "";?>
 					<td><input type="checkbox" name="wpshop_payments_paypal[test]"<?php  echo $paypal_test;?>/></td>
 				</tr>

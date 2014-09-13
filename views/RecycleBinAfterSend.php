@@ -52,6 +52,23 @@ if ($this->order['info']['payment'] == "wm") {
 	<input type="submit" class=\"wpshop-button\" value="<?php  echo __('Pay WM', 'wp-shop'); // Оплатить WM ?>"/>
 </form>
 <?php 
+} elseif ($this->order['info']['payment'] == "yandex_kassa") {
+?>
+<form action="https://<?php if($this->yandex_kassa['test']==true){echo 'demo';}?>money.yandex.ru/eshop.xml" method="POST" id="payment_form">
+	<input type="hidden" name="shopId" value="<?php  echo $this->yandex_kassa['shopId'];?>" />
+	<input type="hidden" name="scid" value="<?php  echo $this->yandex_kassa['scid'];?>" />
+	<input type="hidden" name="sum" value="<?php  echo $order->getTotalSum();?>" />
+	<input type="hidden" name="customerNumber" value="<?php echo $this->order['id'];?>" />
+	<input type="hidden" name="orderNumber" value="<?php echo $this->order['id'];?>" />
+	<input type="hidden" name="custom" value="<?php echo session_id();?>" />
+	<input type="hidden" name="cps_email" value="<?php echo $order->getOrderEmail();?>" />
+	<input type="hidden" name="shopSuccessURL" value="<?php echo $this->yandex_kassa['successUrl'];?>" />
+	<input type="hidden" name="shopFailURL" value="<?php echo $this->yandex_kassa['failedUrl'];?>" />
+	<input type="hidden" name="paymentType" value="<?php echo $_GET['paymentType'];?>" />
+	<input type="hidden" name="cms_name" value="wordpress_wp-shop-original" />
+	<input type="submit" class=\"wpshop-button\" value="<?php  echo __('Pay Yandex kassa', 'wp-shop'); // Оплатить Yandex касса ?>"/>
+</form>
+<?php 
 }elseif($this->order['info']['payment'] == "robokassa"){
 
 // регистрационная информация (логин, пароль #1)

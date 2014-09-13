@@ -167,6 +167,7 @@ array('Field'=>'ordered_digit_live'),
     add_option("wpshop.hide_auth","none");
 		add_option("wpshop_merchant_system","");
 		add_option("wpshop.payments.wm",array('delivery' => array(0=>'postByCountry',1=>'postByWorld',2=>'vizit',3=>'courier'),'successUrl'=>get_bloginfo("url").'/?wpshopcarts=wm_success','failedUrl'=>get_bloginfo("url").'/?wpshopcarts=wm_failed'));
+		add_option("wpshop.payments.yandex_kassa",array('delivery' => array(0=>'postByCountry',1=>'postByWorld',2=>'vizit',3=>'courier'),'successUrl'=>get_bloginfo("url").'/?wpshopcarts=yandex_kassa_success','failedUrl'=>get_bloginfo("url").'/?wpshopcarts=yandex_kassa_failed'));
 		add_option("wpshop.payments.cash",array('delivery'=>array( 0 => 'courier')));
 		add_option("wpshop.payments.ek",array('delivery' => array(0=>'postByCountry',1=>'postByWorld',2=>'vizit',3=>'courier'),'successUrl'=>get_bloginfo("url").'/?wpshopcarts=ek_success','failedUrl'=>get_bloginfo("url").'/?wpshopcarts=ek_failed'));
 		add_option("wpshop.payments.bank",array('delivery' => array(0=>'postByCountry',1=>'postByWorld',2=>'vizit',3=>'courier')));

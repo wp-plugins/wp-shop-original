@@ -317,6 +317,7 @@ class Wpshop_Admin
 			$this->updatePayments();
 		}
 		$this->view->wm = get_option("wpshop.payments.wm");
+		$this->view->yandex_kassa = get_option("wpshop.payments.yandex_kassa");
 		$this->view->merchant = get_option("wpshop_merchant");
 		$this->view->merchant_system = get_option("wpshop_merchant_system");
 		$this->view->cforms = Wpshop_Forms::getInstance()->getForms();
@@ -353,6 +354,13 @@ class Wpshop_Admin
 			$_POST['wpshop_payments_wm']['activate'] = 0;
 		}
 		update_option("wpshop.payments.wm",$_POST['wpshop_payments_wm']);
+		
+		//yandex_kassa
+		if (!isset($_POST['wpshop_payments_yandex_kassa']['activate']))
+		{
+			$_POST['wpshop_payments_yandex_kassa']['activate'] = 0;
+		}
+		update_option("wpshop.payments.yandex_kassa",$_POST['wpshop_payments_yandex_kassa']);
 
 		//Наложный платеж
 		if (!isset($_POST['wpshop_payments_cash']['activate']))

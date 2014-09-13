@@ -151,8 +151,26 @@ class Wpshop_Payment
 		$this->payments[$i]->picture = 'ek.gif';
 		$this->payments[$i]->merchant = true;
 		$this->payments[$i]->textAfterSend = '<h3>'.__('To pay your order, click the button above \'Pay EK\'. <br/> After your payment, we will get data of your payment and our manager will contact you to arrange the delivery. <br/> Thank you for using our service!', 'wp-shop').'</h3>';
+		
+		$i = 8;
+		$this->payments[$i] = new Wpshop_Payment_Data();
+		$this->payments[$i]->paymentID = "yandex_kassa";
+		$this->payments[$i]->title = __('Making order using Yandex kassa payment system', 'wp-shop'); //Оформление заказа с оплатой через систему Yandex
+		$this->payments[$i]->name = "Yandex kassa";
+		$this->payments[$i]->fields = array("Order".'$#$hidden$#$0$#$0$#$0$#$0$#$0',
+						   __('Order type:', 'wp-shop').' <b>'.__('Making order using Yandex kassa payment system', 'wp-shop').'</b>$#$hidden$#$0$#$0$#$0$#$0$#$0', // Тип заказа: <b>Наличными курьеру
+						   __('For making order please fill up the form:', 'wp-shop').'$#$fieldsetstart$#$0$#$0$#$0$#$0$#$0', // Для оформления заказа заполните эту форму:
+						   __('Your name', 'wp-shop').'|||||Name$#$textfield$#$1$#$0$#$1$#$0$#$0', // Ваше имя
+						   __('Contact phone', 'wp-shop').'|||||Phone$#$textfield$#$1$#$0$#$0$#$0$#$0', // Контактный телефон
+						   __('Address', 'wp-shop').'|||||Address$#$textfield$#$0$#$0$#$0$#$0$#$0', // Контактный телефон
+						   __('E-mail', 'wp-shop').'$#$textfield$#$0$#$1$#$0$#$0$#$0', // E-mail
+						   __('Comment to the order', 'wp-shop').'$#$textarea$#$0$#$0$#$0$#$0$#$0');
+		$this->payments[$i]->picture = 'yandex kassa.png';
+		$this->payments[$i]->merchant = true;
+		$this->payments[$i]->textAfterSend = '<h3>'.__('To pay your order, click the button above \'Pay Yandex kassa\'. <br/> After your payment, we will get data of your payment and our manager will contact you to arrange the delivery. <br/> Thank you for using our service!', 'wp-shop').'</h3>';
 
 		add_filter('init', array(&$this,'webMoneyResult'));
+		add_filter('init', array(&$this,'YandexResult'));
 		add_filter('init', array(&$this,'robokassaResult'));
 		add_filter('init', array(&$this,'ekResult'));
 		add_filter('init', array(&$this,'paypalResult'));
@@ -357,5 +375,50 @@ class Wpshop_Payment
 		}		
 			
 	}
-
+	
+	public function YandexResult()
+	{	
+		if ($_POST['action'] == 'checkOrder'){ 
+			$yandex_set = get_option("wpshop.payments.yandex_kassa");
+			$hash= md5($_POST['action'].';'.$_POST['orderSumAmount'].';'.$_POST['orderSumCurrencyPaycash'].';'.$_POST['orderSumBankPaycash'].';'.$_POST['shopId'].';'.$_POST['invoiceId'].';'.$_POST['customerNumber'].';'.$yandex_set['shopPassword']);
+			if (strtolower($hash) != strtolower($_POST['md5'])) {
+					$code = 1;
+				} else {
+					global $wpdb;
+					$order = $wpdb->get_row('SELECT * FROM '.$wpdb->prefix.'wpshop_orders WHERE order_id = '.(int)$_POST['orderNumber']);
+					if (!$order) {
+						$code = 200;
+					} else {
+						$code = 0;
+					}
+			} 
+			header_remove(); 	
+			include WPSHOP_DIR ."/views/response_xml.php";
+			exit;
+		}
+		
+		if ($_POST['action'] == 'paymentAviso'){ 
+			$yandex_set = get_option("wpshop.payments.yandex_kassa");
+			$hash= md5($_POST['action'].';'.$_POST['orderSumAmount'].';'.$_POST['orderSumCurrencyPaycash'].';'.$_POST['orderSumBankPaycash'].';'.$_POST['shopId'].';'.$_POST['invoiceId'].';'.$_POST['customerNumber'].';'.$yandex_set['shopPassword']);
+			if (strtolower($hash) != strtolower($_POST['md5'])) {
+					$code = 1;
+			} else {
+					global $wpdb;
+					$order = $wpdb->get_row('SELECT * FROM '.$wpdb->prefix.'wpshop_orders WHERE order_id = '.(int)$_POST['orderNumber']);
+					if (!$order) {
+						$code = 200;
+					} else {
+						$code = 0;
+					}
+			} 
+			if ($code == 0){
+				global $wpdb;
+				$wpdb->query("DELETE FROM {$wpdb->prefix}wpshop_selected_items WHERE selected_items_session_id='".$_POST["custom"]."'");
+				Wpshop_Orders::setStatus($_POST["orderNumber"],1);
+			}
+			header_remove(); 	
+			include WPSHOP_DIR ."/views/aviso_response_xml.php";
+			exit;
+		}
+	}
 }

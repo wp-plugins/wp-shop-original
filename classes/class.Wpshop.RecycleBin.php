@@ -116,6 +116,13 @@ From: {$email}");
 			$this->view->render("js.inc.clearCart.php");
 			$content = $content . ob_get_clean();
 		}
+		
+		if ($post->post_excerpt == "yandex_kassa_success")
+		{
+			ob_start();
+			$this->view->render("js.inc.clearCart.php");
+			$content = $content . ob_get_clean();
+		}
 
 		if ($post->post_excerpt == "robokassa_success")
 		{
@@ -175,6 +182,10 @@ From: {$email}");
 			if ($this->view->order['info']['payment'] == "wm")
 			{
 				$this->view->wm = get_option("wpshop.payments.wm");
+			}
+			if ($this->view->order['info']['payment'] == "yandex_kassa")
+			{
+				$this->view->yandex_kassa = get_option("wpshop.payments.yandex_kassa");
 			}
 			if ($this->view->order['info']['payment'] == "robokassa")
 			{
