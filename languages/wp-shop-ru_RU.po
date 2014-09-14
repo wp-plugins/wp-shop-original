@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP-shop\n"
-"POT-Creation-Date: 2014-09-13 12:20+0400\n"
-"PO-Revision-Date: 2014-09-13 12:28+0400\n"
+"POT-Creation-Date: 2014-09-14 17:12+0400\n"
+"PO-Revision-Date: 2014-09-14 17:12+0400\n"
 "Last-Translator: WP Shop.ru <masta@wp-shop.ru>\n"
 "Language-Team: Sergey Makarin <serg.makarin@gmail.com>\n"
 "Language: ru_RU\n"
@@ -711,11 +711,10 @@ msgid "Select a payment method"
 msgstr "Выберите способ оплаты"
 
 #: C:\Plugins\wp-shop-original\trunk/views/RecycleBin.php:355
-#: C:\Plugins\wp-shop-original\trunk/views/RecycleBin.php:394
 msgid ""
-"Payment is made through a payment service RoboKassa.ru <br/> Small extra "
+"Payment is made through a payment service Yandex kassa <br/> Small extra "
 "comission."
-msgstr "Оплата производится через платежный сервис 'РобоКасса'"
+msgstr "Оплата производится через платежный сервис 'Yandex касса'"
 
 #: C:\Plugins\wp-shop-original\trunk/views/RecycleBin.php:361
 #: C:\Plugins\wp-shop-original\trunk/views/RecycleBin.php:400
@@ -743,6 +742,12 @@ msgstr ""
 #: C:\Plugins\wp-shop-original\trunk/views/RecycleBin.php:384
 msgid "Sberbank online"
 msgstr "Сбербанк-онлайн"
+
+#: C:\Plugins\wp-shop-original\trunk/views/RecycleBin.php:394
+msgid ""
+"Payment is made through a payment service RoboKassa.ru <br/> Small extra "
+"comission."
+msgstr "Оплата производится через платежный сервис 'РобоКасса'"
 
 #: C:\Plugins\wp-shop-original\trunk/views/RecycleBin.php:409
 msgid "Terminals QIWI"

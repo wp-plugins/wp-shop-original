@@ -352,7 +352,7 @@ if ($total > 0) {
 					<div id='payments-table'>
 					<h3 id='mode-paymets-title'>
 						<?php 
-							echo __('Payment is made through a payment service RoboKassa.ru <br/> Small extra comission.', 'wp-shop'); //Оплата производится через платежный сервис RoboKassa.ru<br/> Взимается небольшая дополнительная комисcия.
+							echo __('Payment is made through a payment service Yandex kassa <br/> Small extra comission.', 'wp-shop'); //Оплата производится через платежный сервис RoboKassa.ru<br/> Взимается небольшая дополнительная комисcия.
 						?>
 					</h3>
 					<ul>
