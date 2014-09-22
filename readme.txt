@@ -8,10 +8,27 @@ Stable tag: 3.4.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
+Powerful online store plugin, with the integration of various Russian payment systems and PayPal
 интернет-магазин для WordPress с подключением множества российских платежных систем
 
 == Description ==
+This is a free but powerful online store plugin, with the integration of various Russian payment systems and PayPal. It works on any themes and it is easy  to configure and manage. 
 Это бесплатный, но мощный плагин интернет-магазина, с подключением различных российских платежных систем а так же PayPal. Работает на любых темах, прост в настройке и управлении.
+
+<h3>Key features of the online store WP-Shop plugin: </h3>
+<ul>
+<li>Products are based on regular posts of WordPress, with addition of the price tag and the button "buy".</li>
+<li>There are convenient tools for creating "tables" of products and price lists with different settings</li>
+<li>Off-line methods  of payment  and delivery: Pickup from the store / warehouse / office; Cash on  courier delivery, Cash on delivery at the post office.</li>
+<li>Customizable delivery options: you can construct any delivery options instead of standard cases.</li>
+<li>Online payment  methods : Webmoney (directly), all kinds of e-money + VISA and MASTERCARD, through payment systems Robokassa (RoboKassa) and WalletOne (W1)</li>
+<li>Integration with Yandex payment system (Yandex Kassa) </li>
+<li>Personal  customer account: orders review, purchase history, customer profile</li>
+<li>Sale of "digital goods": files download after the payment,  copy protection.</li>
+<li>Generating  Yandex.XML file for translation goods in Yandex. Market and other similar services </li>
+<li>Integrated Google Analytics and Yandex Metrika statistics for online retailers: considers sale, the average check, and other specific statistics for online shopping. </li>
+<li>many other options ... </li>
+</ul>
 
 <h3>Ключевые особенности плагина интернет-магазина WP-Shop:</h3>
 <ul>
