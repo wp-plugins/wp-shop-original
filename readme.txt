@@ -13,7 +13,6 @@ Powerful online store plugin, with the integration of various Russian payment sy
 
 == Description ==
 This is a free but powerful online store plugin, with the integration of various Russian payment systems and PayPal. It works on any themes and it is easy  to configure and manage. 
-Это бесплатный, но мощный плагин интернет-магазина, с подключением различных российских платежных систем а так же PayPal. Работает на любых темах, прост в настройке и управлении.
 
 <h3>Key features of the online store WP-Shop plugin: </h3>
 <ul>
@@ -30,6 +29,7 @@ This is a free but powerful online store plugin, with the integration of various
 <li>many other options ... </li>
 </ul>
 
+Это бесплатный, но мощный плагин интернет-магазина, с подключением различных российских платежных систем а так же PayPal. Работает на любых темах, прост в настройке и управлении.
 <h3>Ключевые особенности плагина интернет-магазина WP-Shop:</h3>
 <ul>
 	<li>Товары строятся на основе обычных записей WordPress, к которым, при указании цены, добавляется ценник и кнопка «купить»</li>
