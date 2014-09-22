@@ -8,11 +8,12 @@ Stable tag: 3.4.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Powerful online store plugin, with the integration of various Russian payment systems and PayPal
-интернет-магазин для WordPress с подключением множества российских платежных систем
+Powerful online store plugin, with WebMoney, YandexMoney, RoboKassa, QIWI, WalletOne, VISA & MasterCard, PayPal and many more payment systems
 
 == Description ==
-This is a free but powerful online store plugin, with the integration of various Russian payment systems and PayPal. It works on any themes and it is easy  to configure and manage. 
+
+<p>This is a free but powerful online store plugin, with the integration of various Russian payment systems and PayPal. It works on any themes and it is easy  to configure and manage.</p>
+Это бесплатный, но мощный плагин интернет-магазина, с подключением различных российских платежных систем а так же PayPal. Работает на любых темах, прост в настройке и управлении.
 
 <h3>Key features of the online store WP-Shop plugin: </h3>
 <ul>
@@ -29,7 +30,6 @@ This is a free but powerful online store plugin, with the integration of various
 <li>many other options ... </li>
 </ul>
 
-Это бесплатный, но мощный плагин интернет-магазина, с подключением различных российских платежных систем а так же PayPal. Работает на любых темах, прост в настройке и управлении.
 <h3>Ключевые особенности плагина интернет-магазина WP-Shop:</h3>
 <ul>
 	<li>Товары строятся на основе обычных записей WordPress, к которым, при указании цены, добавляется ценник и кнопка «купить»</li>
@@ -59,18 +59,18 @@ This is a free but powerful online store plugin, with the integration of various
 4. Activate the plugin WP Shop through the 'Plugins' menu in WordPress
 5. See [full userguide](http://www.youtube.com/embed/Ew51hmmwVIg?list=PLSDnqQFsL1p38epx0edCjawemN-g5_8Ql) how to set up your shop
 
-See also:
-1. Quick and easy WordPress Shop installer - http://wp-shop.ru/wpshop-install/
-2. Full video-guide about WP-Shop-site creation - http://wp-shop.ru/full_video_guide/
-3. Full video-guide about WP-Shop-site usage - http://www.youtube.com/watch?v=XeinZsh_hzo
-4. Video user-guide about update old versions - http://wp-shop.ru/poleznyie-sovetyi/obnovlenie-plagina-magazina-so-staryx-versij/
-
-Смотрите так же:
-1. Простая и быстрая установка интернет-магазина "в 3 клика" - http://wp-shop.ru/wpshop-install/
-2. Полный видеогид по установке интерет-магазина на работающий сайт WordPress - http://wp-shop.ru/full_video_guide/
-3. Полный видеогид по работе с интернет-магазином на WP Shop - http://www.youtube.com/watch?v=XeinZsh_hzo
-4. Видеогид по обновлению старых версий плагина магазина на новую - http://wp-shop.ru/poleznyie-sovetyi/obnovlenie-plagina-magazina-so-staryx-versij/
-
+See also:<ul>
+<li>1. Quick and easy WordPress Shop installer - http://wp-shop.ru/wpshop-install/</li>
+<li>2. Full video-guide about WP-Shop-site creation - http://wp-shop.ru/full_video_guide/</li>
+<li>3. Full video-guide about WP-Shop-site usage - http://www.youtube.com/watch?v=XeinZsh_hzo</li>
+<li>4. Video user-guide about update old versions - http://wp-shop.ru/poleznyie-sovetyi/obnovlenie-plagina-magazina-so-staryx-versij/</li>
+</ul>
+Смотрите так же:<ul>
+<li>1. Простая и быстрая установка интернет-магазина "в 3 клика" - http://wp-shop.ru/wpshop-install/</li>
+<li>2. Полный видеогид по установке интерет-магазина на работающий сайт WordPress - http://wp-shop.ru/full_video_guide/</li>
+<li>3. Полный видеогид по работе с интернет-магазином на WP Shop - http://www.youtube.com/watch?v=XeinZsh_hzo</li>
+<li>4. Видеогид по обновлению старых версий плагина магазина на новую - http://wp-shop.ru/poleznyie-sovetyi/obnovlenie-plagina-magazina-so-staryx-versij/</li>
+</ul>
 
 == Frequently asked questions ==
 
