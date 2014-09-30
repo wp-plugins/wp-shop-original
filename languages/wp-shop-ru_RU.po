@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP-shop\n"
-"POT-Creation-Date: 2014-09-14 17:12+0400\n"
-"PO-Revision-Date: 2014-09-14 17:12+0400\n"
+"POT-Creation-Date: 2014-09-30 17:11+0400\n"
+"PO-Revision-Date: 2014-09-30 17:12+0400\n"
 "Last-Translator: WP Shop.ru <masta@wp-shop.ru>\n"
 "Language-Team: Sergey Makarin <serg.makarin@gmail.com>\n"
 "Language: ru_RU\n"
@@ -36,7 +36,7 @@ msgstr "Настройки оплаты"
 msgid "WP Shop Deliveries"
 msgstr "Настройки доставки"
 
-#: C:\Plugins\wp-shop-original\trunk/classes/class.Wpshop.Admin.php:211
+#: C:\Plugins\wp-shop-original\trunk/classes/class.Wpshop.Admin.php:213
 #: C:\Plugins\wp-shop-original\trunk/views/good.widget.inc.php:33
 #: C:\Plugins\wp-shop-original\trunk/views/RecycleBinAfterSend.php:47
 #: C:\Plugins\wp-shop-original\trunk/views/RecycleBinAfterSend.php:85
@@ -141,7 +141,7 @@ msgid "Items:"
 msgstr "Позиций:"
 
 #: C:\Plugins\wp-shop-original\trunk/classes/class.Wpshop.Boot.php:227
-#: C:\Plugins\wp-shop-original\trunk/classes/class.Wpshop.RecycleBin.php:259
+#: C:\Plugins\wp-shop-original\trunk/classes/class.Wpshop.RecycleBin.php:263
 #: C:\Plugins\wp-shop-original\trunk/views/mail/admin.php:44
 #: C:\Plugins\wp-shop-original\trunk/views/mail/client.php:43
 #: C:\Plugins\wp-shop-original\trunk/views/mail/client1.php:25
@@ -193,7 +193,7 @@ msgstr "Экспорт / Импорт"
 msgid "$"
 msgstr "руб."
 
-#: C:\Plugins\wp-shop-original\trunk/classes/class.Wpshop.Installer.php:182
+#: C:\Plugins\wp-shop-original\trunk/classes/class.Wpshop.Installer.php:183
 msgid ""
 "Amount of your order is below of the minimum. Please order something else!"
 msgstr ""
@@ -632,7 +632,7 @@ msgid "New Order"
 msgstr "Новый заказ"
 
 #: C:\Plugins\wp-shop-original\trunk/classes/class.Wpshop.RecycleBin.php:91
-#: C:\Plugins\wp-shop-original\trunk/classes/class.Wpshop.RecycleBin.php:99
+#: C:\Plugins\wp-shop-original\trunk/classes/class.Wpshop.RecycleBin.php:103
 #: C:\Plugins\wp-shop-original\trunk/views/RecycleBinAfterSend.php:47
 #: C:\Plugins\wp-shop-original\trunk/views/RecycleBinAfterSend.php:85
 #: C:\Plugins\wp-shop-original\trunk/views/RecycleBinAfterSend.php:130
@@ -640,11 +640,11 @@ msgstr "Новый заказ"
 msgid "from site"
 msgstr "с сайта"
 
-#: C:\Plugins\wp-shop-original\trunk/classes/class.Wpshop.RecycleBin.php:99
+#: C:\Plugins\wp-shop-original\trunk/classes/class.Wpshop.RecycleBin.php:103
 msgid "Your order"
 msgstr "Ваш заказ"
 
-#: C:\Plugins\wp-shop-original\trunk/classes/class.Wpshop.RecycleBin.php:261
+#: C:\Plugins\wp-shop-original\trunk/classes/class.Wpshop.RecycleBin.php:265
 msgid "With discount"
 msgstr "Со скидкой"
 
@@ -930,8 +930,8 @@ msgstr "Курьерская доставка"
 #: C:\Plugins\wp-shop-original\trunk/views/admin/delivery.php:59
 #: C:\Plugins\wp-shop-original\trunk/views/admin/orders.order.php:65
 #: C:\Plugins\wp-shop-original\trunk/views/admin/payments.php:539
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:222
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:275
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:227
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:280
 #: C:\Plugins\wp-shop-original\trunk/views/admin/user.profile.php:24
 msgid "Save"
 msgstr "Сохранить"
@@ -1206,7 +1206,7 @@ msgstr "Валюта"
 
 #: C:\Plugins\wp-shop-original\trunk/views/admin/payments.php:363
 #: C:\Plugins\wp-shop-original\trunk/views/admin/payments.php:530
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:95
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:100
 msgid "Russian Ruble"
 msgstr "Российские рубли"
 
@@ -1216,13 +1216,13 @@ msgstr "Южно-Африканские ранды"
 
 #: C:\Plugins\wp-shop-original\trunk/views/admin/payments.php:365
 #: C:\Plugins\wp-shop-original\trunk/views/admin/payments.php:528
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:93
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:98
 msgid "USD"
 msgstr "Американские доллары"
 
 #: C:\Plugins\wp-shop-original\trunk/views/admin/payments.php:366
 #: C:\Plugins\wp-shop-original\trunk/views/admin/payments.php:529
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:94
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:99
 msgid "euro"
 msgstr "Евро"
 
@@ -1310,67 +1310,71 @@ msgstr ""
 "разделе &quot;Настройка оплаты&quot;"
 
 #: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:67
+msgid "Activate custom mail editor:"
+msgstr "Активировать редактор писем:"
+
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:72
 msgid "E-mail notification about shopping"
 msgstr "E-mail уведомления о покупках"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:72
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:77
 msgid "Tracking ID for E-commerce Google Analytics"
 msgstr "ID для Google Analytics"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:77
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:82
 msgid "Tracking ID for E-commerce Yandex metrika"
 msgstr "ID для Yandex метрики"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:82
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:87
 msgid "Currency for E-commerce Google Analytics"
 msgstr "Валюта для Google Analytics"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:96
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:101
 msgid "Ukrainian Hrivna"
 msgstr "Украинские гривны"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:97
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:102
 msgid "British Pounds"
 msgstr "Британские Фунты"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:103
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:108
 msgid "Disable kind of authorization"
 msgstr "Отключить один из способов авторизации в магазине"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:112
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:117
 msgid "no"
 msgstr "нет"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:113
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:118
 msgid "dissable register form"
 msgstr "Отключить авторизацию пользователей"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:114
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:119
 msgid "disable guest shoping"
 msgstr "Отключить роль гостя"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:128
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:133
 msgid "Данные магазина очищены"
 msgstr ""
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:142
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:147
 msgid "Loginza setting"
 msgstr "Установки Логинзы"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:160
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:165
 msgid "Link in format Yandex-XML. Enter it if the site in the Yandex.Market"
 msgstr ""
 "Линк в формате Yandex-XML. Укажите его при публикации сайта в системе Yandex."
 "Market"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:166
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:171
 msgid ""
 "This XML-file contains a list of items with not emptied price in your store."
 msgstr ""
 "Этот XML-файл содержит в себе список тех товаров Вашего магазина, у которых "
 "указана какая-либо цена."
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:168
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:173
 msgid ""
 "To exclude items from the list, add a custom field <code>noyml</code> with a "
 "value of 1."
@@ -1378,7 +1382,7 @@ msgstr ""
 "Для того чтобы исключить товар из списка, добавьте произвольное поле "
 "<code>noyml</code> со значением 1."
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:170
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:175
 msgid ""
 "Read details about this option on the page: <a href=\"http://www.wp-shop.ru/"
 "yandex-market/\" target=\"_blank\">Publication items Yandex.market</a>"
@@ -1387,55 +1391,55 @@ msgstr ""
 "blog/yandex-market/\" target=\"_blank\">Публикация товаров в Яндекс.Маркете</"
 "a>"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:179
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:184
 msgid "Cart"
 msgstr "Корзина"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:181
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:186
 msgid "Discount:"
 msgstr "Со скидкой:"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:183
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:188
 msgid "Options of minimum order:"
 msgstr "Опции минимального заказа:"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:185
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:190
 msgid "The minimum sum of order:"
 msgstr "Минимальная сумма заказа:"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:186
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:191
 msgid "Message to the buyer:"
 msgstr "Сообщение для покупателя:"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:187
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:192
 msgid "Link to the condition of delivery:"
 msgstr "Линк на условие доставки:"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:188
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:193
 msgid "Link to the return to shopping:"
 msgstr "Ссылка для возврата к покупкам:"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:189
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:194
 msgid "Link to to the cart page:"
 msgstr "Ссылка на страницу корзины:"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:200
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:205
 msgid "Item"
 msgstr "Товар"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:207
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:212
 msgid "Currency:"
 msgstr "Валюта:"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:211
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:216
 msgid "Text if the product is no longer available:"
 msgstr "Текст (HTML), если товара нет в наличии:"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:229
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:234
 msgid "Support the authors of the plugin WP-Shop!"
 msgstr "Поддержите авторов плагина WP-Shop!"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:235
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:240
 msgid ""
 "If the plugin has helped you in your business, please make donations and "
 "support the authors! With your support we can continue to improve the our "
@@ -1445,13 +1449,13 @@ msgstr ""
 "Вашей поддержкой мы сможем продолжать улучшать существующие плагины и делать "
 "новые."
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:247
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:252
 msgid ""
 "<strong>Authors of the plugin:</strong> Alexander Kuznetsov, Igor Bobko, "
 "Sergey Makarin"
 msgstr "<strong>Авторы плагина:</strong> Кузнецов Александр, Абрамов Кирилл"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:248
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:253
 msgid ""
 "<strong>The Website plugin:</strong> <a href=\"http://www.wp-shop.ru/\" "
 "target=\"_blank\">www.wp-shop.ru</a>"
@@ -1459,16 +1463,16 @@ msgstr ""
 "<strong>Сайт плагина:</strong> <a href=\"http://wp-shop.ru/\" target=\"_blank"
 "\">wp-shop.ru</a>"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:255
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:260
 msgid "META-box for display a price list"
 msgstr "META-поле для вывода в прайс-листах"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:266
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:294
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:271
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:299
 msgid "Done"
 msgstr "Готово"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:272
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:277
 msgid ""
 "Here you can specify the name of an additional <code>post_meta</​​code>, which "
 "you want to display in pricelists"
@@ -1476,11 +1480,11 @@ msgstr ""
 "Здесь можно указать наименование дополнительного <code>post_meta</code>, "
 "которое Вы хотите показывать в прайслистах"
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:283
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:288
 msgid "Currency update."
 msgstr "Обновление по валюте."
 
-#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:305
+#: C:\Plugins\wp-shop-original\trunk/views/admin/settings.php:310
 msgid "Update"
 msgstr "Обновить"
 

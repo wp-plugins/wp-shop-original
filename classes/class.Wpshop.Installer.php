@@ -11,6 +11,7 @@ class Wpshop_Installer
 												array('Field'=>'client_name'),
 												array('Field'=>'client_email'),
 												array('Field'=>'client_ip'),
+                        array('Field'=>'client_id'),
 												array('Field'=>'order_status'),
 												array('Field'=>'order_delivery'),
 												array('Field'=>'order_comment'),
@@ -148,7 +149,6 @@ array('Field'=>'ordered_digit_live'),
 			$this->wpdb->query($sql);
 		}
 
-
 	}
 
 	private function createOptions()
@@ -163,6 +163,7 @@ array('Field'=>'ordered_digit_live'),
 		add_option("wpshop.currency", __('$', 'wp-shop')); // руб.
 
 		add_option("wpshop.payments.activate","0");
+    add_option("wpshop.mail_activate","0");
 		add_option("wpshop_merchant","");
     add_option("wpshop.hide_auth","none");
 		add_option("wpshop_merchant_system","");

@@ -63,6 +63,11 @@
 						echo __('Additional options are included in the &quot;WP Shop Payments&quot;', 'wp-shop'); // Дополнительые опции включаются в разделе "WP Shop Payments"
 						?>)</code></td>
 					</tr>
+          <tr>
+						<td><label for="wpshop_mail_activate"><?php  _e('Activate custom mail editor:', 'wp-shop'); /* Активировать редактор писем:*/ ?></label></td>
+						<?php $mail_activate = $this->mail_activate == 1 ? " checked" : ""; ?>
+						<td><input type="checkbox" name="wpshop_mail_activate" id="wpshop_mail_activate"<?php  echo $mail_activate;?>/></td>
+					</tr>
 					<tr>
 						<td><label for="wpshop_payments_activate"><?php  echo __('E-mail notification about shopping', 'wp-shop') /*E-mail уведомления о покупках*/ ?></label></td>
 						<td><input type="text" name="wpshop_email" id="wpshop_email" value="<?php  echo $this->email;?>"/></td>

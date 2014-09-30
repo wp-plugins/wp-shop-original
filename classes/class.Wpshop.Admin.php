@@ -204,6 +204,8 @@ class Wpshop_Admin
 		$this->view->usd_cur = get_option('wp-shop-usd');
 		$this->view->eur_cur = get_option('wp-shop-eur');
 		$this->view->payments_activate = get_option('wpshop.payments.activate');
+    
+    $this->view->mail_activate = get_option('wpshop.mail_activate');
 
 		$this->view->opt_under_title = get_option('wpshop_price_under_title');
 		$this->view->position = get_option('wp-shop_position');
@@ -299,8 +301,17 @@ class Wpshop_Admin
 		{
 			update_option("wpshop.payments.activate",0);
 		}
-
-		if (isset($_POST['wp-shop_show-cost']))
+    
+    if (isset($_POST['wpshop_mail_activate']))
+		{
+			update_option("wpshop.mail_activate",1);
+		}
+		else
+		{
+			update_option("wpshop.mail_activate",0);
+		}
+    
+    if (isset($_POST['wp-shop_show-cost']))
 		{
 			update_option("wp-shop_show-cost",1);
 		}

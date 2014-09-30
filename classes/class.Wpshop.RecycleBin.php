@@ -94,8 +94,12 @@ From:{$email}");
 
 		ob_start();
 		$this->view->order = $orders;
-		//$this->view->render("mail/client1.php");
+		
+    if (!get_option("wpshop.mail_activate")){
 		$this->view->render("mail/client.php");
+    }else{
+      $this->view->render("mail/client1.php");
+    }
 		mail($orders['info']['email'], "Re: ".__('Your order','wp-shop')."  #{$pid} ".__('from site','wp-shop')." {$siteurl}", ob_get_clean(),"Content-type: text/html; charset=UTF-8
 Reply-To: {$email}
 From: {$email}");
