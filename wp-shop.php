@@ -4,7 +4,7 @@
  Plugin URI: http://www.wp-shop.ru
  Description: Интернет-магазин для WordPress.
  Author: www.wp-shop.ru
- Version: 3.4.3.3
+ Version: 3.4.3.4
  Author URI: http://www.wp-shop.ru
  */
 
@@ -41,7 +41,10 @@ function wpshopAutoload($ClassName)
 spl_autoload_register('wpshopAutoload');
 
 $WpShopBoot = new Wpshop_Boot();
-
+function wpshop_plugin_activate() {
+	$installer = new Wpshop_Installer();
+}
+register_activation_hook( __FILE__, 'wpshop_plugin_activate' );
 function wpshop_init_lang(){
 	load_plugin_textdomain('wp-shop', false, dirname(plugin_basename(__FILE__)).'/languages');
 }

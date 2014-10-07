@@ -20,7 +20,8 @@ class Wpshop_Boot
 		wpshop_init_lang();
 		define( 'CURR',	get_option("wpshop.currency") ); // Валюта
 		$this->disableMagicQuotes();
-		$installer = new Wpshop_Installer();
+		//$installer = new Wpshop_Installer();
+		Wpshop_Forms::getInstance()->checkcforms(Wpshop_Payment::getSingleton()->getPayments());
 		$page = new Wpshop_Page();
 		$recycleBin = Wpshop_RecycleBin::getInstance();
 

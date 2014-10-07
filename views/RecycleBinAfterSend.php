@@ -191,6 +191,25 @@ foreach($fields as $key => $val)
 print "<input type=\"image\" value=\"PayPal\" src=\"https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif\" alt=\"Submit button\" align=\"left\" style=\"margin-right:7px;\" /></form>";
 ?>
 
+<?php 
+} elseif($this->order['info']['payment'] == "chronopay"){
+if($this->chronopay['order']==true){
+$sign = md5($this->chronopay['product_id'].'-'.$order->getTotalSum().'-'.$this->order['id'].'-'.$this->chronopay['sharedsec']);}else{
+$sign = md5($this->chronopay['product_id'].'-'.$order->getTotalSum().'-'.$this->chronopay['sharedsec']);
+}
+?>
+  <form action="https://payments.chronopay.com/" method="POST"> 
+    <input type="hidden" name="product_id" value="<?php  echo $this->chronopay['product_id'];?>" /> 
+    <input type="hidden" name="product_price" value="<?php  echo $order->getTotalSum();?>" />
+    <input type="hidden" name="order_id" value="<?php echo $this->order['id'];?>" />     
+    <input type="hidden" name="cs1" value="<?php echo session_id();?>" /> 
+    <input type="hidden" name="cb_type" value="P" />
+    <input type="hidden" name="cb_url" value="<?php echo 'http://'.$_SERVER['HTTP_HOST'];?>" /> 
+    <input type="hidden" name="success_url" value="<?php  echo $this->chronopay['success'];?>" /> 
+    <input type="hidden" name="decline_url" value="<?php  echo $this->chronopay['failed'];?>" /> 
+    <input type="hidden" name="sign" value="<?php echo $sign; ?>" /> 
+    <input type="submit" class=\"wpshop-button\" value="<?php  echo __('Pay Chronopay', 'wp-shop'); // Оплатить через ChronoPay ?>"/>
+  </form>
 <?php  } else {?>
 <script type="text/javascript">
 jQuery(document).ready(function()

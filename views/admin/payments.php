@@ -535,6 +535,87 @@
 			</div>
 		</div>
 	</div>
+  
+  <div id="poststuff">
+		<div class="postbox">
+			<h3>Chronopay</h3>
+			<div class="inside">
+			<table cellpadding="2" cellspacing="2">
+			
+				<script>
+					jQuery(function(){
+						jQuery('#chronopay').change(function(){
+							if(jQuery(this).is(':checked')){
+								window.open('http://wp-shop.ru/chronopay/');
+							}
+						});
+							
+						
+					});
+				</script>
+				<tr>
+					<td style='width:400px;'><?php  _e('Enable Chronopay', 'wp-shop'); ?></td>
+					<?php $chronopay_activate = $this->chronopay['activate'] ? " checked" : "";?>
+					<td><input type="checkbox" id="chronopay" name="wpshop_payments_chronopay[activate]"<?php  echo $chronopay_activate;?>/></td>
+				</tr>
+				
+				
+				<tr>
+					<td><?php  _e('Delivery', 'wp-shop'); /*Доставка*/ ?></td>
+					<td>
+					<?php 
+						$i = 0;
+						foreach($this->deliveries as $delivery)
+						{
+							$checked = "";
+							if($this->chronopay['delivery']){
+							if (in_array($delivery->ID,$this->chronopay['delivery']))
+							{
+								$checked = " checked";
+							}
+							}elseif($i==3){ $checked = " checked"; update_option("wpshop.payments.chronopay",array('delivery' => array(2=>'vizit')));}
+							echo "<input type='checkbox' name='wpshop_payments_chronopay[delivery][]' value='{$delivery->ID}'{$checked}/> <label>{$delivery->name}</label><br/>";
+							if(++$i == 5) break;
+						}
+
+					?>
+					</td>
+				</tr>
+								
+				<tr>
+					<td style='width:400px;'><p><strong>Важно!</strong> для учета номера заказа необходимо связаться с администрацией Сhronopay для подключения данной услуги. Только после этого активируйте ее в настройках оплаты вашего магазина.</p></td>
+				</tr>
+						
+				<tr>
+					<td style='width:400px;'><?php  _e('Order_id enable', 'wp-shop');//Учитывать параметр order_id ?></td>
+					<?php $chronopay_order = $this->chronopay['order'] ? " checked" : "";?>
+					<td><input type="checkbox" name="wpshop_payments_chronopay[order]"<?php  echo $chronopay_order;?>/></td>
+				</tr>
+				
+				<tr>
+					<td><?php  _e('Product_id', 'wp-shop'); /*Product_id*/ ?></td>
+					<td><input type="text" name="wpshop_payments_chronopay[product_id]" value="<?php  echo $this->chronopay[product_id];?>"/></td>
+				</tr>
+				
+				<tr>
+					<td><?php  _e('Success URL', 'wp-shop'); /*Success URL*/ ?></td>
+					<td><input type="text" name="wpshop_payments_chronopay[success]" value="<?php  echo $this->chronopay['success'];?>"/></td>
+				</tr>
+        
+				<tr>
+					<td><?php  _e('Failed URL', 'wp-shop'); /*Failed URL*/ ?></td>
+					<td><input type="text" name="wpshop_payments_chronopay[failed]" value="<?php  echo $this->chronopay['failed'];?>"/></td>
+				</tr>
+        
+				<tr>
+					<td><?php  _e('Password', 'wp-shop'); /*Пароль*/ ?></td>
+					<td><input type="text" name="wpshop_payments_chronopay[sharedsec]" value="<?php  echo $this->chronopay['sharedsec'];?>"/></td>
+				</tr>
+        
+      </table>
+			</div>
+		</div>
+	</div>
 	
 	<input type="submit" value="<?php  _e('Save', 'wp-shop'); /*Сохранить*/ ?>" class="button">
 </form>

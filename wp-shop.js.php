@@ -396,7 +396,7 @@ function Cart(eid_mini, eid_cart)
 		this.s_sklad = sklad;
 
 		this.save();
-		this.update();
+		setTimeout(this.update, 1000);
 	}
 
 	this.remove = function(id, index)

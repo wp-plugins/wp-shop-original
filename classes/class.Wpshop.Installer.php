@@ -11,7 +11,7 @@ class Wpshop_Installer
 												array('Field'=>'client_name'),
 												array('Field'=>'client_email'),
 												array('Field'=>'client_ip'),
-                        array('Field'=>'client_id'),
+												array('Field'=>'client_id'),
 												array('Field'=>'order_status'),
 												array('Field'=>'order_delivery'),
 												array('Field'=>'order_comment'),
@@ -26,7 +26,7 @@ class Wpshop_Installer
 												array('Field'=>'ordered_count'),
 												array('Field'=>'ordered_key'),
 												array('Field'=>'ordered_digit_count'),
-array('Field'=>'ordered_digit_live'),
+												array('Field'=>'ordered_digit_live'),
 											)
 										),
 
@@ -174,6 +174,7 @@ array('Field'=>'ordered_digit_live'),
 		add_option("wpshop.payments.bank",array('delivery' => array(0=>'postByCountry',1=>'postByWorld',2=>'vizit',3=>'courier')));
 		add_option("wpshop.payments.robokassa",array('login'=>'demo','pass1'=>'Morbid11','pass2'=>'Visions22','delivery' => array(0=>'postByCountry',1=>'postByWorld',2=>'vizit',3=>'courier')));
 		add_option("wpshop.payments.paypal",array('delivery' => array(0=>'postByCountry',1=>'postByWorld',2=>'vizit',3=>'courier'),'success'=>get_bloginfo("url").'/?wpshopcarts=paypal_success'));
+    add_option("wpshop.payments.chronopay",array('delivery' => array(0=>'postByCountry',1=>'postByWorld',2=>'vizit',3=>'courier'),'success'=>get_bloginfo("url").'/?wpshopcarts=chronopay_success','failed'=>get_bloginfo("url").'/?wpshopcarts=chronopay_failed'));
 		add_option("wpshop.payments.post",array('delivery' => array(0=>'postByCountry',1=>'postByWorld')));
 		add_option("wpshop.payments.vizit",array('activate'=>1,'delivery'=>array( 0 => 'vizit')));
 

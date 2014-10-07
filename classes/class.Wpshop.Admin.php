@@ -335,6 +335,7 @@ class Wpshop_Admin
 		$this->view->cash = get_option("wpshop.payments.cash");
 		$this->view->robokassa = get_option("wpshop.payments.robokassa");
 		$this->view->paypal = get_option("wpshop.payments.paypal");
+    $this->view->chronopay = get_option("wpshop.payments.chronopay");
 		$this->view->vizit = get_option("wpshop.payments.vizit");
 		$this->view->post = get_option("wpshop.payments.post");
 		$this->view->ek = get_option("wpshop.payments.ek");
@@ -397,6 +398,13 @@ class Wpshop_Admin
 			$_POST['wpshop_payments_paypal']['activate'] = 0;
 		}
 		update_option("wpshop.payments.paypal",$_POST['wpshop_payments_paypal']);
+    
+    //Chronopay
+		if (!isset($_POST['wpshop_payments_chronopay']['activate']))
+		{
+			$_POST['wpshop_payments_chronopay']['activate'] = 0;
+		}
+		update_option("wpshop.payments.chronopay",$_POST['wpshop_payments_chronopay']);
 		
 		//PayPal
 		if (!isset($_POST['wpshop_payments_paypal']['test']))
@@ -404,6 +412,13 @@ class Wpshop_Admin
 			$_POST['wpshop_payments_paypal']['test'] = 0;
 		}
 		update_option("wpshop.payments.paypal",$_POST['wpshop_payments_paypal']);
+		
+		//Chronopay
+		if (!isset($_POST['wpshop_payments_chronopay']['order']))
+		{
+			$_POST['wpshop_payments_chronopay']['order'] = 0;
+		}
+		update_option("wpshop.payments.chronopay",$_POST['wpshop_payments_chronopay']);
 		
 		//EK
 		update_option("wpshop.payments.ek",$_POST['wpshop_payments_ek']);

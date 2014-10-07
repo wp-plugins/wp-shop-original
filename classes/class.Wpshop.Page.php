@@ -348,6 +348,36 @@ class Wpshop_Page
 			$id = wp_insert_post($post);
 			wp_set_object_terms( $id, $payment->paymentID, "genre", false);
 		}
+    
+    if ($payment->paymentID == "chronopay")
+		{
+			$post = array
+			(
+				'post_title' => "Ваш платеж через систему ‘Chronopay’ принят",
+				'post_content' => "",
+				'post_status' => 'publish',
+				'post_type' => 'wpshopcarts',
+				'post_excerpt' => "chronopay_success",
+				'post_name' => "chronopay_success",
+				'comment_status'=>'closed',
+				'ping_status' => 'closed'
+			);
+			$id = wp_insert_post($post);
+			wp_set_object_terms( $id, $payment->paymentID, "genre", false);
+			$post = array
+			(
+				'post_title' => "Ваш платеж через систему ‘Chronopay’ не принят",
+				'post_content' => "",
+				'post_status' => 'publish',
+				'post_type' => 'wpshopcarts',
+				'post_excerpt' => "chronopay_failed",
+				'post_name' => "chronopay_failed",
+				'comment_status'=>'closed',
+				'ping_status' => 'closed'
+			);
+			$id = wp_insert_post($post);
+			wp_set_object_terms( $id, $payment->paymentID, "genre", false);
+		}
 	
 	}
 

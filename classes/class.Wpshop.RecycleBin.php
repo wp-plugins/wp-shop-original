@@ -114,6 +114,8 @@ From: {$email}");
 	public function recycleBinAction($content)
 	{
 		global $post;
+		global $wpdb;
+		$ses = session_id();
 		if ($post->post_excerpt == "wm_success")
 		{
 			ob_start();
@@ -140,6 +142,15 @@ From: {$email}");
 			ob_start();
 			$this->view->render("js.inc.clearCart.php");
 			$content = $content . ob_get_clean();
+		}
+		
+		if ($post->post_excerpt == "chronopay_success")
+		{
+			ob_start();
+			$this->view->render("js.inc.clearCart.php");
+			$content = $content . ob_get_clean();
+			
+			$wpdb->query("DELETE FROM {$wpdb->prefix}wpshop_selected_items WHERE selected_items_session_id='{$ses}'");
 		}
 		$this->view->dataSend = Wpshop_Forms::isDataSend();
 
@@ -203,6 +214,11 @@ From: {$email}");
 			{
 				$this->view->paypal = get_option("wpshop.payments.paypal");
 			}
+			if ($this->view->order['info']['payment'] == "chronopay")
+			{
+				$this->view->chronopay = get_option("wpshop.payments.chronopay");
+			}
+      
 			$this->view->render("RecycleBinAfterSend.php");
 		}
 		else

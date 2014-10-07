@@ -4,7 +4,7 @@ Donate link: http://wp-shop.ru/donate/
 Tags: shop, webmoney, robokassa, wallet one, russian, ukrainian, affiliate, authorize, cart, checkout, commerce, coupons, e-commerce, ecommerce, gifts, online, online shop, online store, paypal, paypal advanced, paypal express, paypal pro, physical, ready!, reports, sales, sell, shipping, shop, shopping, stock, stock control, store, tax, virtual, weights, widgets, wordpress ecommerce, wp e-commerce
 Requires at least: 3.7
 Tested up to: 4.0.0
-Stable tag: 3.4.3.3
+Stable tag: 3.4.3.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,10 @@ Visit the site wp-shop.ru for help.
 
 
 == Changelog ==
+Version: 3.4.3.4
+-Chronopay enable
+-some db bug fixed
+
 Version: 3.4.3.3
 -wpshop_order sudden dropping bug fixed
 -custom mail editor 

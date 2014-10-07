@@ -168,9 +168,26 @@ class Wpshop_Payment
 		$this->payments[$i]->picture = 'yandex kassa.png';
 		$this->payments[$i]->merchant = true;
 		$this->payments[$i]->textAfterSend = '<h3>'.__('To pay your order, click the button above \'Pay Yandex kassa\'. <br/> After your payment, we will get data of your payment and our manager will contact you to arrange the delivery. <br/> Thank you for using our service!', 'wp-shop').'</h3>';
+    
+    $i = 9;
+		$this->payments[$i] = new Wpshop_Payment_Data();
+		$this->payments[$i]->paymentID = "chronopay";
+		$this->payments[$i]->name = "Chronopay";
+		$this->payments[$i]->title = __('Making order using Chronopay payment system', 'wp-shop'); //Оформление заказа с оплатой через систему Pay Pal
+		$this->payments[$i]->fields = array("Order".'$#$hidden$#$0$#$0$#$0$#$0$#$0',
+						   __('Order type:', 'wp-shop').' <b>'.__('Making order with payment using ‘Chronopay’ payment system', 'wp-shop').'</b>$#$hidden$#$0$#$0$#$0$#$0$#$0', // Тип заказа: <b>Наличными курьеру
+						   __('For making order please fill up the form:', 'wp-shop').'$#$fieldsetstart$#$0$#$0$#$0$#$0$#$0', // Для оформления заказа заполните эту форму:
+						   __('Your name', 'wp-shop').'|||||Name$#$textfield$#$1$#$0$#$1$#$0$#$0', // Ваше имя
+						   __('Contact phone', 'wp-shop').'|||||Phone$#$textfield$#$1$#$0$#$0$#$0$#$0', // Контактный телефон
+						   __('Address', 'wp-shop').'|||||Address$#$textfield$#$0$#$0$#$0$#$0$#$0', // Контактный телефон
+						   __('E-mail', 'wp-shop').'$#$textfield$#$0$#$1$#$0$#$0$#$0', // E-mail
+						   __('Comment to the order', 'wp-shop').'$#$textarea$#$0$#$0$#$0$#$0$#$0');
+		$this->payments[$i]->picture = 'chronopay.png';
+		$this->payments[$i]->textAfterSend = '<h3>'.__('To pay your order, click the button above \'Chronopay\'. <br/> After your payment, we will get data of your payment and our manager will contact you to arrange the delivery. <br/> Thank you for using our service!', 'wp-shop').'</h3>';
 
 		add_filter('init', array(&$this,'webMoneyResult'));
 		add_filter('init', array(&$this,'YandexResult'));
+		add_filter('init', array(&$this,'ChronoResult'));
 		add_filter('init', array(&$this,'robokassaResult'));
 		add_filter('init', array(&$this,'ekResult'));
 		add_filter('init', array(&$this,'paypalResult'));
@@ -280,6 +297,30 @@ class Wpshop_Payment
 			exit;
 		}
 	}
+  
+  public function ChronoResult() {
+    if ($_POST['transaction_type']=='Purchase'&&isset($_POST["cs1"])){
+		if (isset($_POST["order_id"])){
+			$status_order = Wpshop_Orders::getStatus_order($_POST["order_id"]);
+			if ($status_order[0]->order_status==0){
+				header_remove(); 	
+				print "200 OK";
+				global $wpdb;
+				$wpdb->query("DELETE FROM {$wpdb->prefix}wpshop_selected_items WHERE selected_items_session_id='".$_POST["cs1"]."'");
+				Wpshop_Orders::setStatus($_POST["order_id"],1);
+				exit;
+			}else{
+				print "200 OK";
+				exit;
+			}
+		}else{
+			print "200 OK";
+			global $wpdb;
+			$wpdb->query("DELETE FROM {$wpdb->prefix}wpshop_selected_items WHERE selected_items_session_id='".$_POST["cs1"]."'");
+		}
+	} 
+}	
+  
 	public function ekResult()
 	{
 		$status_order = Wpshop_Orders::getStatus_order($_POST["WMI_PAYMENT_NO"]);
