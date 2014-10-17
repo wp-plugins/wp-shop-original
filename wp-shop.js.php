@@ -139,8 +139,11 @@ function Cart(eid_mini, eid_cart)
 		{
 			var deliveryCost = (jQuery(this).find('option:selected').attr('cost') * 1).toFixed(2);
 			jQuery('#delivery_cost_value').html(deliveryCost);
-			CARTTHIS.getTotalSum();
-			jQuery('#delivery_cost_total').html((CARTTHIS.getTotalSum()*1 + deliveryCost*1).toFixed(2));
+			var all_price = jQuery('.all_price .rb_total strong').text()*1;
+			var discount_row = jQuery('.discount_row .rb_total strong').text()*1;
+			if(discount_row){var total_p = discount_row;}else{var total_p = all_price;}
+     
+			jQuery('#delivery_cost_total').html((total_p*1 + deliveryCost*1).toFixed(2));
 			jQuery('#delivery_cost').css('display','table-row');
 			jQuery('#delivery_cost').width(jQuery(".recycle_bin").width());
 			jQuery(".cform input[name='delivery']").val(jQuery(this).find('option:selected').val());
@@ -158,8 +161,11 @@ function Cart(eid_mini, eid_cart)
 			jQuery('#delivery_name').html(deliveryName1);
 			jQuery('#delivery_link').attr('href',deliveryLink1);
 			jQuery('#delivery_cost #delivery_link').html('?');
-			CARTTHIS.getTotalSum();
-			jQuery('#delivery_cost_total').html((CARTTHIS.getTotalSum()*1 + deliveryCost1*1).toFixed(2));
+			var all_price = jQuery('.all_price .rb_total strong').text()*1;
+			var discount_row = jQuery('.discount_row .rb_total strong').text()*1;
+			if(discount_row){var total_p = discount_row;}else{var total_p = all_price;}
+     
+			jQuery('#delivery_cost_total').html((total_p*1 + deliveryCost*1).toFixed(2));
 			jQuery('#delivery_cost').css('display','table-row');
 			jQuery('#delivery_cost').width(jQuery(".recycle_bin").width());
 			jQuery(".cform input[name='delivery']").val(deliveryName1);
