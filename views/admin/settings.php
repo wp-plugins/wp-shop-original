@@ -139,9 +139,9 @@
 						});
 						</script>
 					
-						<td>
+						<!--<td>
 							<a href="" class="wp-shop_delete_all">Переустановка магазина</a>
-						</td>
+						</td>-->
 					</tr>
 					<!--tr>
 						<td><label for="wpshop_loginza_token_key_value"><?php  echo __('Loginza setting', 'wp-shop') ?></label></td>
