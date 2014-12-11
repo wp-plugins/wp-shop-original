@@ -305,11 +305,11 @@
 						<td><input type="text" name="wpshop_payments_robokassa[login]" value="<?php  echo $this->robokassa['login'];?>"/></td>
 					</tr>
 					<tr>
-						<td><?php  _e('Robokassa login 1', 'wp-shop'); /*Robokassa пароль 1*/ ?></td>
+						<td><?php  _e('Robokassa pass 1', 'wp-shop'); /*Robokassa пароль 1*/ ?></td>
 						<td><input type="text" name="wpshop_payments_robokassa[pass1]" value="<?php  echo $this->robokassa['pass1'];?>"/></td>
 					</tr>
 					<tr>
-						<td><?php  _e('Robokassa login 2', 'wp-shop'); /*Robokassa пароль 2*/ ?></td>
+						<td><?php  _e('Robokassa pass 2', 'wp-shop'); /*Robokassa пароль 2*/ ?></td>
 						<td><input type="text" name="wpshop_payments_robokassa[pass2]" value="<?php  echo $this->robokassa['pass2'];?>"/></td>
 					</tr>
 				</table>

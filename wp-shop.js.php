@@ -77,7 +77,7 @@ function Cart(eid_mini, eid_cart)
 			url: object_name.url+"/wp-admin/admin-ajax.php",
 			data: {action:'cart_save',wpshop_id:this.s_id,wpshop_key:window.__cart.s_key,wpshop_name:window.__cart.s_name,wpshop_href:window.__cart.s_href,wpshop_cost:window.__cart.s_cost,wpshop_num:window.__cart.s_num,wpshop_sklad:window.__cart.s_sklad},
 			success: function(t){ 
-                            if (t == "add") {
+                            if (jQuery.trim(t) == "add") {
                                 jQuery('<div id="wpshop_shadow_window"></div>').prependTo('body');
 								if (object_name.yandex!= undefined){
 									jQuery('<div id="wpshop_background_alert_put_to_cart"><div>'+object_name.success+'<div id="wpshop_alert_put_to_cart_buttons"><a class=\'wpshop-button\' onclick="document.location=\''+object_name.cartpage+'\'; yaCounter'+object_name.yandex+'.reachGoal(\'wpshop_popup\');">'+object_name.order+'</a> <a class=\'wpshop-button\' id="continueButton">'+object_name.cont+'</a></div></div></div>').prependTo('body');
@@ -415,6 +415,38 @@ function Cart(eid_mini, eid_cart)
 				document.getElementById('cart_tr_'+index).style.display = 'none';
     		}
 		});
+    var local_price = jQuery("tr#cart_tr_" + index).find(".rb_total").html();
+    var local_price_all = jQuery(".recycle_bin > tfoot > tr.all_price > td.rb_total strong").html();
+    jQuery(".recycle_bin > tfoot > tr.all_price > td.rb_total strong").html(local_price_all-local_price);
+			var tmp1 = String(window.__cart.discount).split(";");
+			var max_discount_n = 0;
+			for (property in tmp1)
+			{
+				var ti = String(tmp1[property]).split(':');
+				if ((local_price_all-local_price)*1 > ti[0])
+				{
+					if ((max_discount_n*1) < (ti[1]*1))
+					{
+						max_discount_n = ti[1];
+					}
+				}
+			}
+			
+			if (max_discount_n*1 > 0)
+			{	
+				if(jQuery(".recycle_bin > tfoot > tr.discount_row").length>0){jQuery(".recycle_bin > tfoot > tr.discount_row").show();}else{
+				jQuery(".recycle_bin > tfoot > tr.all_price").after('<tr class="discount_row">'+
+						'<td colspan="5" align="right" ><strong>'+object_name.discont+' ' + max_discount_n + '%. '+object_name.full_total+'</strong></td>'+
+						'<td class="rb_total cost"><strong></strong></td>'+
+						'<td class="rb_delete"></td>' +
+						'</tr>');
+				}
+				
+				var price_n = ((local_price_all-local_price) / 100 * (100-max_discount_n)).toFixed(2);
+				jQuery(".recycle_bin > tfoot > tr.discount_row > td.rb_total strong").html(price_n);
+				jQuery(".recycle_bin > tfoot > tr.discount_row > td:first-child").html('<strong>'+object_name.discont+' ' + max_discount_n + '%. '+object_name.full_total+'</strong>');
+				
+			}else{jQuery(".recycle_bin > tfoot > tr.discount_row").hide();}
 	}
 
 	this.set = function(id, key, value,index,sklad,cost)
