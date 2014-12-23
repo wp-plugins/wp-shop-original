@@ -165,7 +165,7 @@ function Cart(eid_mini, eid_cart)
 			var discount_row = jQuery('.discount_row .rb_total strong').text()*1;
 			if(discount_row){var total_p = discount_row;}else{var total_p = all_price;}
      
-			jQuery('#delivery_cost_total').html((total_p*1 + deliveryCost*1).toFixed(2));
+			jQuery('#delivery_cost_total').html((total_p*1 + deliveryCost1*1).toFixed(2));
 			jQuery('#delivery_cost').css('display','table-row');
 			jQuery('#delivery_cost').width(jQuery(".recycle_bin").width());
 			jQuery(".cform input[name='delivery']").val(deliveryName1);
