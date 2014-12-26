@@ -407,6 +407,7 @@ function Cart(eid_mini, eid_cart)
 
 	this.remove = function(id, index)
 	{
+		jQuery("tr#cart_tr_" + index).hide();
 		jQuery.ajax({
 			type: "POST",
 			url: object_name.url+"/wp-admin/admin-ajax.php?action=cart_remove",
