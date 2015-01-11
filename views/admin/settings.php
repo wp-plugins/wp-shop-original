@@ -285,7 +285,7 @@
 <div id="poststuff" class="metabox-holder" style="padding:0px; min-width: 300px;">
 	<div id="side-sortables" class="meta-box-sortabless ui-sortable">
 		<div id="sm_pnres" class="postbox">
-			<h3 class="hndle"><span><?php  _e('Currency update.', 'wp-shop'); /*Обновление по валюте.*/ ?></span></h3>'
+			<h3 class="hndle"><span><?php  _e('Currency update.', 'wp-shop'); /*Обновление по валюте.*/ ?></span></h3>
 			<div class="inside">
 				<script type="text/javascript">
 				jQuery(document).ready(function()

@@ -4,7 +4,7 @@ Donate link: http://wp-shop.ru/donate/
 Tags: shop, webmoney, robokassa, wallet one, russian, ukrainian, affiliate, authorize, cart, checkout, commerce, coupons, e-commerce, ecommerce, gifts, online, online shop, online store, paypal, paypal advanced, paypal express, paypal pro, physical, ready!, reports, sales, sell, shipping, shop, shopping, stock, stock control, store, tax, virtual, weights, widgets, wordpress ecommerce, wp e-commerce
 Requires at least: 3.7
 Tested up to: 4.0.0
-Stable tag: 3.4.3.5
+Stable tag: 3.4.3.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,6 +92,8 @@ Visit the site wp-shop.ru for help.
 
 
 == Changelog ==
+Version: 3.4.3.6
+-currency recalculation fix
 
 Version: 3.4.3.5
 -recalculation cart while removing the item
