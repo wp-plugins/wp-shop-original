@@ -83,11 +83,16 @@ class Wpshop_Admin
 						gaBuildHit( 'ecommerce', $data);
 					}
 				}
+				$user = wp_get_current_user();
+		
+				if (array_key_exists('Customer',$user->allcaps) && !array_key_exists('Merchant',$user->allcaps)) {
+					$condition = " AND client_id = {$user->data->ID}";
+				}
 				
-				$this->view->order =  $wpdb->get_row("SELECT * FROM `{$wpdb->prefix}wpshop_orders` WHERE `order_id` = '{$id}'");
-
-				$this->view->ordered = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}wpshop_ordered` WHERE `ordered_pid` = '{$id}'");
-
+				$this->view->order =  $wpdb->get_row("SELECT * FROM `{$wpdb->prefix}wpshop_orders` WHERE `order_id` = '{$id}' {$condition}");
+				if($this->view->order){
+					$this->view->ordered = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}wpshop_ordered` WHERE `ordered_pid` = '{$id}'");
+				}
 				$payment = Wpshop_Payment::getInstance()->getPaymentByID($this->view->order->order_payment);
 				if ($payment)
 				{
@@ -97,7 +102,11 @@ class Wpshop_Admin
 				{
 					$this->view->order->payment = "";
 				}
-				$this->view->render("admin/orders.order.php");
+				if($this->view->order->client_id){
+					$this->view->render("admin/orders.order.php");
+				}else{
+					echo "<script>window.location = 'wp-admin/admin.php?page=wpshop_orders'</script>";
+				}
 				return;
 			}
 		}
