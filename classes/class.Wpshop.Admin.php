@@ -102,7 +102,7 @@ class Wpshop_Admin
 				{
 					$this->view->order->payment = "";
 				}
-				if($this->view->order->client_id){
+				if($this->view->order->order_id){
 					$this->view->render("admin/orders.order.php");
 				}else{
 					echo "<script>window.location = 'wp-admin/admin.php?page=wpshop_orders'</script>";
