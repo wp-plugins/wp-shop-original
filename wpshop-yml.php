@@ -1,12 +1,11 @@
-<?php
+<?php 
 header('Content-Type: text/xml; charset=utf-8');
 
 preg_match('|http://(.*)|', get_option('siteurl'), $m);
 $shop_name = $m[1];
 
-
 echo '<?xml version="1.0" encoding="utf-8" ?>'."\n".
-	'<!DOCTYPE yml_catalog SYSTEM "shops.dtd">'."\n\n".
+'<!DOCTYPE yml_catalog SYSTEM "shops.dtd">'."\n\n".
 
 	"<yml_catalog date=\"".date('Y-m-d H:i')."\">\n".
 	"<shop>\n".
@@ -43,11 +42,11 @@ $sql =
 	GROUP BY t.term_id
 	";
 
-if ( mysql_num_rows($res = mysql_query($sql)) )
+if ( $res = $wpdb->get_results($sql)) 
 {
-	while ($row = mysql_fetch_assoc($res))
+	foreach ($res as $row) 
 	{
-		print "\t".'<category id="'.$row['id'].'">'.$row['name'].'</category>'."\n";
+		print "\t".'<category id="'.$row->id.'">'.$row->name.'</category>'."\n";
 	}
 }
 
@@ -61,7 +60,7 @@ print
 
 //MAX(cast(m.meta_value as unsigned)) as price if max price 
 
-$sql =
+$sql1 =
 	"SELECT
 		p.ID,
 		p.post_content as content,
@@ -87,44 +86,40 @@ $sql =
 	ORDER BY category, p.ID
 	";
 
-$res = mysql_query($sql);
+$res1 = $wpdb->get_results($sql1);
 
-while ($row = mysql_fetch_assoc($res))
-{
-	$sql = "SELECT `post_id` FROM `{$wpdb->postmeta}` WHERE `post_id` = '{$row['ID']}' AND `meta_key` = 'noyml'";
-	if ( !mysql_num_rows($r = mysql_query($sql)) )
+foreach ($res1 as $row){
+	$sql2 = "SELECT `post_id` FROM `{$wpdb->postmeta}` WHERE `post_id` = '{$row->ID}' AND `meta_key` = 'noyml'";
+	if ( $r = $wpdb->get_results($sql2) )
 	{
 		//$id_kurs = get_post_meta($row['ID'], 'id_kurs', true);
 		//$picture = get_post_meta($row['ID'],'yml_pic',true);
-                $picture = get_post_meta($row['ID'],'Thumbnail',true);
+        $picture = get_post_meta($row->ID,'Thumbnail',true);
 		// Делаем на случай, если помимо ссылки на картинку, мета-поле обтекает другой текст.
 		//$picture = preg_match("#http://(.*)[\s\">]#U",$picture,$tmp);
 
 		//$description = get_post_meta($row['ID'],'shorttext',true);
-		$description = strip_tags ($row['content']);
-		$permalink = get_permalink($row['ID']);
-		echo "<offer id='{$row['ID']}' available='true'>\n";
+		$description = strip_tags ($row->content);
+		$description = preg_replace("/&#?[a-z0-9]{2,8};/i"," ",$description);
+		$permalink = get_permalink($row->ID);
+		echo "<offer id='{$row->ID}' available='true'>\n";
 		echo "\t<url>{$permalink}</url>\n";
-		echo "\t<price>{$row['price']}</price>\n";
+		echo "\t<price>{$row->price}</price>\n";
 		echo "\t<currencyId>RUR</currencyId>\n";
-		echo "\t<categoryId>{$row['category']}</categoryId>\n";
+		echo "\t<categoryId>{$row->category}</categoryId>\n";
 		echo "\t<picture>{$picture}</picture>\n";
 		echo "\t<delivery>true</delivery>\n";
-		echo "\t<name>{$row['name']}</name>\n";
+		echo "\t<name>{$row->name}</name>\n";
 		//echo "\t<vendorCode>{$id_kurs}</vendorCode>\n";
 		echo "\t<description>{$description}</description>\n";
 		//echo "\t<sales_notes>{$time}</sales_notes>\n";
 		echo "</offer>\n";
 	}
-	mysql_free_result($r);
+	
 }
 
-mysql_free_result($res);
+
 
 echo "</offers>\n\n";
 echo "</shop>\n";
 echo "</yml_catalog>\n";
-
-
-
-?>
