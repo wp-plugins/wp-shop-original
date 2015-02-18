@@ -90,7 +90,8 @@ $res1 = $wpdb->get_results($sql1);
 
 foreach ($res1 as $row){
 	$sql2 = "SELECT `post_id` FROM `{$wpdb->postmeta}` WHERE `post_id` = '{$row->ID}' AND `meta_key` = 'noyml'";
-	if ( $r = $wpdb->get_results($sql2) )
+	$r = $wpdb->get_results($sql2);
+	if ( empty($r))
 	{
 		//$id_kurs = get_post_meta($row['ID'], 'id_kurs', true);
 		//$picture = get_post_meta($row['ID'],'yml_pic',true);
@@ -115,10 +116,7 @@ foreach ($res1 as $row){
 		//echo "\t<sales_notes>{$time}</sales_notes>\n";
 		echo "</offer>\n";
 	}
-	
 }
-
-
 
 echo "</offers>\n\n";
 echo "</shop>\n";

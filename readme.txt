@@ -92,6 +92,10 @@ Visit the site wp-shop.ru for help.
 
 
 == Changelog ==
+
+Version: 3.4.3.10
+-yml export fix for 5.3
+
 Version: 3.4.3.9
 -yml export fix
 
