@@ -4,7 +4,7 @@
  Plugin URI: http://www.wp-shop.ru
  Description: Интернет-магазин для WordPress.
  Author: www.wp-shop.ru
- Version: 3.4.3.10
+ Version: 3.4.3.11
  Author URI: http://www.wp-shop.ru
  */
 

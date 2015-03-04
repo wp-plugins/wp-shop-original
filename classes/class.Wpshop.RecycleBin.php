@@ -88,7 +88,7 @@ class Wpshop_RecycleBin
 		// отправка почты администратору
 		$email = get_option("wpshop.email");
 		$siteurl = get_bloginfo('wpurl');
-		mail($email, __('New Order','wp-shop')." #{$pid} ".__('from site','wp-shop')." {$siteurl}", ob_get_clean(),"Content-type: text/html; charset=UTF-8
+		wp_mail($email, __('New Order','wp-shop')." #{$pid} ".__('from site','wp-shop')." {$siteurl}", ob_get_clean(),"Content-type: text/html; charset=UTF-8
 Reply-To: {$email}
 From:{$email}");
 
@@ -100,7 +100,7 @@ From:{$email}");
     }else{
       $this->view->render("mail/client1.php");
     }
-		mail($orders['info']['email'], "Re: ".__('Your order','wp-shop')."  #{$pid} ".__('from site','wp-shop')." {$siteurl}", ob_get_clean(),"Content-type: text/html; charset=UTF-8
+		wp_mail($orders['info']['email'], "Re: ".__('Your order','wp-shop')."  #{$pid} ".__('from site','wp-shop')." {$siteurl}", ob_get_clean(),"Content-type: text/html; charset=UTF-8
 Reply-To: {$email}
 From: {$email}");
 

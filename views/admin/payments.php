@@ -414,7 +414,7 @@
 							{
 								$checked = "";
 								if($this->yandex_kassa['delivery']){
-								if (in_array($delivery->ID,$this->wm['delivery']))
+								if (in_array($delivery->ID,$this->yandex_kassa['delivery']))
 								{
 									$checked = " checked";
 								}

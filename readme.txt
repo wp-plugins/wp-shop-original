@@ -93,6 +93,10 @@ Visit the site wp-shop.ru for help.
 
 == Changelog ==
 
+Version: 3.4.3.11
+-now you can use mails via smtp server on your site
+-yandex kassa custom delivery fix
+
 Version: 3.4.3.10
 -yml export fix for 5.3
 
