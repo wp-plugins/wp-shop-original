@@ -180,7 +180,7 @@ function Cart(eid_mini, eid_cart)
 				jQuery('#delivery_name').html(deliveryName2);
 				jQuery('#delivery_link').attr('href',deliveryLink2);
 				jQuery('#delivery_cost #delivery_link').html('?');
-				CARTTHIS.getTotalSum();
+			
 				jQuery('#delivery_cost_total').html((CARTTHIS.getTotalSum()*1 + deliveryCost2*1).toFixed(2));
 				jQuery('#delivery_cost').css('display','table-row');
 				jQuery('#delivery_cost').width(jQuery(".recycle_bin").width());
@@ -247,12 +247,15 @@ function Cart(eid_mini, eid_cart)
 						'</thead>'+
 						'<tbody>';
 
-					var i, t, total;
+					var i, t,c, total;
 					for (i = 0, total = 0; i < window.__cart.count; i++)
 					{
 						t = parseFloat(window.__cart.a_cost[i]) * window.__cart.a_num[i];
 						t = t.toFixed(2);
 						t = t * 1;
+            c = parseFloat(window.__cart.a_cost[i]);
+            c = c.toFixed(2);
+						c = c * 1;
 						total += t;
 						if(window.__cart.a_sklad[i]>0){stock='<br>'+object_name.stock+window.__cart.a_sklad[i]+''+object_name.pcs;}else{stock='';}
 						window.__cart.content_cart +=
@@ -260,7 +263,7 @@ function Cart(eid_mini, eid_cart)
 '<td class="rb_img"><a href="'+ window.__cart.a_href[i] +'"><img src="'+ window.__cart.a_thumbnail[i] +'" style="width:50px;height:50px"/></a></td>' + 
 							'<td class="rb_name"><a href="'+ window.__cart.a_href[i] +'">'+ window.__cart.a_name[i] +'</a></td>' + 
 							'<td class="rb_type">'+ window.__cart.a_key[i] +'&nbsp;</td>' +
-							'<td class="rb_cost">'+ window.__cart.a_cost[i] +'</td>' +
+							'<td class="rb_cost">'+c+'</td>' +
 							'<td class="rb_num"><a class="minus minus_'+i+'" href="javascript:void(null)" onmousedown="__cart.minus(\''+window.__cart.a_id[i]+'\', \''+window.__cart.a_key[i]+'\', 1,'+i+','+window.__cart.a_cost[i]+'); return false;">&minus;</a> <input type="text" value="'+ window.__cart.a_num[i] +'" size="3" class="input_'+i+'" maxlength="6" onchange="__cart.set(\''+window.__cart.a_id[i]+'\', \''+window.__cart.a_key[i]+'\', this.value,'+i+','+window.__cart.a_sklad[i]+','+window.__cart.a_cost[i]+'); return false;" onkeypress="WebForm_TextBoxKeyHandler(event);" /> <a class="plus plus_'+i+'" href="javascript:void(null)" onmousedown="__cart.plus(\''+window.__cart.a_id[i]+'\', \''+window.__cart.a_key[i]+'\', 1,'+i+','+window.__cart.a_sklad[i]+','+window.__cart.a_cost[i]+'); return false;">+</a>'+ stock +'</td>' +
 							'<td class="rb_total">'+ t +'</td>' +
 							'<td class="rb_delete"><a title="'+object_name.delet+'" href="javascript:void(null)" onclick="window.__cart.remove(\''+window.__cart.a_id[i]+'\', ' + i + '); return false;" style="text-decoration:none; color:#f00;">&times;</a></td>' +
