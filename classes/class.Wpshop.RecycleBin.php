@@ -112,7 +112,7 @@ class Wpshop_RecycleBin
       
       $location = explode("?h=", $headers["Location"]);
       $hesh = $location[1];
-      echo $orders['info']['total'];
+     
       $itogo = 0;
       foreach($orders['offers'] as $offer) {
         $price = round($offer['partnumber'] * $offer['price'],2);
