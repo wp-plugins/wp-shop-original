@@ -383,7 +383,7 @@ From: {$email}");
 		}
 
 		$allInfo['info']['comment'] = $mainComment;
-    if (get_option("wpshop.partner_param")){
+    if (get_option("wpshop.partner_param")&&get_option("wpshop.partner_param")!=''){
       if ($allInfo['info']['total']){
         self::getInstance()->saveOrder($allInfo);
         return $POSTdata;
