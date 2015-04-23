@@ -69,7 +69,23 @@ class Wpshop_RecycleBin
 
 
 		$pid = $wpdb->insert_id;
-    if (get_option("wpshop.partner_param")){
+         
+		$this->orderDataTmp = $orders;
+		$this->orderDataTmp['id'] = $pid;
+
+		foreach($orders['orders'] as $order) {
+			$digitCount = get_post_meta($order->selected_items_item_id,"digital_count",true);		
+			if (empty($digitCount)) {
+				$digitCount = -1;
+			}
+			$digitLive = get_post_meta($order->selected_items_item_id,"digital_live",true);
+			if (empty($digitLive)) {
+				$digitLive = -1;
+			}			
+			$wpdb->insert("{$wpdb->prefix}wpshop_ordered" , array( 'ordered_pid' => $pid, 'ordered_name' => $order->selected_items_name, 'ordered_cost' => $order->selected_items_cost,'ordered_count' => $order->selected_items_num,'ordered_key' => $order->selected_items_key,'ordered_page_id'=>$order->selected_items_item_id,'ordered_digit_count'=>$digitCount,'ordered_digit_live'=>$digitLive) , array( "%d" , "%s", "%f", "%d", "%s","%d","%d","%d"));
+		}		
+    
+     if (get_option("wpshop.partner_param")){
       $partner_id = get_option("wpshop.partner_param");
       $ref= get_bloginfo('url');
       $ch = curl_init();  
@@ -96,8 +112,24 @@ class Wpshop_RecycleBin
       
       $location = explode("?h=", $headers["Location"]);
       $hesh = $location[1];
-    
-      $url = "http://partner.mbgenerator.ru/affiliate/track_by_hash/{$hesh}/{$pid}/{$orders['info']['total']}/"; 
+      echo $orders['info']['total'];
+      $itogo = 0;
+      foreach($orders['offers'] as $offer) {
+        $price = round($offer['partnumber'] * $offer['price'],2);
+        $itogo += $price;
+      }
+      if ($orders['info']['discount'])
+      {
+        $itogo = round($itogo - $itogo / 100 * $orders['info']['discount'],2);
+      }
+      $delivery = Wpshop_Delivery::getInstance()->getDelivery($orders['info']['delivery']);
+      if ($delivery) {
+        $itogo += $delivery->cost;
+      } 
+      
+      /* print_r($orders); */
+   
+      $url = "http://partner.mbgenerator.ru/affiliate/track_by_hash/{$hesh}/{$pid}/{$itogo}/"; 
       $ch = curl_init();  
       curl_setopt($ch, CURLOPT_URL,$url); // set url to post to  
       curl_setopt($ch, CURLOPT_FAILONERROR, 1);  
@@ -108,21 +140,7 @@ class Wpshop_RecycleBin
       $result = curl_exec($ch); // run the whole process 
       curl_close($ch);  
     }
-      
-		$this->orderDataTmp = $orders;
-		$this->orderDataTmp['id'] = $pid;
-
-		foreach($orders['orders'] as $order) {
-			$digitCount = get_post_meta($order->selected_items_item_id,"digital_count",true);		
-			if (empty($digitCount)) {
-				$digitCount = -1;
-			}
-			$digitLive = get_post_meta($order->selected_items_item_id,"digital_live",true);
-			if (empty($digitLive)) {
-				$digitLive = -1;
-			}			
-			$wpdb->insert("{$wpdb->prefix}wpshop_ordered" , array( 'ordered_pid' => $pid, 'ordered_name' => $order->selected_items_name, 'ordered_cost' => $order->selected_items_cost,'ordered_count' => $order->selected_items_num,'ordered_key' => $order->selected_items_key,'ordered_page_id'=>$order->selected_items_item_id,'ordered_digit_count'=>$digitCount,'ordered_digit_live'=>$digitLive) , array( "%d" , "%s", "%f", "%d", "%s","%d","%d","%d"));
-		}		
+    
 		ob_start();
 		$this->view->order = $orders;
 		$this->view->id = $pid;
