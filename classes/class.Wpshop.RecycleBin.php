@@ -42,12 +42,15 @@ class Wpshop_RecycleBin
 		/**
 		 * @todo Действие очищает корзину в обычном режиме
 		 */
+     
+      
 		if (!get_option("wpshop.payments.activate"))
 		{
 			$this->view->render('js.inc.clearCart.php');
 		}
-	
-
+    
+     
+    
 		$currentUser = wp_get_current_user();
 
 		$status = 0;
@@ -66,7 +69,46 @@ class Wpshop_RecycleBin
 
 
 		$pid = $wpdb->insert_id;
+    if (get_option("wpshop.partner_param")){
+      $partner_id = get_option("wpshop.partner_param");
+      $ref= get_bloginfo('url');
+      $ch = curl_init();  
+      curl_setopt($ch, CURLOPT_URL, "http://partner.mbgenerator.ru/affiliate/goto_offer/{$partner_id}");
+      curl_setopt($ch, CURLOPT_HEADER, 1);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_REFERER, $ref);
+        
+      $response = curl_exec($ch);
+      $info = curl_getinfo($ch);
+      curl_close($ch);  
+      $headers = array();
 
+      $header_text = substr($response, 0, strpos($response, "\r\n\r\n"));
+
+      foreach (explode("\r\n", $header_text) as $i => $line){
+        if ($i === 0){
+           $headers['http_code'] = $line;
+        } else {
+          list ($key, $value) = explode(': ', $line);
+          $headers[$key] = $value;
+        }
+      }
+      
+      $location = explode("?h=", $headers["Location"]);
+      $hesh = $location[1];
+    
+      $url = "http://partner.mbgenerator.ru/affiliate/track_by_hash/{$hesh}/{$pid}/{$orders['info']['total']}/"; 
+      $ch = curl_init();  
+      curl_setopt($ch, CURLOPT_URL,$url); // set url to post to  
+      curl_setopt($ch, CURLOPT_FAILONERROR, 1);  
+      curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);// allow redirects  
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER,1); // return into a variable  
+      curl_setopt($ch, CURLOPT_TIMEOUT, 3); // times out after 4s  
+      curl_setopt($ch, CURLOPT_REFERER, $ref);
+      $result = curl_exec($ch); // run the whole process 
+      curl_close($ch);  
+    }
+      
 		$this->orderDataTmp = $orders;
 		$this->orderDataTmp['id'] = $pid;
 
@@ -257,6 +299,7 @@ From: {$email}");
 	}
 
 	public static function actionOrder($POSTData) {		
+    
 		$cform_name = self::getCformsName($POSTData);
 		$orders = Wpshop_Orders::getCartOrders();
 		
@@ -340,8 +383,16 @@ From: {$email}");
 		}
 
 		$allInfo['info']['comment'] = $mainComment;
-
-		self::getInstance()->saveOrder($allInfo);
-		return $POSTdata;
+    if (get_option("wpshop.partner_param")){
+      if ($allInfo['info']['total']){
+        self::getInstance()->saveOrder($allInfo);
+        return $POSTdata;
+      } else {
+        exit();
+      }
+		} else {
+      self::getInstance()->saveOrder($allInfo);
+      return $POSTdata;
+    }
 	}
 }

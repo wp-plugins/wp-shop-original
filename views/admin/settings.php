@@ -83,6 +83,11 @@
 						<td><input type="text" name="wpshop_yandex_metrika" id="wpshop_yandex_metrika" value="<?php  echo $this->yandex_metrika;?>"/></td>
 						<td></td>
 					</tr>
+          <tr>
+						<td><label for="wpshop_partner_param"><?php  echo __('Partner id', 'wp-shop');?></label></td>
+						<td><input type="text" name="wpshop_partner_param" id="wpshop_partner_param" value="<?php  echo $this->partner_param;?>"/></td>
+						<td></td>
+					</tr>
 					<tr>
 						<td><label for="wpshop_google_analytic_cc"><?php  echo __('Currency for E-commerce Google Analytics', 'wp-shop') /*Currency*/ ?></label></td>
 						<td>

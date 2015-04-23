@@ -227,6 +227,7 @@ class Wpshop_Admin
 		$this->view->shopping_return_link = get_option('wpshop.cart.shopping_return_link','#');
 		$this->view->email = get_option("wpshop.email");
 		$this->view->google_analytic = get_option("wpshop.google_analytic");
+    $this->view->partner_param = get_option("wpshop.partner_param");
 		$this->view->yandex_metrika = get_option("wpshop.yandex_metrika");
 		$this->view->google_analytic_cc = get_option("wpshop.google_analytic_cc");
 		$this->view->hide_auth = get_option("wpshop.hide_auth");
@@ -284,6 +285,7 @@ class Wpshop_Admin
 	public function updateSettingsPage()
 	{
 		update_option("wp-shop_cssfile",$_POST['cssfile']);
+    update_option("wpshop.partner_param",$_POST['wpshop_partner_param']);
 		update_option("wp-shop_cform",$_POST['cform']);
 		update_option("wp-shop_position",$_POST['position']);
 		update_option("wpshop.cart.discount",$_POST['discount']);

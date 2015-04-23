@@ -158,6 +158,7 @@ class Wpshop_Installer
 		add_option("wp-shop_position","top");
 		add_option("wp-shop_show-cost",1);
 		add_option("wp-shop-link_ie6","");
+    add_option("wpshop.partner_param","");
 		add_option("wpshop.email",get_bloginfo('admin_email'));
 
 		add_option("wpshop.currency", __('$', 'wp-shop')); // руб.
