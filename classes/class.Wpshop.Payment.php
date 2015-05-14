@@ -373,7 +373,7 @@ public function simplepayResult() {
       }else{
         $desk = "Платеж отменен";
         $xml->addChild('sp_description', "Платеж отменен");
-        Wpshop_Orders::setStatus($REQUEST_PARAMS["sp_order_id"],3);
+        Wpshop_Orders::setStatus($REQUEST_PARAMS["sp_order_id"],2);
       }
       
       $opts = get_option("wpshop.payments.simplepay");  

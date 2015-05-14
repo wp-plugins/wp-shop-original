@@ -206,7 +206,7 @@ $fields["sp_sig"] =  md5($sp_sig_before);
 print_r($fields["order"]);
 ?>
 
-<form action="https://api.simplepay.pro/sp_v2/payment" method="POST"> 
+<form action="https://api.simplepay.pro/sp/payment" method="POST"> 
    
     <?php foreach($fields as $key => $val)
     {
