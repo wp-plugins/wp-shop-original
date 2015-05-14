@@ -378,6 +378,36 @@ class Wpshop_Page
 			$id = wp_insert_post($post);
 			wp_set_object_terms( $id, $payment->paymentID, "genre", false);
 		}
+    
+    if ($payment->paymentID == "simplepay")
+		{
+			$post = array
+			(
+				'post_title' => "Ваш платеж через систему `Simplepay` принят",
+				'post_content' => "",
+				'post_status' => 'publish',
+				'post_type' => 'wpshopcarts',
+				'post_excerpt' => "siplepay_success",
+				'post_name' => "simplepay_success",
+				'comment_status'=>'closed',
+				'ping_status' => 'closed'
+			);
+			$id = wp_insert_post($post);
+			wp_set_object_terms( $id, $payment->paymentID, "genre", false);
+			$post = array
+			(
+				'post_title' => "Ваш платеж через систему ‘Simplepay’ не принят",
+				'post_content' => "",
+				'post_status' => 'publish',
+				'post_type' => 'wpshopcarts',
+				'post_excerpt' => "simplepay_failed",
+				'post_name' => "simplepay_failed",
+				'comment_status'=>'closed',
+				'ping_status' => 'closed'
+			);
+			$id = wp_insert_post($post);
+			wp_set_object_terms( $id, $payment->paymentID, "genre", false);
+		}
 	
 	}
 

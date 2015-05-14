@@ -175,6 +175,7 @@ class Wpshop_Installer
 		add_option("wpshop.payments.bank",array('delivery' => array(0=>'postByCountry',1=>'postByWorld',2=>'vizit',3=>'courier')));
 		add_option("wpshop.payments.robokassa",array('login'=>'demo','pass1'=>'Morbid11','pass2'=>'Visions22','delivery' => array(0=>'postByCountry',1=>'postByWorld',2=>'vizit',3=>'courier')));
 		add_option("wpshop.payments.paypal",array('delivery' => array(0=>'postByCountry',1=>'postByWorld',2=>'vizit',3=>'courier'),'success'=>get_bloginfo("url").'/?wpshopcarts=paypal_success'));
+    add_option("wpshop.payments.simplepay",array('delivery' => array(0=>'postByCountry',1=>'postByWorld',2=>'vizit',3=>'courier'),'success'=>get_bloginfo("url").'/?wpshopcarts=simplepay_success','failed'=>get_bloginfo("url").'/?wpshopcarts=simplepay_failed'));
     add_option("wpshop.payments.chronopay",array('delivery' => array(0=>'postByCountry',1=>'postByWorld',2=>'vizit',3=>'courier'),'success'=>get_bloginfo("url").'/?wpshopcarts=chronopay_success','failed'=>get_bloginfo("url").'/?wpshopcarts=chronopay_failed'));
 		add_option("wpshop.payments.post",array('delivery' => array(0=>'postByCountry',1=>'postByWorld')));
 		add_option("wpshop.payments.vizit",array('activate'=>1,'delivery'=>array( 0 => 'vizit')));

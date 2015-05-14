@@ -538,6 +538,72 @@
   
   <div id="poststuff">
 		<div class="postbox">
+			<h3>Simplepay</h3>
+			<div class="inside">
+			<table cellpadding="2" cellspacing="2">
+				<tr>
+					<td style='width:400px;'><?php  _e('Enable Simplepay', 'wp-shop'); ?></td>
+					<?php $simplepay_activate = $this->simplepay['activate'] ? " checked" : "";?>
+					<td><input type="checkbox" name="wpshop_payments_simplepay[activate]"<?php  echo $simplepay_activate;?>/></td>
+				</tr>
+				
+				<tr>
+					<td><?php  _e('Delivery', 'wp-shop'); /*Доставка*/ ?></td>
+					<td>
+					<?php 
+						$i = 0;
+						foreach($this->deliveries as $delivery)
+						{
+							$checked = "";
+							if($this->simplepay['delivery']){
+							if (in_array($delivery->ID,$this->simplepay['delivery']))
+							{
+								$checked = " checked";
+							}
+							}elseif($i==3){ $checked = " checked"; update_option("wpshop.payments.simplepay",array('delivery' => array(2=>'vizit')));}
+							echo "<input type='checkbox' name='wpshop_payments_simplepay[delivery][]' value='{$delivery->ID}'{$checked}/> <label>{$delivery->name}</label><br/>";
+							if(++$i == 5) break;
+						}
+
+					?>
+					</td>
+				</tr>
+        
+        <tr>
+					<td><?php  _e('Outlet id', 'wp-shop'); /*Outlet id*/ ?></td>
+					<td><input type="text" name="wpshop_payments_simplepay[outlet_id]" value="<?php  echo $this->simplepay['outlet_id'];?>"/></td>
+				</tr>
+				
+				<tr>
+					<td><?php  _e('Secure key', 'wp-shop'); /*Secure key*/ ?></td>
+					<td><input type="text" name="wpshop_payments_simplepay[secure]" value="<?php  echo $this->simplepay['secure'];?>"/></td>
+				</tr>
+        
+        <tr>
+					<td><?php  _e('Currency', 'wp-shop'); /*Валюта*/ ?></td>
+					<td>
+						<?php 
+							$currency = $this->simplepay['currency_simplepay'];
+							if ($currency == 'USD') { $p1 = ' selected="selected"'; $p2 = ''; $p3 = '';}
+							if ($currency == 'EUR') { $p1 = ''; $p2 = ' selected="selected"';$p3 = '';}
+							if ($currency == 'RUB') { $p1 = ''; $p2 = '';$p3 = ' selected="selected"';}
+						?>
+						<select name="wpshop_payments_simplepay[currency_simplepay]">
+							<option value='USD' <?php echo $p1?>><?php  _e('USD', 'wp-shop'); /*Американские доллары*/ ?></option>
+							<option value='EUR' <?php echo $p2?>><?php  _e('euro', 'wp-shop'); /*Евро*/ ?></option>
+							<option value='RUB' <?php echo $p3?>><?php  _e('Russian Ruble', 'wp-shop'); /*Российские рубли*/ ?></option>
+						</select>
+					</td>
+				</tr>
+					
+			
+			</table>
+			</div>
+		</div>
+	</div>
+  
+  <div id="poststuff">
+		<div class="postbox">
 			<h3>Chronopay</h3>
 			<div class="inside">
 			<table cellpadding="2" cellspacing="2">

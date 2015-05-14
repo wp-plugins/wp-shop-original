@@ -203,6 +203,13 @@ From: {$email}");
 			$this->view->render("js.inc.clearCart.php");
 			$content = $content . ob_get_clean();
 		}
+    
+    if ($post->post_excerpt == "simplepay_success")
+		{
+			ob_start();
+			$this->view->render("js.inc.clearCart.php");
+			$content = $content . ob_get_clean();
+		}
 		
 		if ($post->post_excerpt == "chronopay_success")
 		{
@@ -273,6 +280,10 @@ From: {$email}");
 			if ($this->view->order['info']['payment'] == "paypal")
 			{
 				$this->view->paypal = get_option("wpshop.payments.paypal");
+			}
+      if ($this->view->order['info']['payment'] == "simplepay")
+			{
+				$this->view->simplepay = get_option("wpshop.payments.simplepay");
 			}
 			if ($this->view->order['info']['payment'] == "chronopay")
 			{

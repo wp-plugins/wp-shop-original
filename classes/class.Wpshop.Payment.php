@@ -134,6 +134,22 @@ class Wpshop_Payment
 						   __('Comment to the order', 'wp-shop').'$#$textarea$#$0$#$0$#$0$#$0$#$0');
 		$this->payments[$i]->picture = 'paypal.png';
 		$this->payments[$i]->textAfterSend = '<h3>'.__('To pay your order, click the button above \'Pay PayPal\'. <br/> After your payment, we will get data of your payment and our manager will contact you to arrange the delivery. <br/> Thank you for using our service!', 'wp-shop').'</h3>';
+    
+    $i = 10;
+		$this->payments[$i] = new Wpshop_Payment_Data();
+		$this->payments[$i]->paymentID = "simplepay";
+		$this->payments[$i]->name = "Simplepay";
+		$this->payments[$i]->title = __('Making order using Simplepay payment system', 'wp-shop'); //Оформление заказа с оплатой через систему Simplepay
+		$this->payments[$i]->fields = array("Order".'$#$hidden$#$0$#$0$#$0$#$0$#$0',
+						   __('Order type:', 'wp-shop').' <b>'.__('Making order with payment using ‘Pay Pal’ payment system', 'wp-shop').'</b>$#$hidden$#$0$#$0$#$0$#$0$#$0', // Тип заказа: <b>Наличными курьеру
+						   __('For making order please fill up the form:', 'wp-shop').'$#$fieldsetstart$#$0$#$0$#$0$#$0$#$0', // Для оформления заказа заполните эту форму:
+						   __('Your name', 'wp-shop').'|||||Name$#$textfield$#$1$#$0$#$1$#$0$#$0', // Ваше имя
+						   __('Contact phone', 'wp-shop').'|||||Phone$#$textfield$#$1$#$0$#$0$#$0$#$0', // Контактный телефон
+						   __('Address', 'wp-shop').'|||||Address$#$textfield$#$0$#$0$#$0$#$0$#$0', // Контактный телефон
+						   __('E-mail', 'wp-shop').'$#$textfield$#$0$#$1$#$0$#$0$#$0', // E-mail
+						   __('Comment to the order', 'wp-shop').'$#$textarea$#$0$#$0$#$0$#$0$#$0');
+		$this->payments[$i]->picture = 'simplepay.png';
+		$this->payments[$i]->textAfterSend = '<h3>'.__('To pay your order, click the button above \'Simplepay\'. <br/> After your payment, we will get data of your payment and our manager will contact you to arrange the delivery. <br/> Thank you for using our service!', 'wp-shop').'</h3>';
 				
 		$i = 7;
 		$this->payments[$i] = new Wpshop_Payment_Data();
@@ -191,6 +207,7 @@ class Wpshop_Payment
 		add_filter('init', array(&$this,'robokassaResult'));
 		add_filter('init', array(&$this,'ekResult'));
 		add_filter('init', array(&$this,'paypalResult'));
+    add_filter('init', array(&$this,'simplepayResult'));
 	}
 
 	/**
@@ -320,6 +337,64 @@ class Wpshop_Payment
 		}
 	} 
 }	
+
+public function simplepayResult() {
+  $REQUEST_PARAMS  = array();
+		
+  
+		if(!empty($_POST['sp_xml'])){
+			$xml = $_POST['sp_xml'];
+			// надо распарсить XML в массив	
+			$dom = new DOMDocument;
+      $dom->loadXML($xml);
+      $parsed_xml = $s = simplexml_import_dom($dom);
+		
+      $as_array = (array) $parsed_xml;
+  	
+			$REQUEST_PARAMS = array_filter($as_array);
+		}
+		else if(!empty($_GET['sp_sig'])) $REQUEST_PARAMS = $_GET;
+		else if(!empty($_POST['sp_sig'])) $REQUEST_PARAMS = $_POST;
+		$status_order = Wpshop_Orders::getStatus_order($REQUEST_PARAMS["sp_order_id"]);			
+	
+		if ($REQUEST_PARAMS&&$status_order[0]->order_status==0) {
+      // теперь нужно ответить SimplePay
+			$xml = new SimpleXMLElement('<?xml version="1.0" encoding="utf-8"?><response/>');
+			$xml->addChild('sp_salt', $REQUEST_PARAMS['sp_salt']);
+			$xml->addChild('sp_status', 'ok');
+			
+			if($REQUEST_PARAMS['sp_result'] == 1){
+        $desk = "Оплата принята";
+        global $wpdb;
+        $wpdb->query("DELETE FROM {$wpdb->prefix}wpshop_selected_items WHERE selected_items_session_id='".$REQUEST_PARAMS["sp_user_params"]."'");
+					
+				Wpshop_Orders::setStatus($REQUEST_PARAMS["sp_order_id"],1);
+        $xml->addChild('sp_description', "Оплата принята");
+      }else{
+        $desk = "Платеж отменен";
+        $xml->addChild('sp_description', "Платеж отменен");
+        Wpshop_Orders::setStatus($REQUEST_PARAMS["sp_order_id"],3);
+      }
+      
+      $opts = get_option("wpshop.payments.simplepay");  
+      $res_array = array();
+      $res_array['sp_salt'] = $REQUEST_PARAMS['sp_salt'];
+      $res_array['sp_description'] = $desk;
+      $res_array['sp_status'] = 'ok';
+      ksort($res_array);
+      array_push ($res_array, $opts['secure']);
+      $sign = join(';', $res_array);
+      
+			$xml->addChild('sp_sig', md5(';'.$sign));
+			
+			header_remove(); 
+			header('Content-type: text/xml');
+			print $xml->asXML();
+      exit;
+    }
+} 
+
+
   
 	public function ekResult()
 	{

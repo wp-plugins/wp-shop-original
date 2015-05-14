@@ -111,7 +111,7 @@ $crc  = md5("$mrh_login:$out_summ:$inv_id:$mrh_pass1:Shp_item=$shp_item");
 // HTML-страница с кассой
 // ROBOKASSA HTML-page
 print "<script language=JavaScript ".
-      "src='https://merchant.roboxchange.com/Handler/MrchSumPreview.ashx?".
+      "src='https://auth.robokassa.ru/Merchant/PaymentForm/FormMS.js?".
 //      "src='https://test.robokassa.ru/Handler/MrchSumPreview.ashx?".
       "MrchLogin=$mrh_login&OutSum=$out_summ&InvId=$inv_id&IncCurrLabel=$in_curr".
       "&Desc=$inv_desc&SignatureValue=$crc&Shp_item=$shp_item".
@@ -154,7 +154,75 @@ print "<input type=\"submit\" class=\"wpshop-button\" value=\"".$button_name."\"
 ?>
 
 <?php 
-}elseif($this->order['info']['payment'] == "paypal"){
+}elseif($this->order['info']['payment'] == "simplepay"){
+
+function get_client_ip() {
+    $ipaddress = '';
+    if (getenv('HTTP_CLIENT_IP'))
+        $ipaddress = getenv('HTTP_CLIENT_IP');
+    else if(getenv('HTTP_X_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+    else if(getenv('HTTP_X_FORWARDED'))
+        $ipaddress = getenv('HTTP_X_FORWARDED');
+    else if(getenv('HTTP_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_FORWARDED_FOR');
+    else if(getenv('HTTP_FORWARDED'))
+       $ipaddress = getenv('HTTP_FORWARDED');
+    else if(getenv('REMOTE_ADDR'))
+        $ipaddress = getenv('REMOTE_ADDR');
+    else
+        $ipaddress = 'UNKNOWN';
+    return $ipaddress;
+}
+
+function makeSigStr ( $strScriptName, array $arrParams, $strSecretKey ) {
+  unset($arrParams['sp_sig']);
+  
+  ksort($arrParams);
+
+  array_unshift($arrParams, $strScriptName);
+  array_push   ($arrParams, $strSecretKey);
+
+  return join(';', $arrParams);
+}
+
+$fields = array(); 
+
+// Добавление полей формы в ассоциативный массив
+$fields["sp_outlet_id"]    = $this->simplepay['outlet_id'];
+$fields["sp_order_id"] = $this->order['id'];
+$fields["sp_partner_id"]    = '18';
+$fields["sp_amount"]     = $order->getTotalSum();
+$fields["sp_description"]    = __('Order', 'wp-shop')." #{$this->order['id']} ".__('from site', 'wp-shop')." {$_SERVER['HTTP_HOST']}.";
+$fields["sp_user_params"]    =  session_id();
+$fields["sp_currency"]       = $this->simplepay['currency_simplepay'];
+$fields["sp_salt"]       = rand(21,43433);
+$fields["sp_user_ip"] = get_client_ip();
+$fields["sp_user_name"] = $this->order['info']['username'];
+$fields["sp_user_contact_email"] = $this->order['info']['email'];
+
+$sp_sig_before  = makeSigStr('payment',$fields,$this->simplepay['secure']);
+$fields["sp_sig"] =  md5($sp_sig_before);
+print_r($fields["order"]);
+?>
+
+<form action="https://api.simplepay.pro/sp_v2/payment" method="POST"> 
+   
+    <?php foreach($fields as $key => $val)
+    {
+    if (is_array($val))
+       foreach($val as $value)
+       {
+     print "<input type=\"hidden\" name=\"$key\" value=\"$value\"/>";
+       }
+    else	    
+       print "<input type=\"hidden\" name=\"$key\" value=\"$val\"/>";
+    }?>
+    <input type="submit" class=\"wpshop-button\" value="<?php  echo __('Pay Simplepay', 'wp-shop'); // Оплатить через Simplepay ?>"/>
+  </form>
+
+<?php 
+} elseif($this->order['info']['payment'] == "paypal"){
 
 $fields = array(); 
 
@@ -189,9 +257,7 @@ foreach($fields as $key => $val)
 }
 
 print "<input type=\"image\" value=\"PayPal\" src=\"https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif\" alt=\"Submit button\" align=\"left\" style=\"margin-right:7px;\" /></form>";
-?>
 
-<?php 
 } elseif($this->order['info']['payment'] == "chronopay"){
 if($this->chronopay['order']==true){
 $sign = md5($this->chronopay['product_id'].'-'.$order->getTotalSum().'-'.$this->order['id'].'-'.$this->chronopay['sharedsec']);}else{

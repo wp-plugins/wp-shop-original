@@ -346,6 +346,7 @@ class Wpshop_Admin
 		$this->view->cash = get_option("wpshop.payments.cash");
 		$this->view->robokassa = get_option("wpshop.payments.robokassa");
 		$this->view->paypal = get_option("wpshop.payments.paypal");
+    $this->view->simplepay = get_option("wpshop.payments.simplepay");
     $this->view->chronopay = get_option("wpshop.payments.chronopay");
 		$this->view->vizit = get_option("wpshop.payments.vizit");
 		$this->view->post = get_option("wpshop.payments.post");
@@ -410,6 +411,13 @@ class Wpshop_Admin
 		}
 		update_option("wpshop.payments.paypal",$_POST['wpshop_payments_paypal']);
     
+    //Simplepay
+		if (!isset($_POST['wpshop_payments_simplepay']['activate']))
+		{
+			$_POST['wpshop_payments_simplepay']['activate'] = 0;
+		}
+		update_option("wpshop.payments.simplepay",$_POST['wpshop_payments_simplepay']);
+    
     //Chronopay
 		if (!isset($_POST['wpshop_payments_chronopay']['activate']))
 		{
@@ -423,6 +431,13 @@ class Wpshop_Admin
 			$_POST['wpshop_payments_paypal']['test'] = 0;
 		}
 		update_option("wpshop.payments.paypal",$_POST['wpshop_payments_paypal']);
+    
+    //Simplepay
+		if (!isset($_POST['wpshop_payments_simplepay']['test']))
+		{
+			$_POST['wpshop_payments_simplepay']['test'] = 0;
+		}
+		update_option("wpshop.payments.simplepay",$_POST['wpshop_payments_simplepay']);
 		
 		//Chronopay
 		if (!isset($_POST['wpshop_payments_chronopay']['order']))
