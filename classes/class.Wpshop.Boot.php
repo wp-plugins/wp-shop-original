@@ -1,8 +1,4 @@
-<?php 
-
-
-
-function my_cforms_filter($POSTdata) {
+<?php function my_cforms_filter($POSTdata) {
 	$cform_name = Wpshop_RecycleBin::getCformsName($POSTData);
 	if (!empty($cform_name)) {
 		Wpshop_Forms::setDataSend();
@@ -137,7 +133,7 @@ class WpShop
 	 * @var integer
 	 */
 	private $_showCost;
-
+  
 	/**
 	 * Css style file using administator of site.
 	 * @var string
@@ -162,8 +158,8 @@ class WpShop
 		$this->view = new Wpshop_View();
 		$this->_css = get_option('wp-shop_cssfile');
 		$this->_position = get_option('wp-shop_position');
-		$this->_showCost = get_option('wp-shop_show-cost');
-
+    $this->_showCost = get_option('wp-shop_show-cost');
+    $this->_promoActive = get_option('wp-shop_promo_active');
 		add_filter('the_content', array(&$this,'PriceList'));
 		add_filter('the_content', array(&$this,'PriceInfo'));
 		add_filter('the_content', array(&$this,'Vitrina'));
@@ -211,7 +207,11 @@ class WpShop
         'sum' => __('Sum'/*Сумма*/, 'wp-shop'),
         'url'=> get_bloginfo('wpurl'),
         'success'=>__('Successfully added to cart!'/*Успешно добавлено в корзину!*/, 'wp-shop'),
-        'yandex'=> get_option("wpshop.yandex_metrika"),
+		'wrong_promocode'=>__('Wrong promocode'/*Промокод не найден!*/, 'wp-shop'),
+		'your_promocode'=>__('You use promocode:'/*Вы использовали промокод:*/, 'wp-shop'),
+		'show_panel'=> get_option("wpshop.show_panel"),
+		'yandex'=> get_option("wpshop.yandex_metrika"),
+        'promocode'=> get_option("wp-shop_promo_active"),
         'cartpage'=> get_option("wpshop.cartpage"),
         'order'=> __('To do order'/*Успешно добавлено в корзину!*/, 'wp-shop'),
         'cont'=>__('Continue select'/*Успешно добавлено в корзину!*/, 'wp-shop'),

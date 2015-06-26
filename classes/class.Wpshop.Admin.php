@@ -44,12 +44,14 @@ class Wpshop_Admin
 
 		if (isset($_POST['mass_action']))
 		{
-			foreach($_POST['order_check'] as $order_id)
-			{
-				Wpshop_Orders::setStatus($order_id,$_POST['orders_status']);
-				//$wpdb->query("DELETE FROM `{$wpdb->prefix}wpshop_ordered` WHERE `ordered_pid` = {$order_id}");
-				//$wpdb->query("DELETE FROM `{$wpdb->prefix}wpshop_orders` WHERE `order_id` = {$order_id}");
-				
+			if( is_array($_POST['order_check'])) {
+				foreach($_POST['order_check'] as $order_id)
+				{
+					Wpshop_Orders::setStatus($order_id,$_POST['orders_status']);
+					//$wpdb->query("DELETE FROM `{$wpdb->prefix}wpshop_ordered` WHERE `ordered_pid` = {$order_id}");
+					//$wpdb->query("DELETE FROM `{$wpdb->prefix}wpshop_orders` WHERE `order_id` = {$order_id}");
+					
+				}
 			}
 		}
 
@@ -214,11 +216,14 @@ class Wpshop_Admin
 		$this->view->eur_cur = get_option('wp-shop-eur');
 		$this->view->payments_activate = get_option('wpshop.payments.activate');
     
-    $this->view->mail_activate = get_option('wpshop.mail_activate');
+		$this->view->mail_activate = get_option('wpshop.mail_activate');
+		$this->view->show_panel_activate = get_option('wpshop.show_panel');
 
 		$this->view->opt_under_title = get_option('wpshop_price_under_title');
 		$this->view->position = get_option('wp-shop_position');
 		$this->view->showCost = get_option('wp-shop_show-cost');
+    $this->view->promoActive = get_option('wp-shop_promo_active');
+    
 		$this->view->f_order = __('Order', 'wp-shop');
 		$this->view->discount = get_option('wpshop.cart.discount');
 		$this->view->minzakaz = get_option('wpshop.cart.minzakaz');
@@ -321,6 +326,15 @@ class Wpshop_Admin
 		{
 			update_option("wpshop.mail_activate",0);
 		}
+		
+	if (isset($_POST['wpshop_show_panel']))
+		{
+			update_option("wpshop.show_panel",1);
+		}
+		else
+		{
+			update_option("wpshop.show_panel",0);
+		}
     
     if (isset($_POST['wp-shop_show-cost']))
 		{
@@ -329,6 +343,15 @@ class Wpshop_Admin
 		else
 		{
 			update_option("wp-shop_show-cost",0);
+		}
+    
+    if (isset($_POST['wp-shop_promo_activate']))
+		{
+			update_option("wp-shop_promo_active",1);
+		}
+		else
+		{
+			update_option("wp-shop_promo_active",0);
 		}
 	}
 

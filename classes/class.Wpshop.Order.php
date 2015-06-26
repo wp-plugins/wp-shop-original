@@ -52,10 +52,6 @@ class Wpshop_Order
 		return round($total,2);
 	}
 
-	public function getCartOrders() {
-		
-	}
-	
 	public function getOrderItems($order_id) {
 		foreach($this->ordered as $key=>$item){
 			$product[$key]['ip']=$item->ordered_cost;

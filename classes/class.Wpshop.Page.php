@@ -14,6 +14,7 @@ class Wpshop_Page
 		add_action('init', array(&$this,'registerPostType'));
 		add_action('init', array(&$this,'registerCustomDelivery'));
 		add_action('init', array(&$this,'registerCustomMail'));
+    add_action('init', array(&$this,'registerCustomPromo'));
 	}
 
 	public function registerPostType()
@@ -119,6 +120,36 @@ class Wpshop_Page
 			'taxonomies' => array('mail_type')
 		);
 		register_post_type('wpshop_client_mail',$args);
+		
+	}
+  
+  public function registerCustomPromo()
+	{
+		$labels = array();
+		$labels['name'] = __('WP Shop Promo', 'wp-shop'); // Основное название типа записи
+		$labels['singular_name'] = 'Promo'; // отдельное название записи типа Book
+			//'add_new' => 'Добавить новую',
+		$labels['add_new_item'] = __('Add new promo', 'wp-shop'); /// Добавить новую корзину
+		$labels['edit_item'] = __('Edit your promo', 'wp-shop'); /// Редактировать корзину
+		$labels['new_item'] = __('New promo', 'wp-shop'); /// Новая книга
+		$labels['view_item'] = __('View promo', 'wp-shop'); /// Посмотреть книгу
+		$labels['search_items'] = __('Search promo', 'wp-shop');  /// Найти книгу
+			//'not_found' =>  'Книг не найдено',
+		$labels['not_found_in_trash'] = __('Not found', 'wp-shop'); /// В корзине книг не найдено
+		$labels['parent_item_colon'] = '';
+		$labels['menu_name'] = __('WP Shop Promo', 'wp-shop');
+
+		$args = array(
+			'labels' => $labels,
+			'public' => true,
+			//'show_ui' => true,
+			'publicly_queryable' => true,
+			'capability_type' => 'page',
+			'show_in_menu' => 'wpshop_main',
+			'has_archive' => true,
+			'supports' => array('title','editor','custom-fields')
+		);
+		register_post_type('wpshop_promo',$args);
 		
 	}
 

@@ -15,6 +15,7 @@ class Wpshop_Installer
 												array('Field'=>'order_status'),
 												array('Field'=>'order_delivery'),
 												array('Field'=>'order_comment'),
+												array('Field'=>'order_promo'),
 												)
 											),
 							'wpshop_ordered' => array('columns' => array(
@@ -40,9 +41,10 @@ class Wpshop_Installer
 												array('Field'=>'selected_items_cost'),
 												array('Field'=>'selected_items_num'),
 												array('Field'=>'selected_items_sklad'),
-											)
-										)
-							);
+												array('Field'=>'selected_items_promo'),
+                      )
+                    )
+              );
 	public function __construct()
 	{
 		global $wpdb;
@@ -55,23 +57,45 @@ class Wpshop_Installer
 	private function checkTable($tableName)
 	{
 		$actualColumns = $this->wpdb->get_results("SHOW COLUMNS FROM `{$this->wpdb->prefix}{$tableName}`;");
-		foreach($this->tables[$tableName]['columns'] as $neededColumn)
-		{
+		if($actualColumns){
+		  foreach($this->tables[$tableName]['columns'] as $neededColumn)
+		  {
 			$find = false;
 			foreach($actualColumns as $column)
 			{
-				if ($neededColumn['Field'] == $column->Field)
-				{
-					$find = true;
-					break;
-				}
+			  if ($neededColumn['Field'] == $column->Field)
+			  {
+				$find = true;
+				break;
+			  }
 			}
 			if (!$find)
 			{
-				return false;
+			  return false;
+			}
+		  }
+		  return true;
+		}else{
+		  return 'no_table';
+		}
+	} 
+	
+	private function alterNewCols($tableName)
+	{
+		if($tableName == 'wpshop_orders') {
+			$checkCol = $this->wpdb->get_results("SHOW COLUMNS FROM `{$this->wpdb->prefix}{$tableName}` LIKE 'order_promo';");
+			if(!$checkCol) {
+				$this->wpdb->query("ALTER TABLE `{$this->wpdb->prefix}wpshop_orders` ADD `order_promo` BIGINT NOT NULL DEFAULT '0' AFTER  `order_comment` ;");
 			}
 		}
-		return true;
+		
+		if($tableName == 'wpshop_selected_items') { 
+			$checkCol = $this->wpdb->get_results("SHOW COLUMNS FROM `{$this->wpdb->prefix}{$tableName}` LIKE 'selected_items_promo';");
+			if(!$checkCol) {
+				$this->wpdb->query("ALTER TABLE `{$this->wpdb->prefix}wpshop_selected_items` ADD `selected_items_promo` BIGINT NOT NULL DEFAULT '0' AFTER  `selected_items_sklad`;");
+			}
+		}
+		
 	}
 
 
@@ -86,9 +110,7 @@ class Wpshop_Installer
 	 */
 	private function createOrderTable()
 	{
-		if (!$this->checkTable('wpshop_orders'))
-		{
-			$this->dropTable('wpshop_orders');
+		if ($this->checkTable('wpshop_orders')=='no_table'){		
 			$sql = "CREATE TABLE `{$this->wpdb->prefix}wpshop_orders`
 					(
 						`order_id` INT NOT NULL AUTO_INCREMENT ,
@@ -102,14 +124,31 @@ class Wpshop_Installer
 						`order_status` INT NULL,
 						`order_delivery` VARCHAR( 50 ),
 						`order_comment` TEXT,
+						`order_promo` BIGINT,
 						PRIMARY KEY ( `order_id` )
 					) ENGINE = INNODB DEFAULT CHARSET=utf8;";
 			$this->wpdb->query($sql);
+		}elseif(!$this->checkTable('wpshop_orders')){
+			$this->alterNewCols('wpshop_orders');
 		}
-		//$this->wpdb->query("ALTER TABLE `{$this->wpdb->prefix}wpshop_orders` ADD `client_id` INT NOT NULL DEFAULT '0' AFTER  `client_ip` ;");
-
-		if (!$this->checkTable('wpshop_ordered')) {
-			$this->dropTable('wpshop_ordered');
+		
+		if ($this->checkTable('wpshop_ordered')=='no_table') {
+			$sql = "CREATE TABLE `{$this->wpdb->prefix}wpshop_ordered` (
+					`ordered_id` INT NOT NULL AUTO_INCREMENT ,
+					`ordered_pid` INT NOT NULL,
+					`ordered_name` VARCHAR( 256) NOT NULL,
+					`ordered_cost` FLOAT,
+					`ordered_count` INT,
+					`ordered_page_id` INT,
+					`ordered_key` VARCHAR(100),
+					`ordered_digit_count` INT NOT NULL DEFAULT '0',
+					`ordered_digit_live` INT NOT NULL DEFAULT '0',
+					 PRIMARY KEY ( `ordered_id` ),
+					 FOREIGN KEY (`ordered_pid`) REFERENCES {$this->wpdb->prefix}wpshop_orders(`order_id`) ON DELETE CASCADE
+				) ENGINE = INNODB DEFAULT CHARSET=utf8;";
+			$this->wpdb->query($sql);
+		}elseif(!$this->checkTable('wpshop_ordered')){
+			$this->dropTable('wpshop_orders');
 			$sql = "CREATE TABLE `{$this->wpdb->prefix}wpshop_ordered` (
 					`ordered_id` INT NOT NULL AUTO_INCREMENT ,
 					`ordered_pid` INT NOT NULL,
@@ -126,12 +165,8 @@ class Wpshop_Installer
 			$this->wpdb->query($sql);
 		}
 		
-		//$this->wpdb->query("ALTER TABLE `{$this->wpdb->prefix}wpshop_ordered` ADD `ordered_digit_count` INT NOT NULL DEFAULT '0' AFTER  `ordered_key`;");
-		//$this->wpdb->query("ALTER TABLE `{$this->wpdb->prefix}wpshop_ordered` ADD `ordered_digit_live` INT NOT NULL DEFAULT '0' AFTER  `ordered_key`;");
 
-		if (!$this->checkTable('wpshop_selected_items'))
-		{
-			$this->dropTable('wpshop_selected_items');
+		if ($this->checkTable('wpshop_selected_items')=='no_table'){
 			$sql = "CREATE TABLE `{$this->wpdb->prefix}wpshop_selected_items`
 				(
 					`selected_items_id` INT NOT NULL AUTO_INCREMENT,
@@ -143,10 +178,12 @@ class Wpshop_Installer
 					`selected_items_cost` FLOAT,
 					`selected_items_num` INT,
 					`selected_items_sklad` INT,
+					`selected_items_promo` BIGINT NOT NULL DEFAULT '0',
 					 PRIMARY KEY ( `selected_items_id` )
 				) ENGINE = INNODB DEFAULT CHARSET=utf8;";
-
 			$this->wpdb->query($sql);
+		}elseif(!$this->checkTable('wpshop_selected_items')){
+			$this->alterNewCols('wpshop_selected_items');
 		}
 
 	}
@@ -165,6 +202,7 @@ class Wpshop_Installer
 
 		add_option("wpshop.payments.activate","0");
     add_option("wpshop.mail_activate","0");
+	add_option("wpshop.show_panel","1");
 		add_option("wpshop_merchant","");
     add_option("wpshop.hide_auth","none");
 		add_option("wpshop_merchant_system","");

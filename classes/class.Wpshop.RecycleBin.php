@@ -58,14 +58,14 @@ class Wpshop_RecycleBin
 'order_payment' => $orders['info']['payment'],
 															  'client_name' => $orders['info']['username'],
 															  'client_email' => $orders['info']['email'],
-
 															  'client_ip' => $orders['info']['ip'],
-'client_id' => $currentUser->ID,
+                                'client_id' => $currentUser->ID,
 															  'order_status' => $status,
 															  'order_delivery' => $orders['info']['delivery'],
-															  'order_comment' => $orders['info']['comment']
+															  'order_comment' => $orders['info']['comment'],
+                                'order_promo' => $orders['info']['promo']
 															  ),
-													   array('%d','%d','%s','%s','%s','%s','%d','%d','%s','%s') );
+													   array('%d','%d','%s','%s','%s','%s','%d','%d','%s','%s','%d') );
 
 
 		$pid = $wpdb->insert_id;
@@ -127,7 +127,7 @@ class Wpshop_RecycleBin
         $itogo += $delivery->cost;
       } 
       
-      /* print_r($orders); */
+     
    
       $url = "http://partner.mbgenerator.ru/affiliate/track_by_hash/{$hesh}/{$pid}/{$itogo}/"; 
       $ch = curl_init();  
@@ -335,33 +335,16 @@ From: {$email}");
 		/*@TODO проверить хранится ли скидка еще здесь*/		
 		$discount = $_COOKIE['wpshop_discount'];
 		$sum = 0;
-
-		$final = "<table style='border: solid 1px #DDDDDD'>";
-		$color = '';
-		foreach($orders as $key => $order) {
-			if ($key % 2) $color = "#DDDDDD";
-			else $color = "white";
-			
-			$total =  $order->selected_items_cost * $order->selected_items_num;
-			$count = $key+1;
-			$final .= "<tr bgcolor=$color><td>{$count}</td><td>{$order->selected_items_name} ({$order->selected_items_key})</td><td>{$order->selected_items_cost}</td><td>{$order->selected_items_num}</td><td>{$total}</td></tr>";
-			$sum += $order->selected_items_cost * $order->selected_items_num;
-		}
-
-		$final .= "<tr><td colspan=5 align=right>".__('Total:', 'WP shop')." $sum</td></tr>"; // Итого
-		if (!empty($discount)) {
-			$final	.= "<tr><td colspan=5 align=right>".__('With discount')." {$discount}%: " . round((100-$discount)*$sum/100,2) ."</td></tr>";
-		}
-		$final .= "</table>";
-		
-		// Конец
-
+    
 		$allInfo = array();
+    $promo = 0;
 		foreach($orders as $key => $order) {
 			$offers = &$allInfo['offers'][];
 			$offers['name'] = $order->selected_items_name;
 			$offers['price'] = $order->selected_items_cost;
-			//$offers['quant'] = '';//$res[$j]['quant'];
+			if ($order->selected_items_promo != 0){
+        $promo = $order->selected_items_promo;
+      }
 			$offers['partnumber'] = $order->selected_items_num;
 			$offers['key'] = $order->selected_items_key;
 			$offers['post_id'] = $order->selected_items_item_id;
@@ -372,6 +355,7 @@ From: {$email}");
 		// Отсюда начинаем работу с данными формы
 		$allInfo['info'] = array();
 		$allInfo['info']['payment'] = $POSTData['payment'];
+    $allInfo['info']['promo'] = get_the_title($promo)*1;
 		$allInfo['info']['ip'] = $_SERVER['REMOTE_ADDR'];
 		$allInfo['info']['discount'] = $_COOKIE['wpshop_discount'];
 		$allInfo['info']['delivery'] = $POSTData['delivery'];
@@ -389,9 +373,9 @@ From: {$email}");
 				$allInfo['info']['email'] = $POSTData[$field['postName']];
 			}
 
-			if ($field['order']) {
+		/* 	if ($field['order']) {
 				$POSTData[$field['postName']] = $final;
-			}
+			} */
 
 			if ($field['type'] == "Name") {
 				$allInfo['info']['username'] = $POSTData[$field['postName']];

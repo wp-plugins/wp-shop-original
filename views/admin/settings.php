@@ -63,10 +63,15 @@
 						echo __('Additional options are included in the &quot;WP Shop Payments&quot;', 'wp-shop'); // Дополнительые опции включаются в разделе "WP Shop Payments"
 						?>)</code></td>
 					</tr>
-          <tr>
+					<tr>
 						<td><label for="wpshop_mail_activate"><?php  _e('Activate custom mail editor:', 'wp-shop'); /* Активировать редактор писем:*/ ?></label></td>
 						<?php $mail_activate = $this->mail_activate == 1 ? " checked" : ""; ?>
 						<td><input type="checkbox" name="wpshop_mail_activate" id="wpshop_mail_activate"<?php  echo $mail_activate;?>/></td>
+					</tr>
+					<tr>
+						<td><label for="wpshop_show_panel"><?php  _e('Show onclick cart widjet:', 'wp-shop'); /* Активировать редактор писем:*/ ?></label></td>
+						<?php $show_panel_activate = $this->show_panel_activate == 1 ? " checked" : ""; ?>
+						<td><input type="checkbox" name="wpshop_show_panel" id="wpshop_show_panel"<?php  echo $show_panel_activate;?>/></td>
 					</tr>
 					<tr>
 						<td><label for="wpshop_payments_activate"><?php  echo __('E-mail notification about shopping', 'wp-shop') /*E-mail уведомления о покупках*/ ?></label></td>
@@ -135,7 +140,7 @@
 									{
 										if (textStatus == "success")
 										{
-											alert('<?php  _e('Данные магазина очищены', 'wp-shop'); /*Готово*/ ?>');
+											alert('<?php  _e('Erase shop data', 'wp-shop'); /*Данные магазина очищены*/ ?>');
 										}
 									});
 									return false;
@@ -197,6 +202,12 @@
 			<tr><td><?php  _e('Link to the condition of delivery:', 'wp-shop'); /*Линк на условие доставки:*/ ?></td><td><input type='text' name='deliveyrCondition' value='<?php  echo $this->deliveyrCondition;?>'/></td></tr>
 			<tr><td><?php  _e('Link to the return to shopping:', 'wp-shop'); /*Линк для возврата к покупкам:*/ ?></td><td><input type='text' name='shopping_return_link' value='<?php  echo $this->shopping_return_link;?>'/></td></tr>
 			<tr><td><?php  _e('Link to to the cart page:', 'wp-shop'); /*Линк к корзине:*/ ?></td><td><input type='text' name='cartpage_link' value='<?php  echo $this->cartpage_link;?>'/></td></tr>
+      <tr>
+					<td><label for="wp-shop_promo_activate"><?php  echo __('Activate Promocodes:', 'wp-shop'); /*Активировать скидочную систему*/
+					?></label></td>
+						<?php $promoActiveChecked = $this->promoActive == 1 ? " checked" : ""; ?>
+						<td colspan="2"><input type="checkbox" name="wp-shop_promo_activate" id="wp-shop_promo_activate"<?php  echo $promoActiveChecked;?>/></td>
+					</tr>
 			</tbody>
 			</table>
 			</div>

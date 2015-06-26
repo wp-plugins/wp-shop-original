@@ -12,6 +12,12 @@ class Wpshop_ExImp
 			$this->exportXML();
 			exit();
 		}
+		
+		if (isset($_POST['submit_wpshop_export_order']) )
+		{
+			$this->exportOrderXML();
+			exit();
+		}
 	}
 
 	public function adminMenu()
@@ -220,5 +226,47 @@ class Wpshop_ExImp
 			echo "{$updated}. {$ID} - updated<br>";
 			flush();
 		}
+	}
+	
+	public function exportOrderXML()
+	{
+		global $wpdb;
+
+		header('Content-Description: File Transfer');
+		header('Content-Disposition: attachment; filename="'.$_SERVER['HTTP_HOST'].'_orders.xml"');
+		header('Content-Type: text/xml; charset=utf-8');
+
+		while(@ob_get_clean());
+
+		echo "<?php xml version=\"1.0\" encoding=\"utf-8\"?>\n<orders>\n";
+
+		$sql = "SELECT * FROM `{$wpdb->prefix}wpshop_orders` WHERE 1";
+		if ( $res = $wpdb->get_results($sql))  {
+			foreach ($res as $row) {
+				$status ='';
+				if ($row->order_status == 0){$status = 'Новый';}
+				if ($row->order_status == 1){$status = 'Оплачено';}
+				if ($row->order_status == 2){$status = 'Отменено';}
+				if ($row->order_status == 3){$status = 'В обработке';}
+				if ($row->order_status == 4){$status = 'Доставлено';}
+				if ($row->order_status == 5){$status = 'Архив';}
+				
+				print "\t".'<order order_id="'.$row->order_id.'" client_email="'.$row->client_email.'" client_name="'.$row->client_name.'" status="'.$status.'"  order_payment="'.$row->order_payment.'" order_promo="'.$row->order_promo.'">'."\n";
+				
+				$items_sql = "SELECT * FROM `{$wpdb->prefix}wpshop_ordered` WHERE `ordered_pid`={$row->order_id}";
+				$items = $wpdb->get_results($items_sql);
+				
+				foreach ($items as $item) {
+					$name = '';
+					$name = str_replace(array("\'",'\"'),'"',$item->ordered_name);
+          $name = htmlspecialchars($name, ENT_QUOTES);
+					print "\t\t".'<offer offer_id="'.$item->ordered_page_id.'" offer_name="'.$name.'" offer_cost="'.$item->ordered_cost.'" offer_count="'.$item->ordered_count.'" offer_key="'.$item->ordered_key.'"></offer>'."\n";
+				}
+				echo "\t".'</order>'."\n";
+			}
+		}
+		
+
+		echo "</orders>\n";
 	}
 }

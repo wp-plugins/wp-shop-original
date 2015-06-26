@@ -12,6 +12,8 @@ add_action("wp_ajax_ajax_post", "ajax_post");
 add_action("wp_ajax_nopriv_ajax_post", "ajax_post");
 add_action("wp_ajax_delete_all", "delete_all");
 add_action("wp_ajax_nopriv_delete_all", "delete_all");
+add_action("wp_ajax_cart_promocode", "cart_promocode");
+add_action("wp_ajax_nopriv_cart_promocode", "cart_promocode");
 
 function ajax_post(){
 	if ($_POST['act'] == 'price_options')
@@ -32,6 +34,85 @@ function delete_all(){
 	
 	die();
 } 
+
+function cart_promocode(){
+  global $wpdb;
+  $wpshop_session_id	= session_id();
+	$promocode = $_POST['promocode'];
+  wp_reset_postdata();
+	$wp_query_promo = new WP_Query(
+    array(
+        'post_type' => 'wpshop_promo',
+        'posts_per_page' => -1 
+    ) 
+	);
+	
+	$find = false;
+	
+	if ($wp_query_promo->have_posts()): while ($wp_query_promo->have_posts()) : $wp_query_promo->the_post(); 
+    $id = get_the_ID();
+		$code = get_the_title($id)*1;
+		$value = get_post_meta($id, 'wpshop_promo_value', true);
+		$pers = get_post_meta($id, 'wpshop_promo_pers', true);
+		/* $message_promo = get_post_meta($id, 'wpshop_promo_message', true); */
+		$message_promo = apply_filters('the_content', get_post_field('post_content', $id));
+		$active_promo = get_post_meta($id, 'wpshop_promo_active', true);
+    
+		if ($active_promo > 0){
+      if ($code == $promocode) {
+        if ($value) {
+          
+        }elseif($pers) {
+          $wpdb->get_results("UPDATE {$wpdb->prefix}wpshop_selected_items SET selected_items_cost=selected_items_cost-(selected_items_cost*{$pers}/100) WHERE selected_items_session_id='".session_id()."' and selected_items_promo=0");
+          if ($message_promo) {
+            $message = $message_promo;
+          }else {
+            $message = __('Your promo discount '/*Ваша скидка по промокоду*/, 'wp-shop').$pers.'%';
+          }
+        }
+      
+        $wpdb->get_results("UPDATE {$wpdb->prefix}wpshop_selected_items SET selected_items_promo={$id} WHERE selected_items_session_id='".session_id()."'");
+        $find = true;
+        
+        update_post_meta($id, 'wpshop_promo_active', $active_promo-1);
+      }
+    } 
+    
+    if ($active_promo !=''&&$active_promo == 0) {
+      if ($code == $promocode) {
+        $message = __('Promocode already not active '/*Промокод больше не активен*/, 'wp-shop');
+        $find = true;
+      }
+    } 
+    
+    if ($active_promo =='') {
+      if ($code == $promocode) {
+        if ($value) {
+          
+        }elseif($pers) {
+          $wpdb->get_results("UPDATE {$wpdb->prefix}wpshop_selected_items SET selected_items_cost=selected_items_cost-(selected_items_cost*{$pers}/100) WHERE selected_items_session_id='".session_id()."' and selected_items_promo=0");
+          if ($message_promo) {
+            $message = $message_promo;
+          }else {
+            $message = __('Your promo discount '/*Ваша скидка по промокоду*/, 'wp-shop').$pers.'%';
+          }
+        }
+      
+        $wpdb->get_results("UPDATE {$wpdb->prefix}wpshop_selected_items SET selected_items_promo={$id} WHERE selected_items_session_id='".session_id()."'");
+        $find = true;
+      }
+    }
+  endwhile; 
+	endif;
+	wp_reset_postdata();
+	if ($find) {
+		echo $message;
+	}else {
+		echo 'NO';
+	}
+	
+	die();
+}
 
 function cart_remove(){
 	global $wpdb;
@@ -126,6 +207,7 @@ function cart_load(){
 	global $wpdb;
 	$rows = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}wpshop_selected_items WHERE selected_items_session_id='".session_id()."'");
 	$n=0;
+	$promo = 0;
 	echo "window.__cart.a_thumbnail = [];\n";
 	foreach ($rows as $row){
 		echo "window.__cart.a_id[$n]   = \"$row->selected_items_id\";";
@@ -135,8 +217,12 @@ function cart_load(){
 		echo "window.__cart.a_cost[$n] = \"$row->selected_items_cost\";";
 		echo "window.__cart.a_num[$n]  = \"$row->selected_items_num\";";
 		echo "window.__cart.a_sklad[$n]  = \"$row->selected_items_sklad\";";
-		
+		echo "window.__cart.a_promo[$n]  = \"$row->selected_items_promo\";";
 
+		if($row->selected_items_promo !=0) {
+			$promo = $row->selected_items_promo;
+		}
+		
 		$thumbnail = get_post_meta($row->selected_items_item_id,'Thumbnail',true);
 		$thumbnail1 = wp_get_attachment_url( get_post_thumbnail_id($row->selected_items_item_id) );
 		if (!$thumbnail&&$thumbnail1) {
@@ -162,6 +248,19 @@ function cart_load(){
 		$n++;
 	}
 	echo "window.__cart.count = $n;";
+	
+	if($promo !=0){
+		$code = get_the_title($promo)*1;
+		$value = get_post_meta($promo, 'wpshop_promo_value', true);
+		$pers = get_post_meta($promo, 'wpshop_promo_pers', true);
+		$message_promo = get_post_meta($promo, 'wpshop_promo_message', true);
+		  
+		echo "window.__cart.promo_code = \"$code\";";
+		echo "window.__cart.promo_value = \"$value\";";
+		echo "window.__cart.promo_pers = \"$pers\";";
+		echo "window.__cart.promo_message = \"$message_promo\";";
+	
+	}
 	//var_dump($rows);
 
 	

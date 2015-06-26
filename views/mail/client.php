@@ -49,6 +49,11 @@ if ($this->order['info']['discount'])
 	echo "<tr><td colspan='3'>".__('Price with discount', 'wp-shop') . " ({$this->order['info']['discount']}%)</td><td>{$itogo}</td></tr>";
 }
 
+if ($this->order['info']['promo'])
+{
+	echo "<tr><td colspan='3'>".__('Promocode: ', 'wp-shop').$this->order['info']['promo']."</td></tr>";
+}
+
 $delivery = Wpshop_Delivery::getInstance()->getDelivery($this->order['info']['delivery']);
 if ($delivery) {
 	$itogo += $delivery->cost;

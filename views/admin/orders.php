@@ -197,6 +197,7 @@ if (!array_key_exists("Customer",$current_user->caps)){ ?>
 
 	</select>
 	<input type="submit" value="<?php  _e('Apply', 'wp-shop');/*Применить*/ ?>" class="button-secondary"/>
+	<input type="submit" name="submit_wpshop_export_order" value="<?php  _e('Export', 'wp-shop'); /*Экспортировать*/; ?>" class="button-secondary" />
 	</div>
 	<?php  } ?>
 	</form>

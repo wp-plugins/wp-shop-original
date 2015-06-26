@@ -129,6 +129,9 @@
 			<tr><td colspan='5' style='text-align:right;font-weight:bold'><?php  _e("Delivery",'wp-shop');?>: </td><td style='text-align:center'><?php  echo $delivery->cost;?></td></tr>
 			<?php  } ?>
 			<tr><td colspan='5' style='text-align:right;font-weight:bold'><?php  _e("In all",'wp-shop');?>: </td><td style='text-align:center;font-weight:bold'><?php  echo $itogo;?></td></tr>
+      <?php  if (!empty($this->order->order_promo)) {?>
+        <tr><td colspan='6' style='text-align:left;font-weight:bold; color:red;'><?php  _e("Promocode: ",'wp-shop');?><?php echo $this->order->order_promo;?></td></tr>
+      <?php } ?>
 		</tfoot>
 	</table>
 	</form>

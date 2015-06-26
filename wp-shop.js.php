@@ -2,6 +2,22 @@
 header("Content-Type: content=text; charset=utf-8");
 
 ?>
+var cart_reload_promo_text = '';
+jQuery( document ).ready(function( $ ) {
+
+  jQuery( "#promocode_button_block" ).live( "click", function() {
+ 
+    promocode=jQuery("#promocode_block").val();
+	
+    jQuery.post( "/wp-admin/admin-ajax.php", { action: "cart_promocode",promocode:promocode})
+
+    .done(function( data ) {
+      cart_reload_promo_text = data;
+      window.__cart.update();
+    });
+  });
+
+});
 
 var CURR = '&nbsp;';
 
@@ -42,7 +58,7 @@ function Cart(eid_mini, eid_cart)
 	this.mini = document.getElementById(eid_mini);
 	this.cart = document.getElementById(eid_cart);
 	this.discount = 0;
-
+	
 
 	var OnUpdate = undefined;
 	var wps = undefined;
@@ -60,7 +76,10 @@ function Cart(eid_mini, eid_cart)
 		this.a_num = new Array();
 		this.a_cost = new Array();
 		this.a_sklad = new Array();
-
+		this.a_promo = new Array();
+				
+		this.promo_code = '';
+		
 		this.s_id = '';
 		this.s_key = '';
 		this.s_name = '';
@@ -78,18 +97,21 @@ function Cart(eid_mini, eid_cart)
 			data: {action:'cart_save',wpshop_id:this.s_id,wpshop_key:window.__cart.s_key,wpshop_name:window.__cart.s_name,wpshop_href:window.__cart.s_href,wpshop_cost:window.__cart.s_cost,wpshop_num:window.__cart.s_num,wpshop_sklad:window.__cart.s_sklad},
 			success: function(t){ 
                             if (jQuery.trim(t) == "add") {
-                                jQuery('<div id="wpshop_shadow_window"></div>').prependTo('body');
-								if (object_name.yandex!= undefined){
-									jQuery('<div id="wpshop_background_alert_put_to_cart"><div>'+object_name.success+'<div id="wpshop_alert_put_to_cart_buttons"><a class=\'wpshop-button\' onclick="document.location=\''+object_name.cartpage+'\'; yaCounter'+object_name.yandex+'.reachGoal(\'wpshop_popup\');">'+object_name.order+'</a> <a class=\'wpshop-button\' id="continueButton">'+object_name.cont+'</a></div></div></div>').prependTo('body');
-								}else{
-									jQuery('<div id="wpshop_background_alert_put_to_cart"><div>'+object_name.success+'<div id="wpshop_alert_put_to_cart_buttons"><a class=\'wpshop-button\' onclick="document.location=\''+object_name.cartpage+'\';">'+object_name.order+'</a> <a class=\'wpshop-button\' id="continueButton">'+object_name.cont+'</a></div></div></div>').prependTo('body');
+								if (object_name.show_panel==1){
+									jQuery('<div id="wpshop_shadow_window"></div>').prependTo('body');
+								
+									if (object_name.yandex!= undefined){
+										jQuery('<div id="wpshop_background_alert_put_to_cart"><div>'+object_name.success+'<div id="wpshop_alert_put_to_cart_buttons"><a class=\'wpshop-button\' onclick="document.location=\''+object_name.cartpage+'\'; yaCounter'+object_name.yandex+'.reachGoal(\'wpshop_popup\');">'+object_name.order+'</a> <a class=\'wpshop-button\' id="continueButton">'+object_name.cont+'</a></div></div></div>').prependTo('body');
+									}else{
+										jQuery('<div id="wpshop_background_alert_put_to_cart"><div>'+object_name.success+'<div id="wpshop_alert_put_to_cart_buttons"><a class=\'wpshop-button\' onclick="document.location=\''+object_name.cartpage+'\';">'+object_name.order+'</a> <a class=\'wpshop-button\' id="continueButton">'+object_name.cont+'</a></div></div></div>').prependTo('body');
+									}
+					
+									jQuery('#continueButton').click(function() {
+										jQuery('#wpshop_shadow_window').remove();
+										jQuery('#wpshop_background_alert_put_to_cart').remove();
+										return false;
+									});
 								}
-				
-				jQuery('#continueButton').click(function() {
-					jQuery('#wpshop_shadow_window').remove();
-					jQuery('#wpshop_background_alert_put_to_cart').remove();
-					return false;
-				});
                             }
     			}
 		});
@@ -169,6 +191,8 @@ function Cart(eid_mini, eid_cart)
 			jQuery('#delivery_cost').css('display','table-row');
 			jQuery('#delivery_cost').width(jQuery(".recycle_bin").width());
 			jQuery(".cform input[name='delivery']").val(deliveryName1);
+      
+       
 			jQuery("ul.custom_del li > a.img, ul.custom_del li > a.info").click(function()
 			{
 				jQuery("ul.custom_del").find('li.select').removeClass('select');
@@ -180,8 +204,8 @@ function Cart(eid_mini, eid_cart)
 				jQuery('#delivery_name').html(deliveryName2);
 				jQuery('#delivery_link').attr('href',deliveryLink2);
 				jQuery('#delivery_cost #delivery_link').html('?');
-			
-				jQuery('#delivery_cost_total').html((CARTTHIS.getTotalSum()*1 + deliveryCost2*1).toFixed(2));
+        
+        jQuery('#delivery_cost_total').html((CARTTHIS.getTotalSum()*1 + deliveryCost2*1).toFixed(2));
 				jQuery('#delivery_cost').css('display','table-row');
 				jQuery('#delivery_cost').width(jQuery(".recycle_bin").width());
 				jQuery(".cform input[name='delivery']").val(deliveryName2);
@@ -247,7 +271,8 @@ function Cart(eid_mini, eid_cart)
 						'</thead>'+
 						'<tbody>';
 
-					var i, t,c, total;
+					var i, t,c, total,promo;
+					
 					for (i = 0, total = 0; i < window.__cart.count; i++)
 					{
 						t = parseFloat(window.__cart.a_cost[i]) * window.__cart.a_num[i];
@@ -256,6 +281,9 @@ function Cart(eid_mini, eid_cart)
             c = parseFloat(window.__cart.a_cost[i]);
             c = c.toFixed(2);
 						c = c * 1;
+            if(window.__cart.a_promo[i]!=0) {
+              promo = parseFloat(window.__cart.a_promo[i]);
+            } 
 						total += t;
 						if(window.__cart.a_sklad[i]>0){stock='<br>'+object_name.stock+window.__cart.a_sklad[i]+''+object_name.pcs;}else{stock='';}
 						window.__cart.content_cart +=
@@ -269,7 +297,7 @@ function Cart(eid_mini, eid_cart)
 							'<td class="rb_delete"><a title="'+object_name.delet+'" href="javascript:void(null)" onclick="window.__cart.remove(\''+window.__cart.a_id[i]+'\', ' + i + '); return false;" style="text-decoration:none; color:#f00;">&times;</a></td>' +
 							'</tr>';
 					}
-
+					
 					total = total.toFixed(2)*1;
 
 					window.__cart.content_cart +=
@@ -317,11 +345,22 @@ function Cart(eid_mini, eid_cart)
 
 
 					window.__cart.content_cart +=
-					"<tr style='display:none;text-align:right;margin-top:15px' id='delivery_cost'><td colspan='5' style='font-weight:bold'>"+object_name.price_full+" <span id='delivery_name'></span> (<span id='delivery_cost_value'></span> "+CURR+") <a id='delivery_link'></a></td><td id='delivery_cost_total' style='text-align:left;font-weight:bold'></td><td class='last_col_del'></td></tr>" +
-
-					'</tfoot>'+
-
-						'</table><a name="wp-shop_down"></a>';
+					"<tr style='display:none;text-align:right;margin-top:15px' id='delivery_cost'><td colspan='5' style='font-weight:bold'>"+object_name.price_full+" <span id='delivery_name'></span> (<span id='delivery_cost_value'></span> "+CURR+") <a id='delivery_link'></a></td><td id='delivery_cost_total' style='text-align:left;font-weight:bold'></td><td class='last_col_del'></td></tr>";
+					if (object_name.promocode== 1){
+						window.__cart.content_cart += "<tr><td colspan=7><input type=text value='' id='promocode_block' placeholder='Промокод' style='width:200px;'>&nbsp;<input type=button  id='promocode_button_block' value='Применить промокод' class='wpshop-button'></td></tr>";
+					
+						if (cart_reload_promo_text !=''&&cart_reload_promo_text !='NO'){
+						  window.__cart.content_cart += "<tr><td colspan=7 style='color: green; font-weight: bold;'>"+cart_reload_promo_text+"</td></tr>";
+						}
+						if (cart_reload_promo_text =='NO'){
+						  window.__cart.content_cart += "<tr><td colspan=7 style='color: green; font-weight: bold;'>"+object_name.wrong_promocode+"</td></tr>";
+						}
+						if(promo) {
+							window.__cart.content_cart += "<tr><td colspan=7 style='color: red; font-weight: bold;'>"+object_name.your_promocode+window.__cart.promo_code+"</td></tr>";
+						}  
+					}
+					
+					window.__cart.content_cart +='</tfoot>'+'</table><a name="wp-shop_down"></a>';
 
 					window.__cart.content_mini +=
 						'<div class="wpshop_mini_count"><strong>'+object_name.items+'</strong> '+window.__cart.count+'</div>'+
