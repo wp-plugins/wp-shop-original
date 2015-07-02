@@ -9,7 +9,7 @@ jQuery( document ).ready(function( $ ) {
  
     promocode=jQuery("#promocode_block").val();
 	
-    jQuery.post( "/wp-admin/admin-ajax.php", { action: "cart_promocode",promocode:promocode})
+    jQuery.post( object_name.url+"/wp-admin/admin-ajax.php", { action: "cart_promocode",promocode:promocode})
 
     .done(function( data ) {
       cart_reload_promo_text = data;
