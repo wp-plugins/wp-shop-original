@@ -63,15 +63,16 @@ function cart_promocode(){
         if ($value) {
           
         }elseif($pers) {
-          $wpdb->get_results("UPDATE {$wpdb->prefix}wpshop_selected_items SET selected_items_cost=selected_items_cost-(selected_items_cost*{$pers}/100) WHERE selected_items_session_id='".session_id()."' and selected_items_promo=0");
+		  $param_prom = array(session_id());
+          $wpdb->get_results($wpdb->prepare("UPDATE {$wpdb->prefix}wpshop_selected_items SET selected_items_cost=selected_items_cost-(selected_items_cost*{$pers}/100) WHERE selected_items_session_id='%s' and selected_items_promo=0",$param_prom));
           if ($message_promo) {
             $message = $message_promo;
           }else {
             $message = __('Your promo discount '/*Ваша скидка по промокоду*/, 'wp-shop').$pers.'%';
           }
         }
-      
-        $wpdb->get_results("UPDATE {$wpdb->prefix}wpshop_selected_items SET selected_items_promo={$id} WHERE selected_items_session_id='".session_id()."'");
+		$param_prom1 = array($id,session_id());
+        $wpdb->get_results($wpdb->prepare("UPDATE {$wpdb->prefix}wpshop_selected_items SET selected_items_promo=%d WHERE selected_items_session_id='%s'",$param_prom1));
         $find = true;
         
         update_post_meta($id, 'wpshop_promo_active', $active_promo-1);
@@ -90,15 +91,16 @@ function cart_promocode(){
         if ($value) {
           
         }elseif($pers) {
-          $wpdb->get_results("UPDATE {$wpdb->prefix}wpshop_selected_items SET selected_items_cost=selected_items_cost-(selected_items_cost*{$pers}/100) WHERE selected_items_session_id='".session_id()."' and selected_items_promo=0");
+		  $param_prom = array(session_id());
+          $wpdb->get_results($wpdb->prepare("UPDATE {$wpdb->prefix}wpshop_selected_items SET selected_items_cost=selected_items_cost-(selected_items_cost*{$pers}/100) WHERE selected_items_session_id='%s' and selected_items_promo=0",$param_prom));
           if ($message_promo) {
             $message = $message_promo;
           }else {
             $message = __('Your promo discount '/*Ваша скидка по промокоду*/, 'wp-shop').$pers.'%';
           }
         }
-      
-        $wpdb->get_results("UPDATE {$wpdb->prefix}wpshop_selected_items SET selected_items_promo={$id} WHERE selected_items_session_id='".session_id()."'");
+		$param_prom1 = array($id,session_id());
+        $wpdb->get_results($wpdb->prepare("UPDATE {$wpdb->prefix}wpshop_selected_items SET selected_items_promo=%d WHERE selected_items_session_id='%s'",$param_prom1));
         $find = true;
       }
     }
@@ -120,10 +122,12 @@ function cart_remove(){
 	$wpshop_id = $_POST['wpshop_id'];
 
 	if ($wpshop_id=="-1"){ // Delete all selected items
-		$res = $wpdb->get_results("DELETE FROM {$wpdb->prefix}wpshop_selected_items WHERE selected_items_session_id='".session_id()."'");
+		$param_remove = array(session_id());
+		$res = $wpdb->get_results($wpdb->prepare("DELETE FROM {$wpdb->prefix}wpshop_selected_items WHERE selected_items_session_id='%s'",$param_remove));
 	}else{
 		// Delete 1 selected item
-		$res = $wpdb->get_results("DELETE FROM {$wpdb->prefix}wpshop_selected_items WHERE selected_items_session_id='".session_id()."' and selected_items_id='{$wpshop_id}'");
+		$param_remove1 = array(session_id(),$wpshop_id);
+		$res = $wpdb->get_results($wpdb->prepare("DELETE FROM {$wpdb->prefix}wpshop_selected_items WHERE selected_items_session_id='%s' and selected_items_id='%d'",$param_remove1));
 	}
 	die();
 } 
@@ -136,7 +140,7 @@ function set_currency(){
 	$usd_opt = $_POST['usd'];
 	$eur_opt = $_POST['eur'];
 
-	$results=$wpdb->get_results("SELECT * FROM $wpdb->posts");
+	$results=$wpdb->get_results($wpdb->prepare("SELECT * FROM $wpdb->posts"));
 
 	foreach($results as $row)
 	{
@@ -179,10 +183,12 @@ function cart_save(){
 	#$wpshop_num			or die();
 	
 	global $wpdb;
-	$rows = $wpdb->get_results("SELECT count(*) as cnt FROM {$wpdb->prefix}wpshop_selected_items WHERE selected_items_session_id='".session_id()."' AND selected_items_id=".$wpshop_item_id);
+	$params = array(session_id(),$wpshop_item_id);
+	$rows = $wpdb->get_results($wpdb->prepare( "SELECT count(*) as cnt FROM {$wpdb->prefix}wpshop_selected_items WHERE selected_items_session_id='%s' AND selected_items_id=%d", $params));
 	$row = $rows[0];
 	if ($row->cnt>0){
-		$wpdb->get_results("UPDATE {$wpdb->prefix}wpshop_selected_items SET selected_items_num='".$wpshop_num."' WHERE selected_items_session_id='".session_id()."' AND selected_items_id=".$wpshop_item_id);
+		$params_up = array($wpshop_num,session_id(),$wpshop_item_id);
+		$wpdb->get_results($wpdb->prepare("UPDATE {$wpdb->prefix}wpshop_selected_items SET selected_items_num='%d' WHERE selected_items_session_id='%s' AND selected_items_id=%d",$params_up));
 		echo 'edit';
 	}else{
 		$data = array(
@@ -205,7 +211,8 @@ function cart_save(){
 
 function cart_load(){
 	global $wpdb;
-	$rows = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}wpshop_selected_items WHERE selected_items_session_id='".session_id()."'");
+	$params_load = array(session_id());
+	$rows = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$wpdb->prefix}wpshop_selected_items WHERE selected_items_session_id='%s'",$params_load));
 	$n=0;
 	$promo = 0;
 	echo "window.__cart.a_thumbnail = [];\n";

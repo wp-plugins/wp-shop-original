@@ -93,7 +93,8 @@ class Wpshop_Admin
 				
 				$this->view->order =  $wpdb->get_row("SELECT * FROM `{$wpdb->prefix}wpshop_orders` WHERE `order_id` = '{$id}' {$condition}");
 				if($this->view->order){
-					$this->view->ordered = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}wpshop_ordered` WHERE `ordered_pid` = '{$id}'");
+					$param_order = array($id);
+					$this->view->ordered = $wpdb->get_results($wpdb->prepare("SELECT * FROM `{$wpdb->prefix}wpshop_ordered` WHERE `ordered_pid` = '%d'",$param_order));
 				}
 				$payment = Wpshop_Payment::getInstance()->getPaymentByID($this->view->order->order_payment);
 				if ($payment)

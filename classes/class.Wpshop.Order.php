@@ -9,8 +9,9 @@ class Wpshop_Order
 	public function __construct($id)
 	{
 		global $wpdb;
-		$this->order =  $wpdb->get_row("SELECT * FROM `{$wpdb->prefix}wpshop_orders` WHERE `order_id` = '{$id}'"); 
-		$this->ordered = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}wpshop_ordered` WHERE `ordered_pid` = '{$id}'");
+		$param_order = array($id);
+		$this->order =  $wpdb->get_row($wpdb->prepare("SELECT * FROM `{$wpdb->prefix}wpshop_orders` WHERE `order_id` = '%d'",$param_order)); 
+		$this->ordered = $wpdb->get_results($wpdb->prepare("SELECT * FROM `{$wpdb->prefix}wpshop_ordered` WHERE `ordered_pid` = '%d'",$param_order));
 	}
 	
 	public function getDiscount()

@@ -29,8 +29,15 @@ class Wpshop_Digital {
 
 	public static function getDigitalOrder($clientid,$postID,$order_id) {
 		global $wpdb;
-		$order_where = $order_id == null ? "" : " and order_id = " . $order_id; 
-		$rows = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}wpshop_orders` INNER JOIN `{$wpdb->prefix}wpshop_ordered` ON (ordered_pid = order_id) WHERE `client_id` = '{$clientid}' AND `ordered_page_id` = '{$postID}' {$order_where}");
+		
+		if ($order_id == null){
+			$param_digit = array($clientid,$postID);
+			$rows = $wpdb->get_results($wpdb->prepare("SELECT * FROM `{$wpdb->prefix}wpshop_orders` INNER JOIN `{$wpdb->prefix}wpshop_ordered` ON (ordered_pid = order_id) WHERE `client_id` = '%d' AND `ordered_page_id` = '%d'",$param_digit));
+		}else {
+			$param_digit1 = array($clientid,$postID,$order_id);
+			$rows = $wpdb->get_results($wpdb->prepare("SELECT * FROM `{$wpdb->prefix}wpshop_orders` INNER JOIN `{$wpdb->prefix}wpshop_ordered` ON (ordered_pid = order_id) WHERE `client_id` = '%d' AND `ordered_page_id` = '%d' AND `order_id` = %d",$param_digit1));
+		}
+		
 		if (count($rows)) return current($rows);
 		return false;
 	}

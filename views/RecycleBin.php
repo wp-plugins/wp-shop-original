@@ -60,7 +60,8 @@ jQuery(function()
 
 $total = 0;
 global $wpdb;
-$rows = $wpdb->get_results("SELECT sum(selected_items_cost*selected_items_num) as total FROM {$wpdb->prefix}wpshop_selected_items WHERE selected_items_session_id='".session_id()."'");
+$param_sum = array(session_id());
+$rows = $wpdb->get_results($wpdb->prepare("SELECT sum(selected_items_cost*selected_items_num) as total FROM {$wpdb->prefix}wpshop_selected_items WHERE selected_items_session_id='%s'",$param_sum));
 foreach ($rows as $row) {
 	$total = $row->total;
 }
@@ -68,7 +69,8 @@ foreach ($rows as $row) {
 $yandex_num = get_option("wpshop.yandex_metrika");
 if($yandex_num){
 global $wpdb;
-$rows1 = $wpdb->get_results("SELECT selected_items_item_id as id, selected_items_name as name, selected_items_cost as price, selected_items_num as quantity FROM {$wpdb->prefix}wpshop_selected_items WHERE selected_items_session_id='".session_id()."'");
+$param_yan = array(session_id());
+$rows1 = $wpdb->get_results($wpdb->prepare("SELECT selected_items_item_id as id, selected_items_name as name, selected_items_cost as price, selected_items_num as quantity FROM {$wpdb->prefix}wpshop_selected_items WHERE selected_items_session_id='%s'",$param_yan));
 
 $yandex_params= array(
 	'order_id'=>time(),
