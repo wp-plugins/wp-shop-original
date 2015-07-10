@@ -291,22 +291,50 @@ class Wpshop_Admin
 	public function updateSettingsPage()
 	{
 		update_option("wp-shop_cssfile",$_POST['cssfile']);
-    update_option("wpshop.partner_param",$_POST['wpshop_partner_param']);
+		
+		$wpshop_partner_param = sanitize_text_field($_POST['wpshop_partner_param']);
+		update_option("wpshop.partner_param",$wpshop_partner_param);
+		
 		update_option("wp-shop_cform",$_POST['cform']);
 		update_option("wp-shop_position",$_POST['position']);
-		update_option("wpshop.cart.discount",$_POST['discount']);
-		update_option("wpshop.email",$_POST['wpshop_email']);
-		update_option("wpshop.google_analytic",$_POST['wpshop_google_analytic']);
-		update_option("wpshop.yandex_metrika",$_POST['wpshop_yandex_metrika']);
+		
+		$discount = sanitize_text_field($_POST['discount']);
+		update_option("wpshop.cart.discount",$discount);
+		
+		$wpshop_email = sanitize_text_field($_POST['wpshop_email']);
+		update_option("wpshop.email",$wpshop_email);
+		
+		$wpshop_google_analytic = sanitize_text_field($_POST['wpshop_google_analytic']);
+		update_option("wpshop.google_analytic",$wpshop_google_analytic);
+		
+		$wpshop_yandex_metrika = sanitize_text_field($_POST['wpshop_yandex_metrika']);
+		update_option("wpshop.yandex_metrika",$wpshop_yandex_metrika);
+		
 		update_option("wpshop.google_analytic_cc",$_POST['wpshop_google_analytic_cc']);
+		
 		update_option("wpshop.hide_auth",$_POST['wpshop_hide_auth']);
-		update_option("wpshop.cart.deliveyrCondition",$_POST['deliveyrCondition']);
-		update_option("wpshop.cart.shopping_return_link",$_POST['shopping_return_link']);
-		update_option("wpshop.cart.minzakaz",$_POST['minzakaz']);
-		update_option("wpshop.currency",$_POST['currency']);
-		update_option("wpshop.good.noText",$_POST['noGoodText']);
-		update_option("wpshop.cart.minzakaz_info",$_POST['minzakaz_info']);
-		update_option("wpshop.cartpage",$_POST['cartpage_link']);
+		
+		$deliveyrCondition = sanitize_text_field($_POST['deliveyrCondition']);
+		update_option("wpshop.cart.deliveyrCondition",$deliveyrCondition);
+		
+		$shopping_return_link = sanitize_text_field($_POST['shopping_return_link']);
+		update_option("wpshop.cart.shopping_return_link",$shopping_return_link);
+		
+		$minzakaz = sanitize_text_field($_POST['minzakaz']);
+		update_option("wpshop.cart.minzakaz",$minzakaz);
+		
+		$currency = sanitize_text_field($_POST['currency']);
+		update_option("wpshop.currency",$currency);
+		
+		$noGoodText = sanitize_text_field($_POST['noGoodText']);
+		update_option("wpshop.good.noText",$noGoodText);
+		
+		$minzakaz_info = sanitize_text_field($_POST['minzakaz_info']);
+		update_option("wpshop.cart.minzakaz_info",$minzakaz_info);
+		
+		$cartpage_link = sanitize_text_field($_POST['cartpage_link']);
+		update_option("wpshop.cartpage",$cartpage_link);
+		
 		//update_option("wpshop.loginza.widget_id",$_POST['wpshop_loginza_widget_id']);
 		//update_option("wpshop.loginza.secret_key",$_POST['wpshop_loginza_secret_key']);
 

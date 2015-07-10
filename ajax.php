@@ -18,7 +18,8 @@ add_action("wp_ajax_nopriv_cart_promocode", "cart_promocode");
 function ajax_post(){
 	if ($_POST['act'] == 'price_options')
   {
-    update_option('wpshop_price_under_title', $_POST['under_title']);
+	$under_title = sanitize_text_field($_POST['under_title']);
+    update_option('wpshop_price_under_title', $under_title);
   }
 	die();
 }
@@ -38,7 +39,7 @@ function delete_all(){
 function cart_promocode(){
   global $wpdb;
   $wpshop_session_id	= session_id();
-	$promocode = $_POST['promocode'];
+	$promocode = sanitize_text_field($_POST['promocode']);
   wp_reset_postdata();
 	$wp_query_promo = new WP_Query(
     array(
@@ -134,11 +135,10 @@ function cart_remove(){
 
 function set_currency(){
 	global $wpdb;
-	update_option('wp-shop-usd',$_POST['usd']);
-	update_option('wp-shop-eur',$_POST['eur']);
-
-	$usd_opt = $_POST['usd'];
-	$eur_opt = $_POST['eur'];
+	$usd_opt = sanitize_text_field($_POST['usd']);
+	$eur_opt = sanitize_text_field($_POST['eur']);
+	update_option('wp-shop-usd',$usd_opt);
+	update_option('wp-shop-eur',$eur_opt);
 
 	$results=$wpdb->get_results($wpdb->prepare("SELECT * FROM $wpdb->posts"));
 
