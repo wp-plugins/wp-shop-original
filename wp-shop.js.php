@@ -5,7 +5,7 @@ header("Content-Type: content=text; charset=utf-8");
 var cart_reload_promo_text = '';
 jQuery( document ).ready(function( $ ) {
 
-  jQuery( "#promocode_button_block" ).live( "click", function() {
+  jQuery( "#promocode_button_block" ).on( "click", function() {
  
     promocode=jQuery("#promocode_block").val();
 	
@@ -228,7 +228,7 @@ function Cart(eid_mini, eid_cart)
 				return false;
 			});
 			
-			jQuery('a#close').live("click",function() {
+			jQuery('a#close').on("click",function() {
 					jQuery('#wpshop_shadow_window').remove();
 					jQuery('#wpshop_modal').remove();
 					return false;

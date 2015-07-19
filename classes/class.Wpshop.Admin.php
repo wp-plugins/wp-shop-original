@@ -301,8 +301,7 @@ class Wpshop_Admin
 		$discount = sanitize_text_field($_POST['discount']);
 		update_option("wpshop.cart.discount",$discount);
 		
-		$wpshop_email = sanitize_text_field($_POST['wpshop_email']);
-		update_option("wpshop.email",$wpshop_email);
+		update_option("wpshop.email",$_POST['wpshop_email']);
 		
 		$wpshop_google_analytic = sanitize_text_field($_POST['wpshop_google_analytic']);
 		update_option("wpshop.google_analytic",$wpshop_google_analytic);
