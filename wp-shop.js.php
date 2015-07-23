@@ -228,7 +228,7 @@ function Cart(eid_mini, eid_cart)
 				return false;
 			});
 			
-			jQuery('a#close').on("click",function() {
+			jQuery('body').on("click", "a#close", function() {
 					jQuery('#wpshop_shadow_window').remove();
 					jQuery('#wpshop_modal').remove();
 					return false;
