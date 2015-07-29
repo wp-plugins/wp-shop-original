@@ -140,7 +140,7 @@ function set_currency(){
 	update_option('wp-shop-usd',$usd_opt);
 	update_option('wp-shop-eur',$eur_opt);
 
-	$results=$wpdb->get_results($wpdb->prepare("SELECT * FROM $wpdb->posts"));
+	$results=$wpdb->get_results("SELECT * FROM $wpdb->posts");
 
 	foreach($results as $row)
 	{
