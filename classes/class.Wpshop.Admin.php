@@ -322,10 +322,10 @@ class Wpshop_Admin
 		$minzakaz = sanitize_text_field($_POST['minzakaz']);
 		update_option("wpshop.cart.minzakaz",$minzakaz);
 		
-		$currency = sanitize_text_field($_POST['currency']);
+		$currency = strip_tags($_POST['currency'],'<span></span><em></em><p></p><a></a><strong></strong><br>');
 		update_option("wpshop.currency",$currency);
 		
-		$noGoodText = sanitize_text_field($_POST['noGoodText']);
+		$noGoodText = strip_tags($_POST['noGoodText'],'<span></span><em></em><p></p><a></a><strong></strong><br>');
 		update_option("wpshop.good.noText",$noGoodText);
 		
 		$minzakaz_info = sanitize_text_field($_POST['minzakaz_info']);

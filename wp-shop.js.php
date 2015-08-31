@@ -5,7 +5,7 @@ header("Content-Type: content=text; charset=utf-8");
 var cart_reload_promo_text = '';
 jQuery( document ).ready(function( $ ) {
 
-  jQuery( "#promocode_button_block" ).on( "click", function() {
+  jQuery( "#wpshop_cart" ).on( "click","input#promocode_button_block",function() {
  
     promocode=jQuery("#promocode_block").val();
 	
