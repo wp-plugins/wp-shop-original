@@ -147,10 +147,16 @@ class Wpshop_RecycleBin
 		$this->view->render("mail/admin.php");
 		// отправка почты администратору
 		$email = get_option("wpshop.email");
+		$user_name = get_option("wpshop.email_name");
+		if($user_name) {
+			$email_result=$user_name.' <'.$email.'>';
+		}else {
+			$email_result=$email;
+		}
 		$siteurl = get_bloginfo('wpurl');
 		wp_mail($email, __('New Order','wp-shop')." #{$pid} ".__('from site','wp-shop')." {$siteurl}", ob_get_clean(),"Content-type: text/html; charset=UTF-8
-Reply-To: {$email}
-From:{$email}");
+Reply-To: {$email_result}
+From:{$email_result}");
 
 		ob_start();
 		$this->view->order = $orders;
@@ -161,8 +167,8 @@ From:{$email}");
       $this->view->render("mail/client1.php");
     }
 		wp_mail($orders['info']['email'], "Re: ".__('Your order','wp-shop')."  #{$pid} ".__('from site','wp-shop')." {$siteurl}", ob_get_clean(),"Content-type: text/html; charset=UTF-8
-Reply-To: {$email}
-From: {$email}");
+Reply-To: {$email_result}
+From: {$email_result}");
 
 		if ($payment)
 		{

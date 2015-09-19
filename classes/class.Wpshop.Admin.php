@@ -232,6 +232,7 @@ class Wpshop_Admin
 		$this->view->deliveyrCondition = get_option('wpshop.cart.deliveyrCondition','#');
 		$this->view->shopping_return_link = get_option('wpshop.cart.shopping_return_link','#');
 		$this->view->email = get_option("wpshop.email");
+		$this->view->email_name = get_option("wpshop.email_name");
 		$this->view->google_analytic = get_option("wpshop.google_analytic");
     $this->view->partner_param = get_option("wpshop.partner_param");
 		$this->view->yandex_metrika = get_option("wpshop.yandex_metrika");
@@ -301,7 +302,11 @@ class Wpshop_Admin
 		$discount = sanitize_text_field($_POST['discount']);
 		update_option("wpshop.cart.discount",$discount);
 		
-		update_option("wpshop.email",$_POST['wpshop_email']);
+		$email = sanitize_email($_POST['wpshop_email']);
+		update_option("wpshop.email",$email);
+		
+		$email_name = sanitize_text_field($_POST['wpshop_email_name']);
+		update_option("wpshop.email_name",$email_name);
 		
 		$wpshop_google_analytic = sanitize_text_field($_POST['wpshop_google_analytic']);
 		update_option("wpshop.google_analytic",$wpshop_google_analytic);
