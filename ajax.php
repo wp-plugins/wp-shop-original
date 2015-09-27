@@ -1,21 +1,21 @@
 <?php
 
-add_action("wp_ajax_cart_remove", "cart_remove");
-add_action("wp_ajax_nopriv_cart_remove", "cart_remove");
-add_action("wp_ajax_cart_save", "cart_save");
-add_action("wp_ajax_nopriv_cart_save", "cart_save");
-add_action("wp_ajax_cart_load", "cart_load");
-add_action("wp_ajax_nopriv_cart_load", "cart_load");
-add_action("wp_ajax_set_currency", "set_currency");
-add_action("wp_ajax_nopriv_set_currency", "set_currency");
-add_action("wp_ajax_ajax_post", "ajax_post");
-add_action("wp_ajax_nopriv_ajax_post", "ajax_post");
-add_action("wp_ajax_delete_all", "delete_all");
-add_action("wp_ajax_nopriv_delete_all", "delete_all");
-add_action("wp_ajax_cart_promocode", "cart_promocode");
-add_action("wp_ajax_nopriv_cart_promocode", "cart_promocode");
+add_action("wp_ajax_cart_remove", "wp_shop_original_cart_remove");
+add_action("wp_ajax_nopriv_cart_remove", "wp_shop_original_cart_remove");
+add_action("wp_ajax_cart_save", "wp_shop_original_cart_save");
+add_action("wp_ajax_nopriv_cart_save", "wp_shop_original_cart_save");
+add_action("wp_ajax_cart_load", "wp_shop_original_cart_load");
+add_action("wp_ajax_nopriv_cart_load", "wp_shop_original_cart_load");
+add_action("wp_ajax_set_currency", "wp_shop_original_set_currency");
+add_action("wp_ajax_nopriv_set_currency", "wp_shop_original_set_currency");
+add_action("wp_ajax_ajax_post", "wp_shop_original_ajax_post");
+add_action("wp_ajax_nopriv_ajax_post", "wp_shop_original_ajax_post");
+add_action("wp_ajax_delete_all", "wp_shop_original_delete_all");
+add_action("wp_ajax_nopriv_delete_all", "wp_shop_original_delete_all");
+add_action("wp_ajax_cart_promocode", "wp_shop_original_cart_promocode");
+add_action("wp_ajax_nopriv_cart_promocode", "wp_shop_original_cart_promocode");
 
-function ajax_post(){
+function wp_shop_original_ajax_post(){
 	if ($_POST['act'] == 'price_options')
   {
 	$under_title = sanitize_text_field($_POST['under_title']);
@@ -24,7 +24,7 @@ function ajax_post(){
 	die();
 }
 
-function delete_all(){
+function wp_shop_original_delete_all(){
 	global $wpdb;
 	$res = $wpdb->query("SET AUTOCOMMIT=0;");
 	$res = $wpdb->query("SET FOREIGN_KEY_CHECKS=0;");
@@ -36,7 +36,7 @@ function delete_all(){
 	die();
 } 
 
-function cart_promocode(){
+function wp_shop_original_cart_promocode(){
   global $wpdb;
   $wpshop_session_id	= session_id();
 	$promocode = sanitize_text_field($_POST['promocode']);
@@ -117,7 +117,7 @@ function cart_promocode(){
 	die();
 }
 
-function cart_remove(){
+function wp_shop_original_cart_remove(){
 	global $wpdb;
 	$wpshop_session_id	= session_id();
 	$wpshop_id = $_POST['wpshop_id'];
@@ -133,7 +133,7 @@ function cart_remove(){
 	die();
 } 
 
-function set_currency(){
+function wp_shop_original_set_currency(){
 	global $wpdb;
 	$usd_opt = sanitize_text_field($_POST['usd']);
 	$eur_opt = sanitize_text_field($_POST['eur']);
@@ -163,7 +163,7 @@ function set_currency(){
 	die();
 } 
 
-function cart_save(){
+function wp_shop_original_cart_save(){
 	
 	$wpshop_session_id	= session_id();
 	$wpshop_item_id		= $_POST['wpshop_id'];
@@ -209,7 +209,7 @@ function cart_save(){
 	
 }
 
-function cart_load(){
+function wp_shop_original_cart_load(){
 	global $wpdb;
 	$params_load = array(session_id());
 	$rows = $wpdb->get_results($wpdb->prepare("SELECT * FROM {$wpdb->prefix}wpshop_selected_items WHERE selected_items_session_id='%s'",$params_load));

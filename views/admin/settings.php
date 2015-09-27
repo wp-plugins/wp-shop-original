@@ -75,12 +75,12 @@
 					</tr>
 					<tr>
 						<td><label for="wpshop_email"><?php  echo __('E-mail notification about shopping', 'wp-shop') /*E-mail уведомления о покупках*/ ?></label></td>
-						<td><input type="text" name="wpshop_email" id="wpshop_email" value="<?php  echo $this->email;?>"/></td>
+						<td><input type="text" name="wpshop_email" id="wpshop_email" value="<?php  echo esc_html($this->email);?>"/></td>
 						<td></td>
 					</tr>
 					<tr>
 						<td><label for="wpshop_email_name"><?php  echo __('User name for E-mail notification', 'wp-shop') /*User name for E-mail*/ ?></label></td>
-						<td><input type="text" name="wpshop_email_name" id="wpshop_email_name" value="<?php  echo $this->email_name;?>"/></td>
+						<td><input type="text" name="wpshop_email_name" id="wpshop_email_name" value="<?php  echo esc_html($this->email_name);?>"/></td>
 						<td></td>
 					</tr>
 					<tr>
