@@ -20,6 +20,7 @@ define( 'WPSHOP_URL', plugins_url("",__FILE__) );
 define( 'WPSHOP_CLASSES_DIR' , WPSHOP_DIR ."/classes");
 define( 'WPSHOP_VIEWS_DIR' , WPSHOP_DIR ."/views");
 define( 'WPSHOP_DATA_DIR', WPSHOP_DIR ."/data");
+define( 'WPSHOP_THEME_TEMPLATE_DIR', get_template_directory() . "/wpshop" );
 
 define( 'CURR_BEFORE',	'&nbsp;' );
 define( 'CART_ID',		'wpshop_cart' );
