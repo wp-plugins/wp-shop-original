@@ -374,18 +374,54 @@ if ($total > 0) {
 							<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=MC";?>'><img src='<?php  echo WPSHOP_URL;?>/images/payments/mts.png' title=''/></a><br/>
 							<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=MC";?>'><?php  echo __('Mobile', 'wp-shop');?></a>
 						</li>
-            <?php if( $yandex_kassa->data['webmoney']){?>
-						<li>
-							<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=WM";?>'><img src='<?php  echo WPSHOP_URL;?>/images/payments/wbmoney.png' title=''/></a><br/>
-							<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=WM";?>'><?php  echo __('Webmoney', 'wp-shop');?></a>
-						</li>
-            <?php } ?>
-            <?php if( $yandex_kassa->data['sber']){?>
-						<li>
-							<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=SB";?>'><img src='<?php  echo WPSHOP_URL;?>/images/payments/sberonline.png' title=''/></a><br/>
-							<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=SB";?>'><?php  echo __('Sberbank online', 'wp-shop');?></a>
-						</li>
-            <?php } ?>
+						<?php if( $yandex_kassa->data['webmoney']){?>
+									<li>
+										<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=WM";?>'><img src='<?php  echo WPSHOP_URL;?>/images/payments/wbmoney.png' title=''/></a><br/>
+										<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=WM";?>'><?php  echo __('Webmoney', 'wp-shop');?></a>
+									</li>
+						<?php } ?>
+						<?php if( $yandex_kassa->data['sber']){?>
+									<li>
+										<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=SB";?>'><img src='<?php  echo WPSHOP_URL;?>/images/payments/sberonline.png' title=''/></a><br/>
+										<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=SB";?>'><?php  echo __('Sberbank online', 'wp-shop');?></a>
+									</li>
+						<?php } ?>
+						<?php if( $yandex_kassa->data['qiwi']){?>
+									<li>
+										<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=QW";?>'><img src='<?php  echo WPSHOP_URL;?>/images/payments/qiwiwallet.png' title=''/></a><br/>
+										<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=QW";?>'><?php  echo __('QIWI wallet', 'wp-shop');?></a>
+									</li>
+						<?php } ?>
+						<?php if( $yandex_kassa->data['prom']){?>
+									<li>
+										<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=PB";?>'><img src='<?php  echo WPSHOP_URL;?>/images/payments/psbretail.png' title=''/></a><br/>
+										<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=PB";?>'><?php  echo __('Promsvyazbank', 'wp-shop');?></a>
+									</li>
+						<?php } ?>
+						<?php if( $yandex_kassa->data['master']){?>
+									<li>
+										<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=MA";?>'><img src='<?php  echo WPSHOP_URL;?>/images/payments/masterpass.png' title=''/></a><br/>
+										<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=MA";?>'><?php  echo __('MasterPass', 'wp-shop');?></a>
+									</li>
+						<?php } ?>
+						<?php if( $yandex_kassa->data['alfa']){?>
+									<li>
+										<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=AB";?>'><img src='<?php  echo WPSHOP_URL;?>/images/payments/alfaclick.png' title=''/></a><br/>
+										<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=AB";?>'><?php  echo __('Alfa-Click', 'wp-shop');?></a>
+									</li>
+						<?php } ?>
+						<?php if( $yandex_kassa->data['dover']){?>
+									<li>
+										<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=QP";?>'><img src='<?php  echo WPSHOP_URL;?>/images/payments/dover.png' title=''/></a><br/>
+										<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=QP";?>'><?php  echo __('Doveritelniy payment', 'wp-shop');?></a>
+									</li>
+						<?php } ?>
+						<?php if( $yandex_kassa->data['credit']){?>
+									<li>
+										<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=KV";?>'><img src='<?php  echo WPSHOP_URL;?>/images/payments/kupi.png' title=''/></a><br/>
+										<a href='<?php  echo "{$yandex_kassa->data[cart_url]}&step=3&payment={$yandex_kassa->paymentID}&paymentType=KV";?>'><?php  echo __('Buy in credit', 'wp-shop');?></a>
+									</li>
+						<?php } ?>
 					</ul>
 					</div>
 					<?php }?>

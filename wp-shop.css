@@ -193,6 +193,10 @@ Author URI: http://www.wp-shop.ru
 	
 }
 
+.wpshop_ask_after{
+	
+}
+
 .wpshop_pagers li
 {
 	background-color: #DFDFDF;
@@ -430,6 +434,10 @@ th#sklad {
 	border-left: 2px dotted #000;
 	padding-left: 20px;
 	max-width: 400px;
+}
+
+#poststuff.narr{
+  min-width: 728px;
 }
 
 #poststuff .wpshop_information  h3 {

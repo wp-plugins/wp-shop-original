@@ -12,9 +12,9 @@
 		<div class="postbox">
 			<h3><?php  _e('Self-delivery', 'wp-shop'); /*Самовывоз*/ ?></h3>
 			<div class="inside">
-			<table cellpadding="2" cellspacing="2">
+			<table cellpadding="2" cellspacing="2" style="width: 50%;float: left;min-width: 500px;">
 				<tr>
-					<td style='width:400px;'><?php  _e('Enable support for self-delivery from a store / office.', 'wp-shop'); /*Включить поддержку самовывоза из магазина/офиса.*/ ?></td>
+					<td><?php  _e('Enable support for self-delivery from a store / office.', 'wp-shop'); /*Включить поддержку самовывоза из магазина/офиса.*/ ?></td>
 					<?php $vizit_activate = $this->vizit['activate'] ? " checked" : "";?>
 					<td><input type="checkbox" name="wpshop_payments_vizit[activate]"<?php  echo $vizit_activate;?>/></td>
 				</tr>
@@ -41,6 +41,9 @@
 					</td>
 				</tr>
 			</table>
+			<div style="width: 50%;float: left;text-align: right;min-width: 500px;">
+				<ins data-revive-zoneid="8" data-revive-id="03af71d0efe35b0d7d888949e681431d"></ins><script async src="https://wp-shop.ru/adv/www/delivery/asyncjs.php"></script>
+			</div>
 			</div>
 		</div>
 	</div>
@@ -49,9 +52,9 @@
 		<div class="postbox">
 			<h3><?php  _e('Cash to courier', 'wp-shop'); /*Включить поддержку оплаты курьеру*/ ?></h3>
 			<div class="inside">
-			<table cellpadding="2" cellspacing="2">
+			<table cellpadding="2" cellspacing="2" style="width: 50%;float: left;min-width: 500px;">
 				<tr>
-					<td style='width:400px;'><?php  _e('Enable support for payment to courier', 'wp-shop'); /*Включить поддержку оплаты курьеру*/ ?></td>
+					<td><?php  _e('Enable support for payment to courier', 'wp-shop'); /*Включить поддержку оплаты курьеру*/ ?></td>
 					<?php $cash_activate = $this->cash['activate'] ? " checked" : "";?>
 					<td><input type="checkbox" name="wpshop_payments_cash[activate]"<?php  echo $cash_activate;?>/></td>
 				</tr>
@@ -77,6 +80,9 @@
 					</td>
 				</tr>
 			</table>
+			<div style="width: 50%;float: left;text-align: right;min-width: 500px;">
+				<ins data-revive-zoneid="9" data-revive-id="03af71d0efe35b0d7d888949e681431d"></ins><script async src="https://wp-shop.ru/adv/www/delivery/asyncjs.php"></script>
+			</div>
 			</div>
 		</div>
 	</div>
@@ -84,9 +90,9 @@
 		<div class="postbox">
 			<h3><?php  _e('Cash on delivery (COD)', 'wp-shop'); /*Наложенный платеж*/ ?></h3>
 			<div class="inside">
-			<table cellpadding="2" cellspacing="2">
+			<table cellpadding="2" cellspacing="2" style="width: 50%;float: left;min-width: 500px;">
 				<tr>
-					<td style='width:400px;'><?php  _e('Enable support for COD', 'wp-shop'); /*Включить поддержку наложного платежа*/ ?></td>
+					<td><?php  _e('Enable support for COD', 'wp-shop'); /*Включить поддержку наложного платежа*/ ?></td>
 					<?php $post_activate = $this->post['activate'] ? " checked" : "";?>
 					<td><input type="checkbox" name="wpshop_payments_post[activate]"<?php  echo $post_activate;?>/></td>
 				</tr>
@@ -112,6 +118,9 @@
 					</td>
 				</tr>
 			</table>
+			<div style="width: 50%;float: left;text-align: right;min-width: 500px;">
+				<ins data-revive-zoneid="10" data-revive-id="03af71d0efe35b0d7d888949e681431d"></ins><script async src="https://wp-shop.ru/adv/www/delivery/asyncjs.php"></script>
+			</div>
 			</div>
 		</div>
 	</div>
@@ -120,9 +129,9 @@
 		<div class="postbox">
 			<h3><?php  _e('Your bank account details', 'wp-shop'); /*Ваши банковские реквизиты*/ ?></h3>
 			<div class="inside">
-			<table cellpadding="2" cellspacing="2">
+			<table cellpadding="2" cellspacing="2" style="width: 50%;float: left;min-width: 500px;">
 				<tr>
-					<td style='width:400px;'><?php  _e('Enable support of a payment through the bank', 'wp-shop'); /*Включить поддержку оплаты через банк*/ ?></td>
+					<td ><?php  _e('Enable support of a payment through the bank', 'wp-shop'); /*Включить поддержку оплаты через банк*/ ?></td>
 					<?php $bank_activate = $this->bank['activate'] ? " checked" : "";?>
 					<td><input type="checkbox" name="wpshop_payments_bank[activate]"<?php  echo $bank_activate;?>/></td>
 				</tr>
@@ -149,17 +158,20 @@
 				</tr>
 				<tr>
 					<td>БИК</td>
-					<td><input type="text" name="wpshop_payments_bank[bik]" value='<?php  echo $this->bank['bik'];?>'/></td>
+					<td style="min-width:300px;"><input type="text" style="width:100%;"name="wpshop_payments_bank[bik]" value='<?php  echo $this->bank['bik'];?>'/></td>
 				</tr>
 				<tr>
 					<td><?php  _e('Personal account', 'wp-shop'); /*Лицевой счет*/ ?></td>
-					<td><input type="text" name="wpshop_payments_bank[ls]" value='<?php  echo $this->bank['ls'];?>'/></td>
+					<td style="min-width:300px;"><input type="text" style="width:100%;" name="wpshop_payments_bank[ls]" value='<?php  echo $this->bank['ls'];?>'/></td>
 				</tr>
 				<tr>
 					<td><?php  _e('Сorr. account', 'wp-shop'); /*Кор. счет*/ ?></td>
-					<td><input type="text" name="wpshop_payments_bank[ks]" value='<?php  echo $this->bank['ks'];?>'/></td>
+					<td style="min-width:300px;"><input type="text" style="width:100%;" name="wpshop_payments_bank[ks]" value='<?php  echo $this->bank['ks'];?>'/></td>
 				</tr>
 			</table>
+			<div style="width: 50%;float: left;text-align: right;min-width: 500px;">
+				<ins data-revive-zoneid="11" data-revive-id="03af71d0efe35b0d7d888949e681431d"></ins><script async src="https://wp-shop.ru/adv/www/delivery/asyncjs.php"></script>
+			</div>
 			</div>
 		</div>
 	</div>
@@ -168,9 +180,9 @@
 		<div class="postbox">
 			<h3>Web-money</h3>
 			<div class="inside">
-			<table cellpadding="2" cellspacing="2">
+			<table cellpadding="2" cellspacing="2" style="width: 50%;float: left;min-width: 500px;">
 				<tr>
-					<td style='width:400px;'><?php  _e('Enable support of a payment using Web-Money', 'wp-shop'); /*Включить поддержку оплаты по Web-Money*/ ?></td>
+					<td><?php  _e('Enable support of a payment using Web-Money', 'wp-shop'); /*Включить поддержку оплаты по Web-Money*/ ?></td>
 					<?php $wm_activate = $this->wm['activate'] ? " checked" : "";?>
 					<td><input type="checkbox" name="wpshop_payments_wm[activate]"<?php  echo $wm_activate;?>/></td>
 				</tr>
@@ -198,17 +210,20 @@
 
 				<tr>
 					<td><?php  _e('Your WM-purse', 'wp-shop'); /*Ваш WM-Кошелек*/ ?></td>
-					<td><input type="text" name="wpshop_payments_wm[wmCheck]" value="<?php  echo $this->wm['wmCheck'];?>"/></td>
+					<td style="min-width:300px;"><input style="width:100%;" type="text" name="wpshop_payments_wm[wmCheck]" value="<?php  echo $this->wm['wmCheck'];?>"/></td>
 				</tr>
 				<tr>
 					<td><?php  _e('Success URL', 'wp-shop'); ?></td>
-					<td><input type="text" name="wpshop_payments_wm[successUrl]" value="<?php  echo $this->wm['successUrl'];?>"/></td>
+					<td style="min-width:300px;"><input style="width:100%;" type="text" name="wpshop_payments_wm[successUrl]" value="<?php  echo $this->wm['successUrl'];?>"/></td>
 				</tr>
 				<tr>
 					<td><?php  _e('Failed URL', 'wp-shop'); ?></td>
-					<td><input type="text" name="wpshop_payments_wm[failedUrl]" value="<?php  echo $this->wm['failedUrl'];?>"/></td>
+					<td style="min-width:300px;"><input style="width:100%;" type="text" name="wpshop_payments_wm[failedUrl]" value="<?php  echo $this->wm['failedUrl'];?>"/></td>
 				</tr>
 			</table>
+			<div style="width: 50%;float: left;text-align: right;min-width: 500px;">
+				<ins data-revive-zoneid="12" data-revive-id="03af71d0efe35b0d7d888949e681431d"></ins><script async src="https://wp-shop.ru/adv/www/delivery/asyncjs.php"></script>
+			</div>
 			</div>
 		</div>
 	</div>
@@ -218,9 +233,9 @@
 			<h3><?php  _e('Payment through the merchant', 'wp-shop');/* Оплата через шлюз */?></h3>
 			<div class="inside">
 			
-			<table cellpadding="2" cellspacing="2">
+			<table cellpadding="2" cellspacing="2" >
 				<tr>
-					<td style='width:400px;'><?php  _e('Enable support of Merchant', 'wp-shop'); /*Включить поддержку merchants*/ ?></td>
+					<td><?php  _e('Enable support of Merchant', 'wp-shop'); /*Включить поддержку merchants*/ ?></td>
 					<?php $merchant_activate = $this->merchant ? " checked" : "";?>
 					<td><input type="checkbox" name="wpshop_merchant"<?php  echo $merchant_activate;?>/></td>
 				</tr>
@@ -268,7 +283,7 @@
 				</script>
 				
 				<tr>
-					<td style='width:400px;'><?php  _e('Select Merchant System', 'wp-shop'); /*Выбрать merchant system*/ ?></td>
+					<td><?php  _e('Select Merchant System', 'wp-shop'); /*Выбрать merchant system*/ ?></td>
 					<td>
 						<select name="wpshop_merchant_system" class="merchant_system">
 							<option value='ek' <?php  if($this->merchant_system == 'ek'){ echo' selected="selected"';}?>><?php  _e('WalletOne', 'wp-shop');/* Единая касса */?></option>
@@ -279,7 +294,7 @@
 				</tr>
 				
 				<!-- Настройки robokassa-->
-				<table class="robokassa_n" style="display:none">
+				<table class="robokassa_n" style="width: 50%;float: left;min-width: 650px; display:none">
 					<tr>
 						<td><?php  _e('Delivery', 'wp-shop'); /*Доставка*/ ?></td>
 						<td>
@@ -302,20 +317,20 @@
 					</tr>
 					<tr>
 						<td><?php  _e('Robokassa Login', 'wp-shop'); ?></td>
-						<td><input type="text" name="wpshop_payments_robokassa[login]" value="<?php  echo $this->robokassa['login'];?>"/></td>
+						<td style="min-width:300px;"><input type="text" style="width:100%;" name="wpshop_payments_robokassa[login]" value="<?php  echo $this->robokassa['login'];?>"/></td>
 					</tr>
 					<tr>
 						<td><?php  _e('Robokassa pass 1', 'wp-shop'); /*Robokassa пароль 1*/ ?></td>
-						<td><input type="text" name="wpshop_payments_robokassa[pass1]" value="<?php  echo $this->robokassa['pass1'];?>"/></td>
+						<td style="min-width:300px;"><input type="text" style="width:100%;" name="wpshop_payments_robokassa[pass1]" value="<?php  echo $this->robokassa['pass1'];?>"/></td>
 					</tr>
 					<tr>
 						<td><?php  _e('Robokassa pass 2', 'wp-shop'); /*Robokassa пароль 2*/ ?></td>
-						<td><input type="text" name="wpshop_payments_robokassa[pass2]" value="<?php  echo $this->robokassa['pass2'];?>"/></td>
+						<td style="min-width:300px;"><input style="width:100%;" type="text" name="wpshop_payments_robokassa[pass2]" value="<?php  echo $this->robokassa['pass2'];?>"/></td>
 					</tr>
 				</table>
 				
 				<!-- Настройки EK-->
-				<table class="ek_n" style="display:none">
+				<table class="ek_n" style="width: 50%;float: left;min-width: 650px; display:none">
 					<tr>
 						<td>
 							<table>
@@ -343,7 +358,7 @@
 							
 							<tr>
 								<td><?php  _e('Your WalletOne', 'wp-shop'); /*Ваш WalletOne*/ ?></td>
-								<td><input type="text" name="wpshop_payments_ek[wmCheck]" value="<?php  echo $this->ek['wmCheck'];?>"/></td>
+								<td style="min-width:300px;"><input style="width:100%;" type="text" name="wpshop_payments_ek[wmCheck]" value="<?php  echo $this->ek['wmCheck'];?>"/></td>
 							</tr>
 							
 							<tr>
@@ -373,12 +388,12 @@
 							
 							<tr>
 								<td><?php  _e('Success URL', 'wp-shop'); ?></td>
-								<td><input type="text" name="wpshop_payments_ek[successUrl]" value="<?php  echo $this->ek['successUrl'];?>"/></td>
+								<td style="min-width:300px;"><input type="text" style="width:100%;" name="wpshop_payments_ek[successUrl]" value="<?php  echo $this->ek['successUrl'];?>"/></td>
 							</tr>
 							
 							<tr>
 								<td><?php  _e('Failed URL', 'wp-shop'); ?></td>
-								<td><input type="text" name="wpshop_payments_ek[failedUrl]" value="<?php  echo $this->ek['failedUrl'];?>"/></td>
+								<td style="min-width:300px;"><input style="width:100%;" type="text" name="wpshop_payments_ek[failedUrl]" value="<?php  echo $this->ek['failedUrl'];?>"/></td>
 							</tr>
 							</table>
 						</td>
@@ -397,10 +412,10 @@
 				</table>
 				
 				<!-- Настройки yandex_kassa-->
-				<table class="yandex_kassa_n" style="display:none">
+				<table class="yandex_kassa_n" style="width: 50%;float: left;min-width: 650px; display:none">
 					
 					<tr>
-						<td style='width:400px;'><?php  _e('Test paiments', 'wp-shop'); ?></td>
+						<td><?php  _e('Test paiments', 'wp-shop'); ?></td>
 						<?php $yandex_test = $this->yandex_kassa['test'] ? " checked" : "";?>
 						<td><input type="checkbox" name="wpshop_payments_yandex_kassa[test]"<?php  echo $yandex_test;?>/></td>
 					</tr>
@@ -429,38 +444,70 @@
 
 					<tr>
 						<td><?php  _e('Your Yandex kassa shop_id', 'wp-shop'); /*Ваш Yandex shop_id*/ ?></td>
-						<td><input type="text" name="wpshop_payments_yandex_kassa[shopId]" value="<?php  echo $this->yandex_kassa['shopId'];?>"/></td>
+						<td style="min-width:300px;"><input type="text" style="width:100%;" name="wpshop_payments_yandex_kassa[shopId]" value="<?php  echo $this->yandex_kassa['shopId'];?>"/></td>
 					</tr>
 					<tr>
 						<td><?php  _e('Your Yandex kassa scid', 'wp-shop'); /*Ваш Yandex scid*/ ?></td>
-						<td><input type="text" name="wpshop_payments_yandex_kassa[scid]" value="<?php  echo $this->yandex_kassa['scid'];?>"/></td>
+						<td style="min-width:300px;"><input type="text" style="width:100%;" name="wpshop_payments_yandex_kassa[scid]" value="<?php  echo $this->yandex_kassa['scid'];?>"/></td>
 					</tr>
 					<tr>
 						<td><?php  _e('Your Yandex kassa shopPassword', 'wp-shop'); /*Ваш Yandex shopPassword*/ ?></td>
-						<td><input type="text" name="wpshop_payments_yandex_kassa[shopPassword]" value="<?php echo $this->yandex_kassa['shopPassword'];?>"/></td>
+						<td style="min-width:300px;"><input type="text" style="width:100%;" name="wpshop_payments_yandex_kassa[shopPassword]" value="<?php echo $this->yandex_kassa['shopPassword'];?>"/></td>
 					</tr>
 					
 					<tr>
 						<td><?php  _e('Success URL', 'wp-shop'); ?></td>
-						<td><input type="text" name="wpshop_payments_yandex_kassa[successUrl]" value="<?php  echo $this->yandex_kassa['successUrl'];?>"/></td>
+						<td style="min-width:300px;"><input type="text" style="width:100%;" name="wpshop_payments_yandex_kassa[successUrl]" value="<?php  echo $this->yandex_kassa['successUrl'];?>"/></td>
 					</tr>
 					<tr>
 						<td><?php  _e('Failed URL', 'wp-shop'); ?></td>
-						<td><input type="text" name="wpshop_payments_yandex_kassa[failedUrl]" value="<?php  echo $this->yandex_kassa['failedUrl'];?>"/></td>
+						<td style="min-width:300px;"><input style="width:100%;" type="text" name="wpshop_payments_yandex_kassa[failedUrl]" value="<?php  echo $this->yandex_kassa['failedUrl'];?>"/></td>
 					</tr>
 					<tr>
-						<td style='width:400px;'><?php  _e('Enable Sberbank online', 'wp-shop'); ?></td>
+						<td><?php  _e('Enable Sberbank online', 'wp-shop'); ?></td>
 						<?php $yandex_sber = $this->yandex_kassa['sber'] ? " checked" : "";?>
 						<td><input type="checkbox" name="wpshop_payments_yandex_kassa[sber]"<?php  echo $yandex_sber;?>/></td>
 					</tr>
 					<tr>
-						<td style='width:400px;'><?php  _e('Enable Webmoney', 'wp-shop'); ?></td>
+						<td><?php  _e('Enable Webmoney', 'wp-shop'); ?></td>
 						<?php $yandex_webmoney = $this->yandex_kassa['webmoney'] ? " checked" : "";?>
 						<td><input type="checkbox" name="wpshop_payments_yandex_kassa[webmoney]"<?php  echo $yandex_webmoney;?>/></td>
-					</tr>         
+					</tr>    
+					<tr>
+						<td><?php  _e('Enable Qiwi', 'wp-shop'); ?></td>
+						<?php $yandex_qiwi = $this->yandex_kassa['qiwi'] ? " checked" : "";?>
+						<td><input type="checkbox" name="wpshop_payments_yandex_kassa[qiwi]"<?php  echo $yandex_qiwi;?>/></td>
+					</tr>   
+					<tr>
+						<td><?php  _e('Enable Promsvyazbank', 'wp-shop'); ?></td>
+						<?php $yandex_prom = $this->yandex_kassa['prom'] ? " checked" : "";?>
+						<td><input type="checkbox" name="wpshop_payments_yandex_kassa[prom]"<?php  echo $yandex_prom;?>/></td>
+					</tr>   
+					<tr>
+						<td><?php  _e('Enable MasterPass', 'wp-shop'); ?></td>
+						<?php $yandex_master = $this->yandex_kassa['master'] ? " checked" : "";?>
+						<td><input type="checkbox" name="wpshop_payments_yandex_kassa[master]"<?php  echo $yandex_master;?>/></td>
+					</tr>   
+					<tr>
+						<td ><?php  _e('Enable Alfa Click', 'wp-shop'); ?></td>
+						<?php $yandex_alfa = $this->yandex_kassa['alfa'] ? " checked" : "";?>
+						<td><input type="checkbox" name="wpshop_payments_yandex_kassa[alfa]"<?php  echo $yandex_alfa;?>/></td>
+					</tr>   
+					<tr>
+						<td ><?php  _e('Enable Doveritelniy payment', 'wp-shop'); ?></td>
+						<?php $yandex_dover = $this->yandex_kassa['dover'] ? " checked" : "";?>
+						<td><input type="checkbox" name="wpshop_payments_yandex_kassa[dover]"<?php  echo $yandex_dover;?>/></td>
+					</tr>   
+					<tr>
+						<td ><?php  _e('Enable buy in credit', 'wp-shop'); ?></td>
+						<?php $yandex_credit = $this->yandex_kassa['credit'] ? " checked" : "";?>
+						<td><input type="checkbox" name="wpshop_payments_yandex_kassa[credit]"<?php  echo $yandex_credit;?>/></td>
+					</tr>   
 				</table>
 			</table>
-			
+			<div style="width: 50%;float: left;text-align: right;min-width: 500px;">
+				<ins data-revive-zoneid="13" data-revive-id="03af71d0efe35b0d7d888949e681431d"></ins><script async src="https://wp-shop.ru/adv/www/delivery/asyncjs.php"></script>
+			</div>
 			</div>
 		</div>
 	</div>
@@ -470,15 +517,15 @@
 		<div class="postbox">
 			<h3>PayPal</h3>
 			<div class="inside">
-			<table cellpadding="2" cellspacing="2">
+			<table cellpadding="2" cellspacing="2" style="width: 50%;float: left;min-width: 500px;">
 				<tr>
-					<td style='width:400px;'><?php  _e('Enable PayPal', 'wp-shop'); ?></td>
+					<td ><?php  _e('Enable PayPal', 'wp-shop'); ?></td>
 					<?php $paypal_activate = $this->paypal['activate'] ? " checked" : "";?>
 					<td><input type="checkbox" name="wpshop_payments_paypal[activate]"<?php  echo $paypal_activate;?>/></td>
 				</tr>
 				
 				<tr>
-					<td style='width:400px;'><?php  _e('Test paiments', 'wp-shop'); ?></td>
+					<td ><?php  _e('Test paiments', 'wp-shop'); ?></td>
 					<?php $paypal_test = $this->paypal['test'] ? " checked" : "";?>
 					<td><input type="checkbox" name="wpshop_payments_paypal[test]"<?php  echo $paypal_test;?>/></td>
 				</tr>
@@ -507,12 +554,12 @@
 					
 				<tr>
 					<td><?php  _e('Saller Email', 'wp-shop'); /*Email продавца*/ ?></td>
-					<td><input type="text" name="wpshop_payments_paypal[email]" value="<?php  echo $this->paypal['email'];?>"/></td>
+					<td style="min-width:300px;"><input style="width:100%;" type="text" name="wpshop_payments_paypal[email]" value="<?php  echo $this->paypal['email'];?>"/></td>
 				</tr>
 				
 				<tr>
 					<td><?php  _e('Success URL', 'wp-shop'); /*Success URL*/ ?></td>
-					<td><input type="text" name="wpshop_payments_paypal[success]" value="<?php  echo $this->paypal['success'];?>"/></td>
+					<td style="min-width:300px;"><input style="width:100%;" type="text" name="wpshop_payments_paypal[success]" value="<?php  echo $this->paypal['success'];?>"/></td>
 				</tr>
 				
 				<tr>
@@ -532,6 +579,9 @@
 					</td>
 				</tr>
 			</table>
+			<div style="width: 50%;float: left;text-align: right;min-width: 500px;">
+				<ins data-revive-zoneid="14" data-revive-id="03af71d0efe35b0d7d888949e681431d"></ins><script async src="https://wp-shop.ru/adv/www/delivery/asyncjs.php"></script>
+			</div>
 			</div>
 		</div>
 	</div>
@@ -540,9 +590,9 @@
 		<div class="postbox">
 			<h3>Simplepay</h3>
 			<div class="inside">
-			<table cellpadding="2" cellspacing="2">
+			<table cellpadding="2" cellspacing="2" style="width: 50%;float: left;min-width: 500px;">
 				<tr>
-					<td style='width:400px;'><?php  _e('Enable Simplepay', 'wp-shop'); ?></td>
+					<td ><?php  _e('Enable Simplepay', 'wp-shop'); ?></td>
 					<?php $simplepay_activate = $this->simplepay['activate'] ? " checked" : "";?>
 					<td><input type="checkbox" name="wpshop_payments_simplepay[activate]"<?php  echo $simplepay_activate;?>/></td>
 				</tr>
@@ -571,12 +621,12 @@
         
         <tr>
 					<td><?php  _e('Outlet id', 'wp-shop'); /*Outlet id*/ ?></td>
-					<td><input type="text" name="wpshop_payments_simplepay[outlet_id]" value="<?php  echo $this->simplepay['outlet_id'];?>"/></td>
+					<td style="min-width:300px;"><input type="text" style="width:100%;" name="wpshop_payments_simplepay[outlet_id]" value="<?php  echo $this->simplepay['outlet_id'];?>"/></td>
 				</tr>
 				
 				<tr>
 					<td><?php  _e('Secure key', 'wp-shop'); /*Secure key*/ ?></td>
-					<td><input type="text" name="wpshop_payments_simplepay[secure]" value="<?php  echo $this->simplepay['secure'];?>"/></td>
+					<td style="min-width:300px;"><input type="text" style="width:100%;" name="wpshop_payments_simplepay[secure]" value="<?php  echo $this->simplepay['secure'];?>"/></td>
 				</tr>
         
         <tr>
@@ -606,7 +656,7 @@
 		<div class="postbox">
 			<h3>Chronopay</h3>
 			<div class="inside">
-			<table cellpadding="2" cellspacing="2">
+			<table cellpadding="2" cellspacing="2" style="width: 50%;float: left;min-width: 500px;">
 			
 				<script>
 					jQuery(function(){
@@ -620,7 +670,7 @@
 					});
 				</script>
 				<tr>
-					<td style='width:400px;'><?php  _e('Enable Chronopay', 'wp-shop'); ?></td>
+					<td ><?php  _e('Enable Chronopay', 'wp-shop'); ?></td>
 					<?php $chronopay_activate = $this->chronopay['activate'] ? " checked" : "";?>
 					<td><input type="checkbox" id="chronopay" name="wpshop_payments_chronopay[activate]"<?php  echo $chronopay_activate;?>/></td>
 				</tr>
@@ -649,36 +699,39 @@
 				</tr>
 								
 				<tr>
-					<td style='width:400px;'><p><strong>Важно!</strong> для учета номера заказа необходимо связаться с администрацией Сhronopay для подключения данной услуги. Только после этого активируйте ее в настройках оплаты вашего магазина.</p></td>
+					<td ><p><strong>Важно!</strong> для учета номера заказа необходимо связаться с администрацией Сhronopay для подключения данной услуги. Только после этого активируйте ее в настройках оплаты вашего магазина.</p></td>
 				</tr>
 						
 				<tr>
-					<td style='width:400px;'><?php  _e('Order_id enable', 'wp-shop');//Учитывать параметр order_id ?></td>
+					<td ><?php  _e('Order_id enable', 'wp-shop');//Учитывать параметр order_id ?></td>
 					<?php $chronopay_order = $this->chronopay['order'] ? " checked" : "";?>
 					<td><input type="checkbox" name="wpshop_payments_chronopay[order]"<?php  echo $chronopay_order;?>/></td>
 				</tr>
 				
 				<tr>
 					<td><?php  _e('Product_id', 'wp-shop'); /*Product_id*/ ?></td>
-					<td><input type="text" name="wpshop_payments_chronopay[product_id]" value="<?php  echo $this->chronopay[product_id];?>"/></td>
+					<td style="min-width:300px;"><input style="width:100%;" type="text" name="wpshop_payments_chronopay[product_id]" value="<?php  echo $this->chronopay[product_id];?>"/></td>
 				</tr>
 				
 				<tr>
 					<td><?php  _e('Success URL', 'wp-shop'); /*Success URL*/ ?></td>
-					<td><input type="text" name="wpshop_payments_chronopay[success]" value="<?php  echo $this->chronopay['success'];?>"/></td>
+					<td style="min-width:300px;"><input style="width:100%;" type="text" name="wpshop_payments_chronopay[success]" value="<?php  echo $this->chronopay['success'];?>"/></td>
 				</tr>
         
 				<tr>
 					<td><?php  _e('Failed URL', 'wp-shop'); /*Failed URL*/ ?></td>
-					<td><input type="text" name="wpshop_payments_chronopay[failed]" value="<?php  echo $this->chronopay['failed'];?>"/></td>
+					<td style="min-width:300px;"><input style="width:100%;" type="text" name="wpshop_payments_chronopay[failed]" value="<?php  echo $this->chronopay['failed'];?>"/></td>
 				</tr>
         
 				<tr>
 					<td><?php  _e('Password', 'wp-shop'); /*Пароль*/ ?></td>
-					<td><input type="text" name="wpshop_payments_chronopay[sharedsec]" value="<?php  echo $this->chronopay['sharedsec'];?>"/></td>
+					<td style="min-width:300px;"><input style="width:100%;" type="text" name="wpshop_payments_chronopay[sharedsec]" value="<?php  echo $this->chronopay['sharedsec'];?>"/></td>
 				</tr>
         
       </table>
+				<div style="width: 50%;float: left;text-align: right;min-width: 500px;">
+					<ins data-revive-zoneid="15" data-revive-id="03af71d0efe35b0d7d888949e681431d"></ins><script async src="https://wp-shop.ru/adv/www/delivery/asyncjs.php"></script>
+				</div>
 			</div>
 		</div>
 	</div>

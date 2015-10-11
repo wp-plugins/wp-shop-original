@@ -6,36 +6,38 @@
 <table>
 	<tbody>
 		<tr><td valign='top'>
-		<div id="poststuff"><div class="postbox">
+		<div id="poststuff" class="narr"><div class="postbox">
 			<h3><?php  echo __('Options:', 'wp-shop'); // Настройки
 				?></h3>
 			<div class="inside">
-				<table>
+				<table style="width: 50%;float: left;min-width: 500px;">
 					<tr>
-						<td>
+						<td style="width:50%;">
 							<label for="cssfile"><?php  echo __('Choose a style file', 'wp-shop'); // Выберите файл стилей
 							?></label>
 						</td>
-						<td style="width:250px;">
+						<td style="width:50%;">
 							<select name="cssfile" style="width:150px">
 								<?php  echo $this->file_list;?>
 							</select>
+              <a href="http://wp-shop.ru/wpshop-full-settings/id1" target="_blank" class="wpshop_admin_ask"><img src="<?php echo WPSHOP_URL.'/images/help_icon.png';?>"/></a>
 						</td>
-						<td></td>
 					</tr>
 					<tr>
-						<td><label for="cform"><?php  echo __('Available Forms', 'wp-shop'); // Доступные формы
-							?></label> </td>
-						<td>
-						<select name="cform" style="width:150px">
-						<?php 
-							foreach($this->cforms as $cform)
-							{
-								echo "<option value='{$cform['name']}'{$cform['selected']}>{$cform['name']}</option>";
-							}
-						?>
-						</select>
-						<?php  echo $this->formlistbox;?>
+						<td style="width:50%;">
+							<label for="cform"><?php  echo __('Available Forms', 'wp-shop'); // Доступные формы	?></label> 
+						</td>
+						<td style="width:50%;">
+							<select name="cform" style="width:150px">
+							<?php 
+								foreach($this->cforms as $cform)
+								{
+									echo "<option value='{$cform['name']}'{$cform['selected']}>{$cform['name']}</option>";
+								}
+							?>
+							</select>
+              <a href="http://wp-shop.ru/wpshop-full-settings/id2" target="_blank" class="wpshop_admin_ask"><img src="<?php echo WPSHOP_URL.'/images/help_icon.png';?>"/></a>
+							<?php  echo $this->formlistbox;?>
 						</td>
 					</tr>
 					<tr>
@@ -46,57 +48,60 @@
 								<option value='bottom'{$postion_sel['bottom']}>".__('Down' /*Внизу*/, 'wp-shop')."</option>
 								</select>";
 					?>
-					<td><label for="position"><?php //echo __('Location of price block:', 'wp-shop'); /*Расположение блока цены: */
-					?></label></td><td colspan='2'><?php  echo $position_select;?></td>
+          
+					<td><label for="position"><?php echo __('Location of price block', 'wp-shop'); /*Расположение блока цены: */
+					?></label></td><td ><?php  echo $position_select;?>
+          <a href="http://wp-shop.ru/wpshop-full-settings/id3" target="_blank" class="wpshop_admin_ask"><img src="<?php echo WPSHOP_URL.'/images/help_icon.png';?>"/></a></td>
 					</tr>
 					<tr>
 					<td><label for="wp-shop_show-cost"><?php  echo __('Display price of goods in records and archives:', 'wp-shop'); /*Отображать цену товара в записях и архивах:*/
 					?></label></td>
 						<?php $showCostChecked = $this->showCost == 1 ? " checked" : ""; ?>
-						<td colspan="2"><input type="checkbox" name="wp-shop_show-cost" id="wp-shop_show-cost"<?php  echo $showCostChecked;?>/></td>
+						<td colspan="2"><input type="checkbox" name="wp-shop_show-cost" id="wp-shop_show-cost"<?php  echo $showCostChecked;?>/>
+            <a href="http://wp-shop.ru/wpshop-full-settings/id4" target="_blank" class="wpshop_admin_ask"><img src="<?php echo WPSHOP_URL.'/images/help_icon.png';?>"/></a></td>
 					</tr>
 					<tr>
 						<td><label for="wpshop_payments_activate"><?php  _e('Show payment method', 'wp-shop'); /*Показывать способ оплаты:*/ ?></label></td>
 						<?php $payments_activate = $this->payments_activate == 1 ? " checked" : ""; ?>
-						<td><input type="checkbox" name="wpshop_payments_activate" id="wpshop_payments_activate"<?php  echo $payments_activate;?>/></td>
-						<td><code>(<?php 
-						echo __('Additional options are included in the &quot;WP Shop Payments&quot;', 'wp-shop'); // Дополнительые опции включаются в разделе "WP Shop Payments"
-						?>)</code></td>
+						<td><input type="checkbox" name="wpshop_payments_activate" id="wpshop_payments_activate"<?php  echo $payments_activate;?>/>
+            <a href="http://wp-shop.ru/wpshop-full-settings/id5" target="_blank" class="wpshop_admin_ask"><img src="<?php echo WPSHOP_URL.'/images/help_icon.png';?>"/></a></td>
 					</tr>
 					<tr>
 						<td><label for="wpshop_mail_activate"><?php  _e('Activate custom mail editor:', 'wp-shop'); /* Активировать редактор писем:*/ ?></label></td>
 						<?php $mail_activate = $this->mail_activate == 1 ? " checked" : ""; ?>
-						<td><input type="checkbox" name="wpshop_mail_activate" id="wpshop_mail_activate"<?php  echo $mail_activate;?>/></td>
+						<td><input type="checkbox" name="wpshop_mail_activate" id="wpshop_mail_activate"<?php  echo $mail_activate;?>/>
+            <a href="http://wp-shop.ru/wpshop-full-settings/id6" target="_blank" class="wpshop_admin_ask"><img src="<?php echo WPSHOP_URL.'/images/help_icon.png';?>"/></a></td>
 					</tr>
 					<tr>
 						<td><label for="wpshop_show_panel"><?php  _e('Show onclick cart widjet:', 'wp-shop'); /* Активировать редактор писем:*/ ?></label></td>
 						<?php $show_panel_activate = $this->show_panel_activate == 1 ? " checked" : ""; ?>
-						<td><input type="checkbox" name="wpshop_show_panel" id="wpshop_show_panel"<?php  echo $show_panel_activate;?>/></td>
+						<td><input type="checkbox" name="wpshop_show_panel" id="wpshop_show_panel"<?php  echo $show_panel_activate;?>/>
+            <a href="http://wp-shop.ru/wpshop-full-settings/id7" target="_blank" class="wpshop_admin_ask"><img src="<?php echo WPSHOP_URL.'/images/help_icon.png';?>"/></a></td>
 					</tr>
 					<tr>
 						<td><label for="wpshop_email"><?php  echo __('E-mail notification about shopping', 'wp-shop') /*E-mail уведомления о покупках*/ ?></label></td>
-						<td><input type="text" name="wpshop_email" id="wpshop_email" value="<?php  echo esc_html($this->email);?>"/></td>
-						<td></td>
+						<td><input style="width:90%;" type="text" name="wpshop_email" id="wpshop_email" value="<?php  echo esc_html($this->email);?>"/>
+            <a href="http://wp-shop.ru/wpshop-full-settings/id8" target="_blank" class="wpshop_admin_ask"><img src="<?php echo WPSHOP_URL.'/images/help_icon.png';?>"/></a></td>
 					</tr>
 					<tr>
 						<td><label for="wpshop_email_name"><?php  echo __('User name for E-mail notification', 'wp-shop') /*User name for E-mail*/ ?></label></td>
-						<td><input type="text" name="wpshop_email_name" id="wpshop_email_name" value="<?php  echo esc_html($this->email_name);?>"/></td>
-						<td></td>
+						<td><input type="text" style="width:90%;" name="wpshop_email_name" id="wpshop_email_name" value="<?php  echo esc_html($this->email_name);?>"/>
+            <a href="http://wp-shop.ru/wpshop-full-settings/id9" target="_blank" class="wpshop_admin_ask"><img src="<?php echo WPSHOP_URL.'/images/help_icon.png';?>"/></a></td>
 					</tr>
 					<tr>
 						<td><label for="wpshop_google_analytic"><?php  echo __('Tracking ID for E-commerce Google Analytics', 'wp-shop') /*Tracking ID*/ ?></label></td>
-						<td><input type="text" name="wpshop_google_analytic" id="wpshop_google_analytic" value="<?php  echo $this->google_analytic;?>"/></td>
-						<td></td>
+						<td><input type="text" style="width:90%;" name="wpshop_google_analytic" id="wpshop_google_analytic" value="<?php  echo $this->google_analytic;?>"/>
+            <a href="http://wp-shop.ru/wpshop-full-settings/id10" target="_blank" class="wpshop_admin_ask"><img src="<?php echo WPSHOP_URL.'/images/help_icon.png';?>"/></a></td>
 					</tr>
 					<tr>
 						<td><label for="wpshop_yandex_metrika"><?php  echo __('Tracking ID for E-commerce Yandex metrika', 'wp-shop') /*Tracking ID*/ ?></label></td>
-						<td><input type="text" name="wpshop_yandex_metrika" id="wpshop_yandex_metrika" value="<?php  echo $this->yandex_metrika;?>"/></td>
-						<td></td>
+						<td><input type="text" style="width:90%;" name="wpshop_yandex_metrika" id="wpshop_yandex_metrika" value="<?php  echo $this->yandex_metrika;?>"/>
+            <a href="http://wp-shop.ru/wpshop-full-settings/id11" target="_blank" class="wpshop_admin_ask"><img src="<?php echo WPSHOP_URL.'/images/help_icon.png';?>"/></a></td>
 					</tr>
-          <tr>
+					<tr>
 						<td><label for="wpshop_partner_param"><?php  echo __('Partner id', 'wp-shop');?></label></td>
-						<td><input type="text" name="wpshop_partner_param" id="wpshop_partner_param" value="<?php  echo $this->partner_param;?>"/></td>
-						<td></td>
+						<td><input type="text" style="width:90%;" name="wpshop_partner_param" id="wpshop_partner_param" value="<?php  echo $this->partner_param;?>"/>
+            <a href="http://wp-shop.ru/wpshop-full-settings/id12" target="_blank" class="wpshop_admin_ask"><img src="<?php echo WPSHOP_URL.'/images/help_icon.png';?>"/></a></td>
 					</tr>
 					<tr>
 						<td><label for="wpshop_google_analytic_cc"><?php  echo __('Currency for E-commerce Google Analytics', 'wp-shop') /*Currency*/ ?></label></td>
@@ -116,6 +121,7 @@
 								<option value='UAH' <?php echo $p4?>><?php  _e('Ukrainian Hrivna', 'wp-shop'); /*Гривна*/ ?></option>
 								<option value='GBP' <?php echo $p5?>><?php  _e('British Pounds', 'wp-shop'); /*Британские Фунты*/ ?></option>
 							</select>
+              <a href="http://wp-shop.ru/wpshop-full-settings/id13" target="_blank" class="wpshop_admin_ask"><img src="<?php echo WPSHOP_URL.'/images/help_icon.png';?>"/></a>
 						</td>
 					</tr>
           
@@ -128,11 +134,12 @@
 								if ($auth == 'register') { $m1 = ''; $m2 = ' selected="selected"';$m3 = '';}
 								if ($auth == 'guest') { $m1 = ''; $m2 = '';$m3 = ' selected="selected"';}
 							?>
-							<select name="wpshop_hide_auth">
+							<select name="wpshop_hide_auth" style="width:90%;"> 
 								<option value='none' <?php echo $m1?>><?php  _e('no', 'wp-shop'); ?></option>
 								<option value='register' <?php echo $m2?>><?php  _e('dissable register form', 'wp-shop');  ?></option>
 								<option value='guest' <?php echo $m3?>><?php  _e('disable guest shoping', 'wp-shop');  ?></option>
 							</select>
+              <a href="http://wp-shop.ru/wpshop-full-settings/id14" target="_blank" class="wpshop_admin_ask"><img src="<?php echo WPSHOP_URL.'/images/help_icon.png';?>"/></a>
 						</td>
 					</tr>
 					<tr>
@@ -169,12 +176,18 @@
 					</tr-->
 
 					</table>
+					<div style="width: 50%;float: left;text-align: right;min-width: 500px;">
+						<ins data-revive-zoneid="1" data-revive-id="03af71d0efe35b0d7d888949e681431d"></ins><script async src="https://wp-shop.ru/adv/www/delivery/asyncjs.php"></script>
+					</div>
+					<div style="width: 50%;float: left;text-align: right;min-width: 500px;">
+						<ins data-revive-zoneid="2" data-revive-id="03af71d0efe35b0d7d888949e681431d"></ins><script async src="https://wp-shop.ru/adv/www/delivery/asyncjs.php"></script>
+					</div>
 				</div>
 			  </div>
 		</div>
 
 
-<div id="poststuff">
+<div id="poststuff" class="narr">
 	<div class="postbox">
 		<h3><?php 
 		_e('Link in format Yandex-XML. Enter it if the site in the Yandex.Market', 'wp-shop'); //Линк в формате Yandex-XML. Укажите его при публикации сайта в системе Yandex.Market
@@ -194,26 +207,53 @@
 	</div>
 </div>
 
-<div id="poststuff">
+<div id="poststuff" class="narr">
 	<div class="postbox">
 		<h3><?php  _e('Cart', 'wp-shop'); /*Опции минимального заказа:*/ ?></h3>
 		<div class="inside">
-			<div><strong><?php  _e('Discount:', 'wp-shop'); /*Скидка:*/ ?></strong> <input type="text" name="discount" value="<?php  echo $this->discount;?>" style='width:500px'/></div>
-			<div>
-			<table><thead><th colspan=2 style='text-align:left;'><?php  _e('Options of minimum order:', 'wp-shop'); /*Опции минимального заказа:*/ ?></th></thead>
-			<tbody>
-			<tr><td><?php  _e('The minimum sum of order:', 'wp-shop'); /*Минимальная сумма заказа:*/ ?></td><td><input type='text' name='minzakaz' value='<?php  echo $this->minzakaz;?>'/></td></tr>
-			<tr><td><?php  _e('Message to the buyer:', 'wp-shop'); /*Сообщение для покупателя:*/ ?></td><td><textarea name='minzakaz_info'/><?php  echo $this->minzakaz_info;?></textarea></td></tr>
-			<tr><td><?php  _e('Link to the condition of delivery:', 'wp-shop'); /*Линк на условие доставки:*/ ?></td><td><input type='text' name='deliveyrCondition' value='<?php  echo $this->deliveyrCondition;?>'/></td></tr>
-			<tr><td><?php  _e('Link to the return to shopping:', 'wp-shop'); /*Линк для возврата к покупкам:*/ ?></td><td><input type='text' name='shopping_return_link' value='<?php  echo $this->shopping_return_link;?>'/></td></tr>
-			<tr><td><?php  _e('Link to to the cart page:', 'wp-shop'); /*Линк к корзине:*/ ?></td><td><input type='text' name='cartpage_link' value='<?php  echo $this->cartpage_link;?>'/></td></tr>
-      <tr>
-					<td><label for="wp-shop_promo_activate"><?php  echo __('Activate Promocodes:', 'wp-shop'); /*Активировать скидочную систему*/
-					?></label></td>
-						<?php $promoActiveChecked = $this->promoActive == 1 ? " checked" : ""; ?>
-						<td colspan="2"><input type="checkbox" name="wp-shop_promo_activate" id="wp-shop_promo_activate"<?php  echo $promoActiveChecked;?>/></td>
+			<table style="width: 50%;float: left;min-width: 650px;">
+				<thead><th colspan=2 style='text-align:left;'><?php  _e('Options of minimum order:', 'wp-shop'); /*Опции минимального заказа:*/ ?></th></thead>
+				<tbody>
+				<tr>
+					<td><?php  _e('The minimum sum of order:', 'wp-shop'); /*Минимальная сумма заказа:*/ ?></td>
+					<td style="min-width: 350px;">
+						<input style="width: 90%;" type='text' name='minzakaz' value='<?php  echo $this->minzakaz;?>'/><a href="http://wp-shop.ru/wpshop-full-settings/id16" target="_blank" class="wpshop_admin_ask"><img src="<?php echo WPSHOP_URL.'/images/help_icon.png';?>"/></a>
+					</td>
+				</tr>
+				<tr>
+					<td><?php  _e('Message to the buyer:', 'wp-shop'); /*Сообщение для покупателя:*/ ?></td>
+					<td style="min-width: 350px;">
+						<textarea name='minzakaz_info' style="width: 90%;"/><?php  echo $this->minzakaz_info;?></textarea><a href="http://wp-shop.ru/wpshop-full-settings/id17" target="_blank" class="wpshop_admin_ask"><img src="<?php echo WPSHOP_URL.'/images/help_icon.png';?>"/></a>
+					</td>
+				</tr>
+				<tr>
+					<td><?php  _e('Link to the condition of delivery:', 'wp-shop'); /*Линк на условие доставки:*/ ?></td>
+					<td style="min-width: 350px;"><input type='text' name='deliveyrCondition' style="width: 90%;" value='<?php  echo $this->deliveyrCondition;?>'/><a href="http://wp-shop.ru/wpshop-full-settings/id18" target="_blank" class="wpshop_admin_ask"><img src="<?php echo WPSHOP_URL.'/images/help_icon.png';?>"/></a></td>
+				</tr>
+				<tr>
+					<td><?php  _e('Link to the return to shopping:', 'wp-shop'); /*Линк для возврата к покупкам:*/ ?></td>
+					<td style="min-width: 350px;"><input type='text' name='shopping_return_link' style="width: 90%;" value='<?php  echo $this->shopping_return_link;?>'/><a href="http://wp-shop.ru/wpshop-full-settings/id19" target="_blank" class="wpshop_admin_ask"><img src="<?php echo WPSHOP_URL.'/images/help_icon.png';?>"/></a></td>
+				</tr>
+				<tr>
+					<td><?php  _e('Link to to the cart page:', 'wp-shop'); /*Линк к корзине:*/ ?></td>
+					<td style="min-width: 350px;"><input type='text' name='cartpage_link' style="width: 90%;" value='<?php  echo $this->cartpage_link;?>'/><a href="http://wp-shop.ru/wpshop-full-settings/id20" target="_blank" class="wpshop_admin_ask"><img src="<?php echo WPSHOP_URL.'/images/help_icon.png';?>"/></a></td>
+				</tr>
+				<tr>
+					<td><label for="wp-shop_promo_activate"><?php  echo __('Activate Promocodes:', 'wp-shop'); /*Активировать скидочную систему*/?></label></td>
+					<?php $promoActiveChecked = $this->promoActive == 1 ? " checked" : ""; ?>
+					<td colspan="2"><input type="checkbox" name="wp-shop_promo_activate" id="wp-shop_promo_activate"<?php  echo $promoActiveChecked;?>/><a href="http://wp-shop.ru/wpshop-full-settings/id21" target="_blank" class="wpshop_admin_ask"><img src="<?php echo WPSHOP_URL.'/images/help_icon.png';?>"/></a></td>
 					</tr>
 			</tbody>
+			</table>
+			<table style="width: 50%;float: left;min-width: 650px;">
+				<tbody>
+					<tr>
+						<td><strong><?php  _e('Discount:', 'wp-shop'); /*Скидка:*/ ?></strong></td>
+						<td style="min-width: 350px;">
+							<input type="text" name="discount" value="<?php  echo $this->discount;?>" style='width:90%'/><a href="http://wp-shop.ru/wpshop-full-settings/id22" target="_blank" class="wpshop_admin_ask"><img src="<?php echo WPSHOP_URL.'/images/help_icon.png';?>"/></a>
+						</td>
+					</tr>
+				</tbody>
 			</table>
 			</div>
 
@@ -221,21 +261,21 @@
 	</div>
 </div>
 
-<div id="poststuff">
+<div id="poststuff" class="narr">
 	<div class="postbox">
 		<h3><?php  _e('Item', 'wp-shop'); /* Товар */ ?></h3>
 		<div class="inside">
 			<div>
 				<div>
-					<table>
+					<table style="width: 50%;float: left;min-width: 650px;">
 					<tbody>
 					<tr>
 						<td><?php  _e('Currency:', 'wp-shop'); /*Валюта:*/ ?></td>
-						<td><input type="text" name='currency' value='<?php  echo $this->currency;?>'/></td>
+						<td style="min-width: 350px;"><input type="text" name='currency'  style="width: 90%;" value='<?php  echo $this->currency;?>'/><a href="http://wp-shop.ru/wpshop-full-settings/id23" target="_blank" class="wpshop_admin_ask"><img src="<?php echo WPSHOP_URL.'/images/help_icon.png';?>"/></a></td>
 					</tr>
 					<tr>
 						<td><?php  _e('Text if the product is no longer available:', 'wp-shop'); /*Текст, если товара нет в наличие:*/ ?></td>
-						<td><textarea name='noGoodText' style="width:500px;height:100px"><?php  echo $this->noGoodText;?></textarea></td>
+						<td style="min-width: 350px;"><textarea name='noGoodText' style="width: 90%; height:100px"><?php  echo $this->noGoodText;?></textarea><a href="http://wp-shop.ru/wpshop-full-settings/id24" target="_blank" class="wpshop_admin_ask"><img src="<?php echo WPSHOP_URL.'/images/help_icon.png';?>"/></a></td>
 					</tr>
 					</tbody>
 					</table>
@@ -248,37 +288,33 @@
 <input type="submit" value="<?php  _e('Save', 'wp-shop'); /*Сохранить*/ ?>" class="button">
 
 </td>
-<td valign='top' style="width:300px;padding:10px 10px">
+<td valign='top' style="width:320px;padding:10px 10px">
 <div id="poststuff" class="metabox-holder" style="padding:0px; min-width: 300px;">
 	<div id="side-sortables" class="meta-box-sortabless ui-sortable">
 		<div id="sm_pnres" class="postbox">
-		<h3 class="hndle"><span><?php  _e('Support the authors of the plugin WP-Shop!', 'wp-shop'); /*Поддержите авторов плагина WP-Shop!*/ ?></span></h3>
+		<h3 class="hndle"><span><?php  _e('Information from the WP-Shop developers', 'wp-shop'); /*Информация от разработчиков WP-Shop*/ ?></span></h3>
 			<div class="inside">
+				<div>
+					<ins data-revive-zoneid="3" data-revive-id="03af71d0efe35b0d7d888949e681431d"></ins><script async src="https://wp-shop.ru/adv/www/delivery/asyncjs.php"></script>
+				</div>
+				
+				<div>
+					<ins data-revive-zoneid="4" data-revive-id="03af71d0efe35b0d7d888949e681431d"></ins><script async src="https://wp-shop.ru/adv/www/delivery/asyncjs.php"></script>
+				</div>
 
-<table cellpadding="0" cellspacing="0" border="0">
-	<tr>
-		<td width='300px' valign='top' style='font-weight: normal; font-size: 11px; font-family: Verdana;'><table cellpadding='0' cellspacing='0' border='0'><tr><td style="padding-bottom:5px;"></td></tr><tr><td valign='top' align='left' style='padding: 5px 5px 5px;'><p><?php 
-		_e('If the plugin has helped you in your business, please make donations and support the authors! With your support we can continue to improve the our plugins and make new ones.', 'wp-shop');
-		 /* Если наш плагин помог Вам в Вашей работе, поддержите авторов денежкой! С Вашей поддержкой мы сможем продолжать улучшать существующие плагины и делать новые. */ ?></p>
-
-		 <div style="font-weight:normal; text-align:center; margin:0; padding:0.5em 0 0; border-top:1px dotted #999;">
-<iframe frameborder="0" allowtransparency="true" scrolling="no" src="https://money.yandex.ru/embed/small.xml?uid=41001786529092&amp;button-text=06&amp;button-size=l&amp;button-color=orange&amp;targets=%d0%9f%d0%be%d0%b4%d0%b4%d0%b5%d1%80%d0%b6%d0%ba%d0%b0+%d0%b0%d0%b2%d1%82%d0%be%d1%80%d0%be%d0%b2+%d0%bf%d0%bb%d0%b0%d0%b3%d0%b8%d0%bd%d0%b0+wp-shop&amp;default-sum=299&amp;mail=on" width="auto" height="54"></iframe>
-<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=XR3TYGY9VAX6E" target="_blank"><img alt="donate" src="http://www.wp-shop.ru/wp-content/uploads/payment.png" height="65" width="260"></a>
-</div>
-					<div style="font-weight:normal; text-align:left; margin:0; padding:0.5em 0 0; border-top:1px dotted #999;">
-								<!-- доп.инфо -->
-								</div>
-								</td></tr></table></td></td></tr></table>
-					<ul>
-					<li><?php  _e('<strong>Authors of the plugin:</strong> Alexander Kuznetsov, Igor Bobko, Sergey Makarin', 'wp-shop'); /*<strong>Авторы плагина:</strong> Кузнецов Александр, Бобко Игорь, Макарьин Сергей */ ?></li>
+				<ul>
+					<li><?php  _e('<strong>Authors of the plugin:</strong> Alexander Kuznetsov, Abramov Kirill', 'wp-shop'); /*<strong>Авторы плагина:</strong> Кузнецов Александр, Бобко Игорь, Макарьин Сергей */ ?></li>
 					<li><?php  _e('<strong>The Website plugin:</strong> <a href="http://www.wp-shop.ru/" target="_blank">www.wp-shop.ru</a>', 'wp-shop'); /*<strong>Сайт плагина:</strong> <a href="http://www.wp-shop.ru/" target="_blank">www.wp-shop.ru</a>*/ ?></li>
-					</ul>
-			</div></div></div></div>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
 
 <div id="poststuff" class="metabox-holder" style="padding:0px; min-width: 300px;">
 	<div id="side-sortables" class="meta-box-sortabless ui-sortable">
 		<div id="sm_pnres" class="postbox">
-			<h3 class="hndle"><span><?php  _e('META-box for display a price list', 'wp-shop'); /*META-поле для вывода в прайс-листах*/ ?></span></h3>
+			<h3 class="hndle"><span><?php  _e('META-box for display a price list', 'wp-shop'); /*META-поле для вывода в прайс-листах*/ ?></span><a href="http://wp-shop.ru/wpshop-full-settings/id25" target="_blank" class="wpshop_admin_ask"><img src="<?php echo WPSHOP_URL.'/images/help_icon.png';?>"/></a></h3>
 			<div class="inside" id="price_option_window">
 			<script type="text/javascript">
 				jQuery(document).ready(function()
@@ -306,7 +342,7 @@
 <div id="poststuff" class="metabox-holder" style="padding:0px; min-width: 300px;">
 	<div id="side-sortables" class="meta-box-sortabless ui-sortable">
 		<div id="sm_pnres" class="postbox">
-			<h3 class="hndle"><span><?php  _e('Currency update.', 'wp-shop'); /*Обновление по валюте.*/ ?></span></h3>
+			<h3 class="hndle"><span><?php  _e('Currency update.', 'wp-shop'); /*Обновление по валюте.*/ ?></span><a href="http://wp-shop.ru/wpshop-full-settings/id26" target="_blank" class="wpshop_admin_ask"><img src="<?php echo WPSHOP_URL.'/images/help_icon.png';?>"/></a></h3>
 			<div class="inside">
 				<script type="text/javascript">
 				jQuery(document).ready(function()

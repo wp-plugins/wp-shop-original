@@ -12,6 +12,8 @@ jQuery(function()
 ?>
 <div class="wrap">
 <h2><?php  _e('Completed orders','wp-shop'); /*Сделанные заказы*/?></h2>
+<div style="width: 50%;float: left;text-align: right;min-width: 500px;"><ins data-revive-zoneid="6" data-revive-id="03af71d0efe35b0d7d888949e681431d"></ins><script async src="https://wp-shop.ru/adv/www/delivery/asyncjs.php"></script></div>
+<div style="width: 50%;float: left;text-align: right;min-width: 500px;"><ins data-revive-zoneid="7" data-revive-id="03af71d0efe35b0d7d888949e681431d"></ins><script async src="https://wp-shop.ru/adv/www/delivery/asyncjs.php"></script></div>
 	<form action="<?php  echo $this_url;?>" method="get">
 	<input type='hidden' name='page' value='wpshop_orders'/>
 	<table class='wp-list-table widefat posts'>
