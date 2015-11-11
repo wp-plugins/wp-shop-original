@@ -349,13 +349,22 @@ From: {$email_result}");
 			$offers['name'] = $order->selected_items_name;
 			$offers['price'] = $order->selected_items_cost;
 			if ($order->selected_items_promo != 0){
-        $promo = $order->selected_items_promo;
-      }
+				$promo = $order->selected_items_promo;
+				$sum += round((100-$promo)*$order->selected_items_cost/100,2) * $order->selected_items_num;
+			}else{
+				$sum += $order->selected_items_cost * $order->selected_items_num;	
+			}
 			$offers['partnumber'] = $order->selected_items_num;
 			$offers['key'] = $order->selected_items_key;
 			$offers['post_id'] = $order->selected_items_item_id;
 			//$offers['color'] = '';
 			//$offers['size'] = '';
+		}
+		
+		if (!empty($discount)) {
+			$final = round((100-$discount)*$sum/100,2);
+		}else {
+			$final = round((100-$discount)*$sum/100,2);
 		}
 
 		// Отсюда начинаем работу с данными формы
@@ -365,7 +374,7 @@ From: {$email_result}");
 		$allInfo['info']['ip'] = $_SERVER['REMOTE_ADDR'];
 		$allInfo['info']['discount'] = $_COOKIE['wpshop_discount'];
 		$allInfo['info']['delivery'] = $POSTData['delivery'];
-		$allInfo['info']['total'] = $total;
+		$allInfo['info']['total'] = $final;
 		$allInfo['orders'] = $orders;
 		
 		$form = Wpshop_Forms::getInstance()->getFormByName($cform_name);

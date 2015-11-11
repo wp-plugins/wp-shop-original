@@ -433,64 +433,68 @@ public function simplepayResult() {
 		
 	}
 	
-	public function paypalResult()
-	{
-	if (isset($_POST['mc_gross'])){ 
-  
-		// read the data send by PayPal
-		$req = 'cmd=_notify-validate';
-		foreach ($_POST as $key => $value) {
-			$value = urlencode(stripslashes($value));
-			$req .= "&$key=$value";
-		}
-		$email = get_option("wpshop.payments.paypal");  
-		// post back to PayPal system to validate
-		$header .= "POST /cgi-bin/webscr HTTP/1.0\r\n";
-		if($email['test']==true){$header .= "Host: www.sandbox.paypal.com\r\n";}
-		if($email['test']==false){ $header .= "Host: www.paypal.com\r\n";}
-		$header .= "Content-Type: application/x-www-form-urlencoded\r\n";
-		$header .= "Content-Length: " . strlen($req) . "\r\n\r\n";
+	public function paypalResult(){
+		if (isset($_POST['mc_gross'])){ 
+			$req = 'cmd=_notify-validate';
+			// read the data send by PayPal
+			foreach ($_POST as $key => $value) {
+				$value = urlencode(stripslashes($value));
+				$req .= "&$key=$value";
+			}
 		
-		if($email['test']==true){ $fp = fsockopen ('ssl://www.sandbox.paypal.com', 443, $errno, $errstr, 30);}
-		if($email['test']==false){ $fp = fsockopen ('ssl://www.paypal.com', 443, $errno, $errstr, 30);}
+			$email = get_option("wpshop.payments.paypal");  
+			// post back to PayPal system to validate
+			if($email['test']==true){$curl = curl_init("https://www.sandbox.paypal.com/cgi-bin/webscr");}
+			if($email['test']==false){$curl = curl_init("https://www.paypal.com/cgi-bin/webscr");}
 		
-		
-		$payment_status = $_POST['payment_status'];
-		$payment_amount = $_POST['mc_gross'];
-		$receiverEmail = $_POST['business'];
-		
-		$order = new Wpshop_Order($_POST["invoice"]);
-		$full_price = $order->getTotalSum();
-		
-		$email_saler = $email['email'];
+			if ($curl == FALSE) {
+				error_log('curl_not_accessed');
+			}
+			curl_setopt($curl, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+			curl_setopt($curl, CURLOPT_POST, 1);
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER,1);
+			curl_setopt($curl, CURLOPT_POSTFIELDS, $req);
 
-		if (!$fp) {
-		// HTTP ERROR
-		} else {
-				fputs ($fp, $header . $req);
-				while (!feof($fp)) {
-				$res = fgets ($fp, 1024);
+			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 1);
+
+			curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
+			curl_setopt($curl, CURLOPT_FORBID_REUSE, 1);
+			if($email['test']==true){
+				curl_setopt($ch, CURLOPT_HEADER, 1);
+				curl_setopt($ch, CURLINFO_HEADER_OUT, 1);
+			} 
+			curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 30);
+			curl_setopt($curl, CURLOPT_HTTPHEADER, array('Connection: Close', 'User-Agent: wp-shop'));
+			$response = curl_exec ($curl); 
+			curl_close ($curl); 
+
+			$payment_status = $_POST['payment_status'];
+			$payment_amount = $_POST['mc_gross'];
+			$receiverEmail = $_POST['business'];
+			
+			$order = new Wpshop_Order($_POST["invoice"]);
+			$full_price = $order->getTotalSum();
+			
+			$email_saler = $email['email'];
+			$tokens = explode("\r\n\r\n", trim($response));
+			$res = trim(end($tokens));
+			if (!$res) {
+				// HTTP ERROR 
+			} else {
 				if (strcmp ($res, "VERIFIED") == 0) {
 					// PAYMENT VALID
 					if ($payment_amount==$full_price&&$email_saler==$receiverEmail) {
 						global $wpdb;
 						$wpdb->query("DELETE FROM {$wpdb->prefix}wpshop_selected_items WHERE selected_items_session_id='".$_POST["custom"]."'");
 						Wpshop_Orders::setStatus($_POST["invoice"],1);
-						
 					}
-				}
-		  
-				else if (strcmp ($res, "INVALID") == 0) {
-					
+				} else if (strcmp ($res, "INVALID") == 0) {
+					error_log('payment not valid');
 					// PAYMENT INVALID
-		  
 				}
+			}
 		}
-		fclose ($fp);
-		}
-		}		
-			
-	}
+	}		
 	
 	public function YandexResult()
 	{	
