@@ -494,7 +494,7 @@ function Cart(eid_mini, eid_cart)
 
 	this.set = function(id, key, value,index,sklad,cost)
 	{
-		if (sklad >= Math.abs(parseFloat(value)) || sklad == 0 ){
+		if ((sklad >= Math.abs(parseFloat(value)) || sklad == 0)&&Math.abs(parseFloat(value))>0){
 		this.s_id = id;
 		this.s_key = key;
 		this.s_num = Math.abs(parseFloat(value));
@@ -721,6 +721,7 @@ function Cart(eid_mini, eid_cart)
 
 function addtocart(id, key, href, cost, num, cnt, sklad)
 {
+  if (num <=0){num=1;}
 	var result = sklad - num;
 	if(sklad==''||result>=0){
 	var name = jQuery("[name='wpshop-good-title-" + id + "']").val();

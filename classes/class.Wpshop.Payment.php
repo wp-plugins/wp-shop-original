@@ -404,15 +404,15 @@ public function simplepayResult() {
 			{ 
 					// Функция, которая возвращает результат в Единую кассу
 
-					function print_answer($result, $description)
+					function print_answer($result, $description,$res)
 					{
 					  print "WMI_RESULT=" . strtoupper($result) . "&";
 					  print "WMI_DESCRIPTION=" .urlencode($description);
-					  global $wpdb;
-					  
-					  $wpdb->query("DELETE FROM {$wpdb->prefix}wpshop_selected_items WHERE selected_items_session_id='".$_POST["SESSION_USER"]."'");
-					
-					  Wpshop_Orders::setStatus($_POST["WMI_PAYMENT_NO"],1);
+            if ($res){
+              global $wpdb;
+              $wpdb->query("DELETE FROM {$wpdb->prefix}wpshop_selected_items WHERE selected_items_session_id='".$_POST["SESSION_USER"]."'");
+              Wpshop_Orders::setStatus($_POST["WMI_PAYMENT_NO"],1);
+            }
 					  exit();
 					}
 
@@ -420,13 +420,14 @@ public function simplepayResult() {
 					  {
 						// TODO: Пометить заказ, как «Оплаченный» в системе учета магазина
 
-						print_answer("Ok", "Заказ #" . $_POST["WMI_PAYMENT_NO"] . " оплачен!");
+						print_answer("Ok", "Заказ #" . $_POST["WMI_PAYMENT_NO"] . " оплачен!",true);
+            
 					  }
 					  else
 					  {
 						// Случилось что-то странное, пришло неизвестное состояние заказа
 
-						print_answer("Retry", "Неверное состояние ". $_POST["WMI_ORDER_STATE"]);
+						print_answer("Retry", "Неверное состояние ". $_POST["WMI_ORDER_STATE"],false);
 					  }
 			
 			}
